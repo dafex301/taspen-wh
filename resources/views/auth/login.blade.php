@@ -20,7 +20,7 @@
                     <div class="card" style="border-radius: 1rem;">
                         <div class="row g-0">
                             <div class="col-md-6 col-lg-5 d-none d-md-block">
-                                <img src="assets/img/safety.jpg" alt="login form" class="img-fluid"
+                                <img src="assets/img/warehouse2.jpg" alt="login form" class="img-fluid"
                                     style="border-radius: 1rem 0 0 1rem; object-fit: cover;" />
                             </div>
                             <div class="col-md-6 col-lg-7 d-flex align-items-center">
@@ -30,7 +30,7 @@
                                         @csrf
                                         <div class="d-flex align-items-center mb-3 pb-1">
                                             <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
-                                            <img src="assets/img/logo.png" alt="Logo Taspen" width="100px"
+                                            <img src="assets/img/taspen.png" alt="Logo Taspen" width="100px"
                                                 srcset="">
                                         </div>
 
@@ -48,14 +48,12 @@
 
                                         <div class="mb-4">
                                             <div class="form-outline">
-                                                <input type="text" id="username" name="username" autofocus
-                                                    value="{{ old('username') }}"
-                                                    class="form-control form-control-lg" />
-                                                <label class="form-label" for="username">Username</label>
+                                                <input type="text" id="nik" name="nik" autofocus
+                                                    value="{{ old('nik') }}" class="form-control form-control-lg" />
+                                                <label class="form-label" for="nik">NIK</label>
                                             </div>
-                                            @if ($errors->has('username'))
-                                                <span
-                                                    class="text-danger text-left">{{ $errors->first('username') }}</span>
+                                            @if ($errors->has('nik'))
+                                                <span class="text-danger text-left">{{ $errors->first('nik') }}</span>
                                             @endif
                                         </div>
 

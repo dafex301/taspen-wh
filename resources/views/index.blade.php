@@ -9,7 +9,7 @@
                     <div class="card mb-4 text-white bg-primary">
                         <div class="card-body pb-0 d-flex justify-content-between align-items-center">
                             <div>
-                                <h1 class="">{{ $laporanTotal }}</h1>
+                                <h1 class="">1</h1>
                                 <div>Total Laporan</div>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -26,7 +26,7 @@
                     <div class="card mb-4 text-white bg-info">
                         <div class="card-body pb-0 d-flex justify-content-between align-items-center">
                             <div>
-                                <h1 class="">{{ $laporanDiproses }}</h1>
+                                <h1 class="">2</h1>
                                 <div>Laporan Diproses</div>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -46,7 +46,7 @@
                     <div class="card mb-4 text-white bg-warning">
                         <div class="card-body pb-0 d-flex justify-content-between align-items-center">
                             <div>
-                                <h1 class="">{{ $waktuPenyelesaian }} <span class="fs-5">jam</span></h1>
+                                <h1 class="">3 <span class="fs-5">jam</span></h1>
                                 <div>Rata-rata penyelesaian</div>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -63,7 +63,7 @@
                     <div class="card mb-4 text-white bg-success">
                         <div class="card-body pb-0 d-flex justify-content-between align-items-center">
                             <div>
-                                <h1 class="">{{ $laporanSelesai }}</h1>
+                                <h1 class="">5</h1>
                                 <div>Selesai</div>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -89,7 +89,7 @@
                         <div>
                             <h4 class="card-title mb-0">Traffic</h4>
                             {{-- <div class="small text-medium-emphasis">January - July 2023</div> --}}
-                            <div>Januari - Desember {{}}</div>
+                            <div>Januari - Desember</div>
                         </div>
                     </div>
                     <div class="c-chart-wrapper" style="height:300px;margin-top:40px;">
@@ -367,14 +367,7 @@
         // });
 
         // eslint-disable-next-line no-unused-vars
-        let kategori = {!! json_encode($kategori) !!};
-        let laporanPerKategori = {!! json_encode($laporanPerKategori) !!};
-        laporanPerKategori = laporanPerKategori.map((item) => {
-            return item.reverse();
-        });
 
-        console.log(kategori);
-        console.log(laporanPerKategori);
 
         // Create a dataset for borderColor, borderWith, and backgroundColor
         const colorData = {
@@ -435,7 +428,6 @@
 
                 datasets: [
                     // {
-                    //     label: {!! json_encode($kategori[0]->name) !!},
                     // backgroundColor: coreui.Utils.hexToRgba(
                     //         coreui.Utils.getStyle("--cui-info"),
                     //         10

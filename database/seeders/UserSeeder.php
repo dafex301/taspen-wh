@@ -18,55 +18,44 @@ class UserSeeder extends Seeder
 
         User::factory()->create([
             'role' => 1,
-            'username' => 'admin',
-            'cabang' => 1
+            'nik' => 'staff-layanan',
+            'bidang' => 1
+        ]);
+
+        User::factory()->create([
+            'role' => 1,
+            'nik' => 'staff-keuangan',
+            'bidang' => 2
+        ]);
+
+        User::factory()->create([
+            'role' => 1,
+            'nik' => 'staff-sdm',
+            'bidang' => 3
         ]);
 
         User::factory()->create([
             'role' => 2,
-            'username' => 'staff-jkt',
-            'cabang' => 1
+            'nik' => 'manajer-layanan',
+            'bidang' => 1
         ]);
 
         User::factory()->create([
             'role' => 2,
-            'username' => 'staff-smg',
-            'cabang' => 2
+            'nik' => 'manajer-keuangan',
+            'bidang' => 2
+        ]);
+
+        User::factory()->create([
+            'role' => 2,
+            'nik' => 'manajer-sdm',
+            'bidang' => 3
         ]);
 
         User::factory()->create([
             'role' => 3,
-            'username' => 'pic-jkt',
-            'cabang' => 1
+            'nik' => 'manajer-umum',
+            'bidang' => 3
         ]);
-
-        User::factory()->create([
-            'role' => 3,
-            'username' => 'pic-smg',
-            'cabang' => 2
-        ]);
-
-        User::factory()->create([
-            'role' => 4,
-            'username' => 'dpnp',
-            'cabang' => 1
-        ]);
-
-        User::factory()->create([
-            'role' => 5,
-            'username' => 'bm-jkt',
-            'cabang' => 1
-        ]);
-
-
-        User::factory()->create([
-            'role' => 5,
-            'username' => 'bm-smg',
-            'cabang' => 2
-        ]);
-
-
-
-        User::factory()->count(5)->create();
     }
 }

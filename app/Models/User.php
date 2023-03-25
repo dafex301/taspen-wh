@@ -18,10 +18,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'nama',
         'nik',
         'email',
-        'username',
         'role',
         'password',
     ];
@@ -63,8 +62,8 @@ class User extends Authenticatable
     }
 
     // Relation with cabang
-    public function Cabang()
+    public function Bidang()
     {
-        return $this->belongsTo(Cabang::class, 'cabang', 'id');
+        return $this->belongsTo(Bidang::class, 'bidang', 'id');
     }
 }

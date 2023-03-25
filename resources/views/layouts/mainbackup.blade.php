@@ -161,7 +161,7 @@
                 @auth
                     <ul class="header-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="#">
-                                Welcome, {{ Auth::user()->name }}</a></li>
+                                Welcome, {{ Auth::user()->nama }}</a></li>
 
                         <li class="nav-item"><a class="nav-link" href="#">
                                 <svg class="icon icon-lg">

@@ -46,7 +46,7 @@ class UserController extends Controller
         $data = request()->validate([
             'name' => 'required',
             'email' => 'required|email',
-            'username' => 'required',
+            'nik' => 'required',
             'role' => 'required',
             'password' => 'required',
         ]);
@@ -55,7 +55,7 @@ class UserController extends Controller
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'username' => $data['username'],
+            'nik' => $data['nik'],
             'role' => $data['role'],
             'password' => bcrypt($data['password']),
         ]);
@@ -68,7 +68,7 @@ class UserController extends Controller
         $data = request()->validate([
             'name' => 'required',
             'email' => 'required|email',
-            'username' => 'required',
+            'nik' => 'required',
             'role' => 'required',
         ]);
 
@@ -76,7 +76,7 @@ class UserController extends Controller
         $user = User::where('id', $id)->update([
             'name' => $data['name'],
             'email' => $data['email'],
-            'username' => $data['username'],
+            'nik' => $data['nik'],
             'role' => $data['role'],
         ]);
 

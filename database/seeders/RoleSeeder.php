@@ -18,19 +18,13 @@ class RoleSeeder extends Seeder
         // Create role seeder that is staff, PIC, and DPP
         $roles = [
             [
-                'name' => 'Admin',
+                'nama' => 'Staff',
             ],
             [
-                'name' => 'Staff',
+                'nama' => 'Manajer Bidang',
             ],
             [
-                'name' => 'PIC',
-            ],
-            [
-                'name' => 'DPnP',
-            ],
-            [
-                'name' => 'BM',
+                'nama' => 'Manajer Umum',
             ],
         ];
 

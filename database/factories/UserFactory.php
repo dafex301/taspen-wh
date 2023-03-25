@@ -18,15 +18,12 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->name(),
+            'nama' => fake()->name(),
             // nik create a random number with 8 digits
             'nik' => fake()->unique()->numberBetween(10000000, 99999999),
-            'username' => fake()->unique()->userName(),
-            'role' => 2,
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
-            'cabang' => 2
             // 'remember_token' => Str::random(10),
         ];
     }

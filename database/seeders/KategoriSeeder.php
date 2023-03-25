@@ -17,19 +17,13 @@ class KategoriSeeder extends Seeder
     {
         $kategoris = [
             [
-                'name' => 'Kimia',
+                'nama' => 'ATK',
             ],
             [
-                'name' => 'Fisik',
+                'nama' => 'Supplies',
             ],
             [
-                'name' => 'Biologi',
-            ],
-            [
-                'name' => 'Ergonomi',
-            ],
-            [
-                'name' => 'Psikososial',
+                'nama' => 'Cetak',
             ],
         ];
 

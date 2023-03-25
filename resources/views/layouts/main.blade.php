@@ -70,7 +70,7 @@
 <body>
     <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
         <div class="sidebar-brand d-none d-md-flex">
-            <h2>T-SAFE</h2>
+            <h5 class="">Taspen Warehouse System</h5>
         </div>
         <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
             <li class="nav-item w-100"><a class="nav-link" href="/">
@@ -86,7 +86,7 @@
             <li class="nav-divider"></li>
             @auth
                 <li class="nav-title">Menu Pegawai</li>
-                @if (auth()->user()->Role->name === 'Admin')
+                @if (auth()->user()->Role->nama === 'Admin')
                     <li class="nav-item"><a class="nav-link" href="/admin/akun">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                 style="width: 20px; margin: 0 5px 0 5px">
@@ -112,7 +112,7 @@
                                 <path
                                     d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
                             </svg>
-                            Lapor Potensi Bahaya</a></li>
+                            Pengajuan Permintaan</a></li>
                     <li class="nav-item"><a class="nav-link" href="/laporan">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                 style="width: 20px; margin: 0 5px 0 5px">
@@ -123,7 +123,7 @@
                                     d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z" />
                             </svg>
 
-                            Laporan Potensi Bahaya</a></li>
+                            Usulan Pengadaan</a></li>
                     <li class="nav-item"><a class="nav-link" href="/history">
 
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -135,10 +135,10 @@
                                     d="M14.25 5.25a5.23 5.23 0 00-1.279-3.434 9.768 9.768 0 016.963 6.963A5.23 5.23 0 0016.5 7.5h-1.875a.375.375 0 01-.375-.375V5.25z" />
                             </svg>
 
-                            History Laporan</a></li>
+                            History Permintaan</a></li>
                 @endif
 
-                @if (auth()->user()->Role->name === 'PIC')
+                @if (auth()->user()->Role->nama === 'PIC')
                     <li class="nav-title">Menu Admin</li>
                     <li class="nav-item"><a class="nav-link" href="/pic/laporan">
 
@@ -162,7 +162,7 @@
                                     d="M15 5.25a5.23 5.23 0 00-1.279-3.434 9.768 9.768 0 016.963 6.963A5.23 5.23 0 0017.25 7.5h-1.875A.375.375 0 0115 7.125V5.25zM4.875 6H6v10.125A3.375 3.375 0 009.375 19.5H16.5v1.125c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 013 20.625V7.875C3 6.839 3.84 6 4.875 6z" />
                             </svg>
                             Revisi Laporan</a></li>
-                @elseif (auth()->user()->Role->name === 'BM')
+                @elseif (auth()->user()->Role->nama === 'BM')
                     <li class="nav-title">Menu Branch Manager</li>
                     <li class="nav-item"><a class="nav-link" href="/bm/laporan">
 
@@ -186,7 +186,7 @@
                                     d="M15 5.25a5.23 5.23 0 00-1.279-3.434 9.768 9.768 0 016.963 6.963A5.23 5.23 0 0017.25 7.5h-1.875A.375.375 0 0115 7.125V5.25zM4.875 6H6v10.125A3.375 3.375 0 009.375 19.5H16.5v1.125c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 013 20.625V7.875C3 6.839 3.84 6 4.875 6z" />
                             </svg>
                             Laporan Ditolak</a></li>
-                @elseif (auth()->user()->Role->name === 'DPnP')
+                @elseif (auth()->user()->Role->nama === 'DPnP')
                     <li class="nav-title">Menu Div. PNP</li>
                     <li class="nav-item"><a class="nav-link" href="/dpnp/laporan">
 
@@ -236,8 +236,8 @@
                 @auth
                     <ul class="header-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="#">
-                                Welcome, {{ Auth::user()->name }} - {{ Auth::user()->Role->name }} -
-                                {{ Auth::user()->Cabang->name }}</a></li>
+                                Welcome, {{ Auth::user()->nama }} - {{ Auth::user()->Role->nama }} -
+                                {{ Auth::user()->Bidang->nama }}</a></li>
 
                         <li class="nav-item"><a class="nav-link" href="#">
                                 <svg class="icon icon-lg">
