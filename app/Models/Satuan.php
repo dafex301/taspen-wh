@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Satuan extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'nama',
+    ];
+
+    // Relation with Item
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
 }

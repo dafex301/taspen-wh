@@ -15,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
-    <title>T-SAFE</title>
+    <title>Taspen Warehouse System</title>
     <!-- Vendors styles-->
     <link rel="stylesheet" href="{{ url('vendors/simplebar/css/simplebar.css') }}">
     <link rel="stylesheet" href="{{ url('css/vendors/simplebar.css') }}">
@@ -85,7 +85,7 @@
                     Beranda</a></li>
             <li class="nav-divider"></li>
             @auth
-                <li class="nav-title">Menu Pegawai</li>
+                <li class="nav-title">Menu Permintaan</li>
                 @if (auth()->user()->Role->nama === 'Admin')
                     <li class="nav-item"><a class="nav-link" href="/admin/akun">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -104,7 +104,7 @@
                             </svg>
                             Manajemen Kategori</a></li>
                 @else
-                    <li class="nav-item"><a class="nav-link" href="/lapor">
+                    <li class="nav-item"><a class="nav-link" href="/permintaan/create">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                 style="width: 20px; margin: 0 5px 0 5px">
                                 <path
@@ -113,18 +113,7 @@
                                     d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
                             </svg>
                             Pengajuan Permintaan</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/laporan">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                style="width: 20px; margin: 0 5px 0 5px">
-                                <path fill-rule="evenodd"
-                                    d="M9 1.5H5.625c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5zm6.61 10.936a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 14.47a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-                                    clip-rule="evenodd" />
-                                <path
-                                    d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z" />
-                            </svg>
-
-                            Usulan Pengadaan</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/history">
+                    <li class="nav-item"><a class="nav-link" href="/permintaan/history">
 
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                 style="width: 20px; margin: 0 5px 0 5px">
@@ -136,6 +125,37 @@
                             </svg>
 
                             History Permintaan</a></li>
+                    <li class="nav-title">Menu Pengadaan</li>
+                    <li class="nav-item"><a class="nav-link" href="/pengadaan/create">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                style="width: 20px; margin: 0 5px 0 5px">
+                                <path
+                                    d="M21 6.375c0 2.692-4.03 4.875-9 4.875S3 9.067 3 6.375 7.03 1.5 12 1.5s9 2.183 9 4.875z" />
+                                <path
+                                    d="M12 12.75c2.685 0 5.19-.586 7.078-1.609a8.283 8.283 0 001.897-1.384c.016.121.025.244.025.368C21 12.817 16.97 15 12 15s-9-2.183-9-4.875c0-.124.009-.247.025-.368a8.285 8.285 0 001.897 1.384C6.809 12.164 9.315 12.75 12 12.75z" />
+                                <path
+                                    d="M12 16.5c2.685 0 5.19-.586 7.078-1.609a8.282 8.282 0 001.897-1.384c.016.121.025.244.025.368 0 2.692-4.03 4.875-9 4.875s-9-2.183-9-4.875c0-.124.009-.247.025-.368a8.284 8.284 0 001.897 1.384C6.809 15.914 9.315 16.5 12 16.5z" />
+                                <path
+                                    d="M12 20.25c2.685 0 5.19-.586 7.078-1.609a8.282 8.282 0 001.897-1.384c.016.121.025.244.025.368 0 2.692-4.03 4.875-9 4.875s-9-2.183-9-4.875c0-.124.009-.247.025-.368a8.284 8.284 0 001.897 1.384C6.809 19.664 9.315 20.25 12 20.25z" />
+
+                            </svg>
+
+                            Usulan Pengadaan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/pengadaan/history">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                style="width: 20px; margin: 0 5px 0 5px">
+                                <path
+                                    d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839 21.66 3 20.625 3H3.375z" />
+                                <path fill-rule="evenodd"
+                                    d="M3.087 9l.54 9.176A3 3 0 006.62 21h10.757a3 3 0 002.995-2.824L20.913 9H3.087zm6.163 3.75A.75.75 0 0110 12h4a.75.75 0 010 1.5h-4a.75.75 0 01-.75-.75z"
+                                    clip-rule="evenodd" />
+
+                            </svg>
+
+
+
+                            History Pengadaan</a></li>
                 @endif
 
                 @if (auth()->user()->Role->nama === 'PIC')

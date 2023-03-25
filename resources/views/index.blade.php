@@ -86,15 +86,33 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title mb-0">Traffic</h4>
-                            {{-- <div class="small text-medium-emphasis">January - July 2023</div> --}}
-                            <div>Januari - Desember</div>
-                        </div>
+                        <table class="table table-hover" id="myTable">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Nama</th>
+                                    <th scope="col">Kategori</th>
+                                    <th scope="col">Jumlah</th>
+                                    <th scope="col">Satuan</th>
+                                    <th scope="col">Harga</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($items as $item)
+                                    <tr>
+                                        <th scope="row">{{ $loop->iteration }}</th>
+                                        <th>{{ $item->nama }}</th>
+                                        <td>{{ $item->Kategori->nama }}</td>
+                                        <td>{{ $item->jumlah }}</td>
+                                        <td>{{ $item->Satuan->nama }}</td>
+                                        <td>Rp. {{ number_format($item->harga, 0, ',', '.') }}</td>
+
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="c-chart-wrapper" style="height:300px;margin-top:40px;">
-                        <canvas class="chart" id="main-chart" height="300"></canvas>
-                    </div>
+
                 </div>
 
             </div>

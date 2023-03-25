@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
-                        <div class="card-header"><strong>Lapor Potensi Bahaya</strong></div>
+                        <div class="card-header"><strong>Ajukan Permintaan Barang</strong></div>
                         <form action="{{ route('lapor.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">

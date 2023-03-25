@@ -13,8 +13,9 @@ class Kategori extends Model
         'nama',
     ];
 
-    public function laporan()
+    // Relation with Item
+    public function items()
     {
-        return $this->hasMany(Laporan::class);
+        return $this->hasMany(Item::class);
     }
 }
