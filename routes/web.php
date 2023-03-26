@@ -33,7 +33,15 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::group(['middleware' => ['auth']], function () {
         // Pengadaan Routes
         Route::get('/pengadaan/create', 'PengadaanController@create')->name('pengadaan.create');
+        Route::get('/pengadaan/detail/{id}', 'PengadaanController@show')->name('pengadaan.detail');
+        Route::get('/pengadaan/history', 'PengadaanController@history')->name('pengadaan.history');
         Route::post('/pengadaan', 'PengadaanController@store')->name('pengadaan.store');
+
+        // Permintaan Routes
+        Route::get('/permintaan/create', 'PermintaanController@create')->name('permintaan.create');
+        Route::get('/permintaan/detail/{id}', 'PermintaanController@show')->name('permintaan.detail');
+        Route::get('/permintaan/history', 'PermintaanController@history')->name('permintaan.history');
+        Route::post('/permintaan', 'PermintaanController@store')->name('permintaan.store');
 
         // Logout
         Route::get('/logout', 'LogoutController@perform')->name('logout.perform');

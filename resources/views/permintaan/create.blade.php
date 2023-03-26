@@ -7,92 +7,71 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header"><strong>Ajukan Permintaan Barang</strong></div>
-                        <form action="{{ route('lapor.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('permintaan.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
 
                                 <div class="tab-content rounded-bottom">
                                     <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-719">
                                         <div class="mb-3">
-                                            <label class="form-label" for="inputTanggal">Hari dan Tanggal</label>
-                                            <input class="form-control" id="inputTanggal" type="date" name="tanggal"
-                                                placeholder="" value="{{ old('tanggal') }}">
-                                            @error('tanggal')
+                                            <label class="form-label" for="bidang">Bidang</label>
+                                            <input class="form-control" type="input" readonly
+                                                value="{{ auth()->user()->Bidang->nama }}">
+                                            <input class="form-control" id="bidang" type="input" name="bidang" hidden
+                                                value="{{ auth()->user()->Bidang->id }}">
+                                            @error('bidang')
                                                 <div class="text-danger">
                                                     {{ $message }}
                                                 </div>
                                             @enderror
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label" for="lokasi">Lokasi</label>
-                                            <input class="form-control" id="lokasi" type="text" name="lokasi"
-                                                placeholder="" value="{{ old('lokasi') }}">
-                                            @error('lokasi')
+                                            <label class="form-label" for="kegiatan">Kegiatan</label>
+                                            <input class="form-control" id="kegiatan" type="text" name="kegiatan"
+                                                placeholder="" value="{{ old('kegiatan') }}" required>
+                                            @error('kegiatan')
                                                 <div class="text-danger">
                                                     {{ $message }}
                                                 </div>
                                             @enderror
                                         </div>
-                                        <div class="mb-3">
-                                            <label class="form-label" for="jenis">Jenis / Kategori Potensi Bahaya</label>
-                                            <select class="form-select" aria-label="Jenis" id="jenis" name="kategori">
-                                                @if (old('kategori') == null)
-                                                    <option value="" disabled selected>Pilih Jenis / Kategori</option>
-                                                @else
-                                                    <option value="" disabled>Pilih Jenis / Kategori</option>
-                                                @endif
-                                                {{-- Foreach kategori --}}
-                                                @foreach ($kategori as $item)
-                                                    @if (old('kategori') == $item->id)
-                                                        <option value="{{ $item->id }}" selected>{{ $item->name }}
+                                        <div class="mb-3" id="add-container">
+                                            <label class="form-label" for="jenis">Pengadaan Barang</label>
+                                            <div class="row mb-3 add-barang">
+
+                                                <div class="col">
+                                                    <select class="form-select" name="item[]" id="barang1" required>
+                                                        <option hidden value="">Pilih Barang</option>
+                                                        @foreach ($kategori as $k)
+                                                            <option value="" disabled>
+                                                                -------------------------------------------{{ $k->nama }}-------------------------------------------
+                                                                @foreach ($items as $i)
+                                                                    @if ($i->kategori == $k->id)
+                                                            <option value="{{ $i->id }}">
+                                                                {{ $i->nama }} ({{ $i->Satuan->nama }}) (Stok:
+                                                                {{ $i->jumlah }})</option>
+                                                        @endif
+                                                        @endforeach
                                                         </option>
-                                                    @else
-                                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                    @endif
-                                                @endforeach
-                                                @if (old('kategori') == '0')
-                                                    <option selected value="0">Lain-lain</option>
-                                                @else
-                                                    <option value="0">Lain-lain</option>
-                                                @endif
-                                                {{-- End Foreach --}}
-                                            </select>
-                                            @error('kategori')
-                                                <div class="text-danger">
-                                                    {{ $message }}
+                                                        @endforeach
+                                                    </select>
                                                 </div>
-                                            @enderror
+                                                <div class="col">
+                                                    <input type="number" class="form-control" placeholder="Jumlah"
+                                                        id="jumlah1" name="jumlah[]" required>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="mb-3" id="jenis-lain-container" style="display: none">
-                                            <label class="form-label" for="jenis-lain">Jenis / Kategori</label>
-                                            <input class="form-control" name="kategori_lain" id="jenis-lain" type="text"
-                                                placeholder="" value="{{ old('kategori_lain') }}">
-                                            @error('kategori_lain')
-                                                <div class="text-danger">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label" for="deskripsi">Deskripsi</label>
-                                            <input class="form-control" id="deskripsi" type="text" placeholder=""
-                                                name="deskripsi" value="{{ old('deskripsi') }}">
-                                            @error('deskripsi')
-                                                <div class="text-danger">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label" for="image">Dokumentasi</label>
-                                            <div class="img-container mb-2"></div>
-                                            <input type="file" id="dokumentasi" class="form-control" accept="image/*"
-                                                capture="camera" value="{{ old('image') }}" name="image">
-                                            @error('image')
-                                                <div class="text-danger">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
+                                        <div class="text-center mb-3">
+                                            <button class="btn btn-success" id="tambah-btn">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" style="width: 20px;">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M12 4.5v15m7.5-7.5h-15" />
+                                                </svg>
+
+                                                <span>Tambah Barang
+                                                </span> </button>
                                         </div>
                                         <div class="mb-3 mt-4">
                                             <button class="btn btn-primary" type="submit">Submit Laporan</button>
@@ -108,6 +87,15 @@
         </div>
     </div>
     <script defer>
-        document.getElementById('inputTanggal').valueAsDate = new Date();
+        // When tambah-btn clicked, duplicate elements with class add-barang inside add-container
+        document.getElementById('tambah-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            let addContainer = document.getElementById('add-container');
+            let addBarang = document.querySelector('.add-barang');
+            let clone = addBarang.cloneNode(true);
+            clone.querySelector('select').value = '';
+            clone.querySelector('input').value = '';
+            addContainer.appendChild(clone);
+        });
     </script>
 @endsection

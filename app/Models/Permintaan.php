@@ -9,6 +9,13 @@ class Permintaan extends Model
 {
     use HasFactory;
 
+    // Fillable
+    protected $fillable = [
+        'kegiatan',
+        'pemohon',
+        'bidang',
+    ];
+
     // Relation with user
     public function pemohon()
     {

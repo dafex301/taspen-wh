@@ -9,6 +9,13 @@ class ItemPengadaan extends Model
 {
     use HasFactory;
 
+    // Fillable
+    protected $fillable = [
+        'id_pengadaan',
+        'id_item',
+        'jumlah',
+    ];
+
     // Relation with Item
     public function item()
     {

@@ -336,6 +336,15 @@
             table.buttons().container()
                 .appendTo($('div.column.is-half', table.table().container()).eq(0));
         });
+
+        $(document).ready(function() {
+            var table = $('#myTableClear').DataTable({
+                lengthChange: false,
+            });
+
+            table.buttons().container()
+                .appendTo($('div.column.is-half', table.table().container()).eq(0));
+        });
     </script>
 
     <!-- Input Form -->
