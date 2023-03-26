@@ -18,31 +18,19 @@
                                                 <th scope="col">No</th>
                                                 <th scope="col">Kegiatan</th>
                                                 <th scope="col">Tanggal</th>
-                                                @if (!request()->routeIs('permintaan.history'))
-                                                    <th scope="col">Pemohon</th>
-                                                @endif
-                                                <th scope="col">Status</th>
+                                                <th scope="col">Pemohon</th>
                                                 <th scope="col">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($permintaan as $p)
+                                            @foreach ($pengadaan as $p)
                                                 <tr>
                                                     <th scope="row">{{ $loop->iteration }}</th>
                                                     <th scope="row">{{ $p->kegiatan }}</th>
                                                     <td>{{ $p->created_at->format('d M Y') }}</td>
-                                                    @if (!request()->routeIs('permintaan.history'))
-                                                        <td>{{ $p->Pemohon->nama }}</td>
-                                                    @endif
-                                                    @if (!$p->status_manager_bidang)
-                                                        <td>Diproses Manager Bidang</td>
-                                                    @elseif (!$p->status_manager_umum)
-                                                        <td>Diproses Manager Umum</td>
-                                                    @else
-                                                        <td>Selesai</td>
-                                                    @endif
+                                                    <td>{{ $p->Pemohon->nama }}</td>
                                                     <td>
-                                                        <a href="/permintaan/detail/{{ $p->id }}"
+                                                        <a href="/bidang/pengadaan/verifikasi/{{ $p->id }}"
                                                             class="btn btn-outline-primary">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"

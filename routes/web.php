@@ -47,6 +47,25 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
     });
 
+    Route::group(['middleware' => ['manajer.bidang']], function () {
+        // Pengadaan Routes
+        Route::get('/bidang/pengadaan/verifikasi', 'PengadaanController@verifikasi')->name('pengadaan.bidang.verifikasi');
+        Route::get('/bidang/pengadaan/verifikasi/{id}', 'PengadaanController@show')->name('pengadaan.bidang.verifikasi.detail');
+        Route::post('/bidang/pengadaan/verifikasi/{id}', 'PengadaanController@accept')->name('pengadaan.bidang.verifikasi.accept');
+        Route::get('/bidang/pengadaan/history', 'PengadaanController@history')->name('pengadaan.bidang.history');
+
+        // Permintaan Routes
+        Route::get('/bidang/permintaan/verifikasi', 'PermintaanController@verifikasi')->name('permintaan.bidang.verifikasi');
+        Route::get('/bidang/permintaan/history', 'PermintaanController@history')->name('permintaan.bidang.history');
+    });
+
+    Route::group(['middleware' => ['manajer.umum']], function () {
+        // Pengadaan Routes
+        Route::get('/umum/pengadaan/verifikasi', 'PengadaanController@verifikasi')->name('pengadaan.umum.verifikasi');
+        Route::get('/umum/pengadaan/verifikasi/{id}', 'PengadaanController@show')->name('pengadaan.umum.verifikasi.detail');
+        Route::post('/umum/pengadaan/verifikasi/{id}', 'PengadaanController@accept')->name('pengadaan.umum.verifikasi.accept');
+    });
+
     // Admin Routes
     Route::group(['middleware' => ['admin']], function () {
         // User Routes

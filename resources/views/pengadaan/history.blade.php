@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
-                        <div class="card-header"><strong>History Potensi Bahaya</strong></div>
+                        <div class="card-header"><strong>History Pengadaan Bidang</strong></div>
 
                         <div class="card-body">
 
@@ -18,6 +18,9 @@
                                                 <th scope="col">No</th>
                                                 <th scope="col">Kegiatan</th>
                                                 <th scope="col">Tanggal</th>
+                                                @if (!request()->routeIs('pengadaan.history'))
+                                                    <th scope="col">Pemohon</th>
+                                                @endif
                                                 <th scope="col">Status</th>
                                                 <th scope="col">Aksi</th>
                                             </tr>
@@ -30,6 +33,9 @@
                                                     <td>
                                                         {{ $p->created_at->format('d M Y') }}
                                                     </td>
+                                                    @if (!request()->routeIs('pengadaan.history'))
+                                                        <td>{{ $p->Pemohon->nama }}</td>
+                                                    @endif
                                                     @if (!$p->status_manager_bidang)
                                                         <td>Diproses Manager Bidang</td>
                                                     @elseif (!$p->status_manager_umum)
@@ -38,7 +44,7 @@
                                                         <td>Selesai</td>
                                                     @endif
                                                     <td>
-                                                        <a href="/permintaan/detail/{{ $p->id }}"
+                                                        <a href="/pengadaan/detail/{{ $p->id }}"
                                                             class="btn btn-outline-primary">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"

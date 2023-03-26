@@ -27,4 +27,16 @@ class Pengadaan extends Model
     {
         return $this->belongsTo(Bidang::class, 'bidang');
     }
+
+    // Relation with manager_umum
+    public function manager_umum()
+    {
+        return $this->belongsTo(User::class, 'manager_umum');
+    }
+
+    // Relation with manager_bidang
+    public function manager_bidang()
+    {
+        return $this->belongsTo(User::class, 'manager_bidang');
+    }
 }

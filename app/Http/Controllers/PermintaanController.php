@@ -31,16 +31,17 @@ class PermintaanController extends Controller
     {
         $user = auth()->user();
         $role = $user->Role->nama;
+        $path = request()->path();
 
-        if ($role === 'Staff') {
-            $pengadaan = Permintaan::where('pemohon', $user->id)->orderBy('updated_at', 'desc')->get();
-        } elseif ($role === 'Manajer Bidang') {
-            $pengadaan = Permintaan::where('bidang', $user->bidang)->orderBy('updated_at', 'desc')->get();
-        } else { // role === Manajer Umum
-            $pengadaan = Permintaan::all();
+        if ($path === 'bidang/permintaan/history' && $role === 'Manajer Bidang') {
+            $permintaan = Permintaan::where('bidang', $user->bidang)->orderBy('updated_at', 'desc')->get();
+        } elseif ($path === 'umum/permintaan/history' && $role === 'Manajer Umum') {
+            $permintaan = Permintaan::all();
+        } else {
+            $permintaan = Permintaan::where('pemohon', $user->id)->orderBy('updated_at', 'desc')->get();
         }
 
-        return view('pengadaan.history', compact('pengadaan'));
+        return view('permintaan.history', compact('permintaan'));
     }
 
 
