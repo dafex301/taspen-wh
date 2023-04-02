@@ -74,7 +74,7 @@
                                                 </span> </button>
                                         </div>
                                         <div class="mb-3 mt-4">
-                                            <button class="btn btn-primary" type="submit">Submit Laporan</button>
+                                            <button class="btn btn-primary" type="submit">Submit Permintaan</button>
                                         </div>
                                     </div>
                                 </div>

@@ -50,25 +50,11 @@
     <link href="{{ url('vendors/@coreui/chartjs/css/coreui-chartjs.css') }}" rel="stylesheet">
 
 
-    {{-- Script Defer --}}
-    <!-- Bootstrap CDN -->
-    <script src="{{ url('js/bootstrap.min.js') }}"></script>
-    <script src="{{ url('js/bootstrap.bundle.min.js') }}"></script>
-    <!-- jQuery -->
-    <script src="{{ url('js/jquery-3.6.3.slim.min.js') }}"></script>
 
-    <!-- CoreUI and necessary plugins-->
-    <script src="{{ url('vendors/@coreui/coreui/js/coreui.bundle.min.js') }}"></script>
-    <script src="{{ url('vendors/simplebar/js/simplebar.min.js') }}"></script>
-    <!-- Plugins and scripts required by this view-->
-    <script src="{{ url('vendors/chart.js/js/chart.min.js') }}"></script>
-    <script src="{{ url('vendors/@coreui/chartjs/js/coreui-chartjs.js') }}"></script>
-    <script src="{{ url('vendors/@coreui/utils/js/coreui-utils.js') }}"></script>
-    {{-- <script src="{{ url('js/main.js') }}"></script> --}}
 </head>
 
 <body>
-    <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
+    <div class="sidebar sidebar-fixed" id="sidebar">
         <div class="sidebar-brand d-none d-md-flex">
             <h5 class="">Taspen Warehouse System</h5>
         </div>
@@ -87,7 +73,7 @@
             @auth
                 @if (auth()->user()->Role->nama === 'Admin')
                     <li class="nav-title">Menu Admin</li>
-                    <li class="nav-item"><a class="nav-link" href="/admin/akun">
+                    <li class="nav-item w-100"><a class="nav-link" href="/admin/akun">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                 style="width: 20px; margin: 0 5px 0 5px">
                                 <path fill-rule="evenodd"
@@ -95,7 +81,7 @@
                                     clip-rule="evenodd" />
                             </svg>
                             Manajemen Akun</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/admin/kategori">
+                    <li class="nav-item w-100"><a class="nav-link" href="/admin/kategori">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                 style="width: 20px; margin: 0 5px 0 5px">
                                 <path fill-rule="evenodd"
@@ -106,7 +92,7 @@
                 @else
                     @if (auth()->user()->Role->nama === 'Manajer Bidang')
                         <li class="nav-title">Menu Manajer Bidang</li>
-                        <li class="nav-item"><a class="nav-link" href="/bidang/permintaan/verifikasi">
+                        <li class="nav-item w-100"><a class="nav-link" href="/bidang/permintaan/verifikasi">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                     style="width: 20px; margin: 0 5px 0 5px">
                                     <path fill-rule="evenodd"
@@ -115,7 +101,7 @@
 
                                 </svg>
                                 Verifikasi Permintaan</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/bidang/permintaan/history">
+                        <li class="nav-item w-100"><a class="nav-link" href="/bidang/permintaan/history">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                     style="width: 20px; margin: 0 5px 0 5px">
                                     <path
@@ -123,7 +109,7 @@
 
                                 </svg>
                                 History Permintaan</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/bidang/pengadaan/verifikasi">
+                        <li class="nav-item w-100"><a class="nav-link" href="/bidang/pengadaan/verifikasi">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                     style="width: 20px; margin: 0 5px 0 5px">
                                     <path fill-rule="evenodd"
@@ -132,7 +118,7 @@
 
                                 </svg>
                                 Verifikasi Pengadaan</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/bidang/pengadaan/history">
+                        <li class="nav-item w-100"><a class="nav-link" href="/bidang/pengadaan/history">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                     style="width: 20px; margin: 0 5px 0 5px">
                                     <path
@@ -143,7 +129,7 @@
                         </li>
                     @elseif (auth()->user()->Role->nama == 'Manajer Umum')
                         <li class="nav-title">Menu Manajer Umum</li>
-                        <li class="nav-item"><a class="nav-link" href="/umum/permintaan/verifikasi">
+                        <li class="nav-item w-100"><a class="nav-link" href="/umum/permintaan/verifikasi">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                     style="width: 20px; margin: 0 5px 0 5px">
                                     <path fill-rule="evenodd"
@@ -152,7 +138,7 @@
 
                                 </svg>
                                 Verifikasi Permintaan</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/umum/permintaan/history">
+                        <li class="nav-item w-100"><a class="nav-link" href="/umum/permintaan/history">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                     style="width: 20px; margin: 0 5px 0 5px">
                                     <path
@@ -160,7 +146,7 @@
 
                                 </svg>
                                 History Permintaan</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/umum/pengadaan/verifikasi">
+                        <li class="nav-item w-100"><a class="nav-link" href="/umum/pengadaan/verifikasi">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                     style="width: 20px; margin: 0 5px 0 5px">
                                     <path fill-rule="evenodd"
@@ -169,7 +155,7 @@
 
                                 </svg>
                                 Verifikasi Pengadaan</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/umum/pengadaan/history">
+                        <li class="nav-item w-100"><a class="nav-link" href="/umum/pengadaan/history">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                     style="width: 20px; margin: 0 5px 0 5px">
                                     <path
@@ -178,11 +164,20 @@
                                 </svg>
                                 History Pengadaan</a>
                         </li>
+                        <li class="nav-item w-100"><a class="nav-link" href="/umum/pengadaan/approval">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    style="width: 20px; margin: 0 5px 0 5px">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 10.5v6m3-3H9m4.06-7.19l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
+
+                                </svg>
+                                Approval Pengadaan</a>
+                        </li>
                     @endif
 
 
                     <li class="nav-title">Menu Permintaan</li>
-                    <li class="nav-item"><a class="nav-link" href="/permintaan/create">
+                    <li class="nav-item w-100"><a class="nav-link" href="/permintaan/create">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                 style="width: 20px; margin: 0 5px 0 5px">
                                 <path
@@ -191,7 +186,7 @@
                                     d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
                             </svg>
                             Pengajuan Permintaan</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/permintaan/history">
+                    <li class="nav-item w-100"><a class="nav-link" href="/permintaan/history">
 
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                 style="width: 20px; margin: 0 5px 0 5px">
@@ -206,7 +201,7 @@
                     </li>
 
                     <li class="nav-title">Menu Pengadaan</li>
-                    <li class="nav-item"><a class="nav-link" href="/pengadaan/create">
+                    <li class="nav-item w-100"><a class="nav-link" href="/pengadaan/create">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                 style="width: 20px; margin: 0 5px 0 5px">
                                 <path
@@ -221,7 +216,7 @@
                             </svg>
 
                             Usulan Pengadaan</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/pengadaan/history">
+                    <li class="nav-item w-100"><a class="nav-link" href="/pengadaan/history">
 
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                 style="width: 20px; margin: 0 5px 0 5px">
@@ -243,7 +238,7 @@
 
             @guest
                 <li class="nav-title">Menu Tamu</li>
-                <li class="nav-item"><a class="nav-link" href="/login">
+                <li class="nav-item w-100"><a class="nav-link" href="/login">
 
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                             style="width: 20px; margin: 0 5px 0 5px">
@@ -326,6 +321,21 @@
     </div>
 
     {{-- Scripts --}}
+    {{-- Script Defer --}}
+    <!-- Bootstrap CDN -->
+    <script src="{{ url('js/bootstrap.min.js') }}"></script>
+    <script src="{{ url('js/bootstrap.bundle.min.js') }}"></script>
+    <!-- jQuery -->
+    <script src="{{ url('js/jquery-3.6.3.slim.min.js') }}"></script>
+
+    <!-- CoreUI and necessary plugins-->
+    <script src="{{ url('vendors/@coreui/coreui/js/coreui.bundle.min.js') }}"></script>
+    <script src="{{ url('vendors/simplebar/js/simplebar.min.js') }}"></script>
+    <!-- Plugins and scripts required by this view-->
+    <script src="{{ url('vendors/chart.js/js/chart.min.js') }}"></script>
+    <script src="{{ url('vendors/@coreui/chartjs/js/coreui-chartjs.js') }}"></script>
+    <script src="{{ url('vendors/@coreui/utils/js/coreui-utils.js') }}"></script>
+    {{-- <script src="{{ url('js/main.js') }}"></script> --}}
 
 
 

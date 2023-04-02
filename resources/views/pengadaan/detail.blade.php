@@ -7,13 +7,11 @@
             <div class="card-body">
                 <div class="mb-3 d-flex justify-content-between">
                     <div>
-                        <h2>{{ $pengadaan->kegiatan }}</h2>
+                        <h3>{{ $pengadaan->kegiatan }}</h3>
                         <div>{{ $pengadaan->created_at->format('d M Y') }}</div>
                         <div>{{ $pengadaan->Bidang->nama }}</div>
                         <div>{{ $pengadaan->Pemohon->nama }}</div>
                     </div>
-
-
                 </div>
 
                 @foreach ($kategori as $k)
@@ -42,8 +40,10 @@
                         </tbody>
                     </table>
                 @endforeach
+
                 {{-- if path is start with 'bidang/pengadaan/verifikasi/id' --}}
-                @if (Str::startsWith(request()->path(), 'bidang/pengadaan/verifikasi'))
+                @if (Str::startsWith(request()->path(), 'bidang/pengadaan/verifikasi') ||
+                        Str::startsWith(request()->path(), 'umum/pengadaan/verifikasi'))
                     <div class="d-flex justify-content-end">
                         <div>
                             <button class="btn btn-danger" id="tolak" data-bs-toggle="modal"
@@ -62,22 +62,30 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="approveModalLabel">Approve Laporan</h1>
+                    <h1 class="modal-title fs-5" id="approveModalLabel">Approve Pengadaan</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body d-flex flex-column justify-content-center align-items-center">
                     <img src="{{ url('assets/img/accept.jpeg') }}" alt="Approve" srcset=""
                         class="img-fluid w-25 mb-2">
-                    <h5 class="text-center">Apakah anda yakin untuk <i>approve</i> laporan ini?</h5>
+                    <h5 class="text-center">Apakah anda yakin untuk <i>approve</i> pengadaan ini?</h5>
                     <div id="approve-text"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <form action="/bidang/pengadaan/verifikasi/{{ $pengadaan->id }}" method="POST"
-                        id="approve-laporan-form">
-                        @csrf
-                        <button type="submit" class="btn btn-success">Approve</button>
-                    </form>
+                    @if (Str::startsWith(request()->path(), 'bidang/pengadaan/verifikasi'))
+                        <form action="/bidang/pengadaan/verifikasi/{{ $pengadaan->id }}" method="POST"
+                            id="approve-laporan-form">
+                            @csrf
+                            <button type="submit" class="btn btn-success">Approve</button>
+                        </form>
+                    @elseif (Str::startsWith(request()->path(), 'umum/pengadaan/verifikasi'))
+                        <form action="/umum/pengadaan/verifikasi/{{ $pengadaan->id }}" method="POST"
+                            id="approve-laporan-form">
+                            @csrf
+                            <button type="submit" class="btn btn-success">Approve</button>
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>
@@ -88,27 +96,52 @@
     <div class="modal fade" id="tolakModal" tabindex="-1" aria-labelledby="tolakModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
+                @if (Str::startsWith(request()->path(), 'bidang/pengadaan/verifikasi'))
+                    <form action="/bidang/pengadaan/reject/{{ $pengadaan->id }}" method="post">
+                    @elseif (Str::startsWith(request()->path(), 'umum/pengadaan/verifikasi'))
+                        <form action="/umum/pengadaan/reject/{{ $pengadaan->id }}" method="post">
+                @endif
+                @csrf
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="TolakModalLabel">Tolak Laporan</h1>
+                    <h1 class="modal-title fs-5" id="TolakModalLabel">Tolak Pengadaan</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                         id="cancelModal"></button>
                 </div>
                 <div class="modal-body ">
                     <div class="d-flex align-items-center">
                         <img src="{{ url('assets/img/warning.webp') }}" alt="Warning" srcset="" class="w-25">
-                        <h3 class="ms-2">Apakah anda yakin untuk menolak laporan?</h3>
+                        <h3 class="ms-2">Apakah anda yakin untuk menolak pengadaan?</h3>
                     </div>
                     <div class="d-flex flex-column mt-2 text-center">
                         <label for="alasan">Alasan Ditolak*</label>
-                        <input class="form-control mt-2" type="text" placeholder="Alasan" id="alasan">
+                        <input class="form-control mt-2" type="text" placeholder="Alasan" id="alasan" required
+                            name="alasan">
                         <div class="text-danger text-sm" id="alasan-error"></div>
                     </div>
+                    @if (Route::is('pengadaan.umum.verifikasi.detail'))
+                        <div class="d-flex flex-column mt-2 text-center">
+                            <label for="alasan">Revisi</label>
+                            <div>
+
+                                <input type="radio" name="tujuan" id="manajer-bidang" required value="manajer-bidang">
+                                <label for="manajer-bidang">
+                                    Manajer
+                                    Bidang
+                                </label>
+
+                                <input type="radio" name="tujuan" id="staff" class="ms-2" required
+                                    value="staff"> <label for="staff">Staff</label>
+                            </div>
+                        </div>
+                    @endif
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-danger" id="tolak-laporan">Tolak
-                        Laporan</button>
+                    <button type="submit" class="btn btn-danger" id="tolak-laporan">Tolak
+                    </button>
                 </div>
+                </form>
+
             </div>
         </div>
     </div>

@@ -92,7 +92,8 @@
                                     <th scope="col">No</th>
                                     <th scope="col">Nama</th>
                                     <th scope="col">Kategori</th>
-                                    <th scope="col">Jumlah</th>
+                                    <th scope="col">Jumlah Yang Dimiliki</th>
+                                    <th scope="col">Jumlah Keseluruhan</th>
                                     <th scope="col">Satuan</th>
                                     <th scope="col">Harga</th>
                                 </tr>
@@ -103,7 +104,15 @@
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <th>{{ $item->nama }}</th>
                                         <td>{{ $item->Kategori->nama }}</td>
-                                        <td>{{ $item->jumlah }}</td>
+                                        @if (auth()->user()->Bidang === 'Bidang Keuangan')
+                                            <td>{{ $item->stok_bidang_keuangan }}</td>
+                                        @elseif(auth()->user()->Bidang === 'Bidang Layanan dan Kepesertaan')
+                                            <td>{{ $item->stok_bidang_layanan }}</td>
+                                        @else
+                                            <td>{{ $item->stok_bidang_umum }}</td>
+                                        @endif
+                                        <td>{{ $item->stok_bidang_keuangan + $item->stok_bidang_layanan + $item->stok_bidang_umum }}
+                                        </td>
                                         <td>{{ $item->Satuan->nama }}</td>
                                         <td>Rp. {{ number_format($item->harga, 0, ',', '.') }}</td>
 

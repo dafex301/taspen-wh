@@ -22,7 +22,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 1,
                 'satuan' => 1,
                 'harga' => 220000,
-                'jumlah' => 10,
             ],
             [
                 'kode' => '123-01-114-0009',
@@ -30,7 +29,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 1,
                 'satuan' => 2,
                 'harga' => 107250,
-                'jumlah' => 10,
             ],
             [
                 'kode' => '123-01-127-0006',
@@ -38,7 +36,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 1,
                 'satuan' => 3,
                 'harga' => 159500,
-                'jumlah' => 1,
             ],
             [
                 'kode' => '612-01-100-4001',
@@ -46,7 +43,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 1,
                 'satuan' => 4,
                 'harga' => 9256500,
-                'jumlah' => 198,
             ],
             [
                 'kode' => '612-01-101-0022',
@@ -54,7 +50,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 1,
                 'satuan' => 2,
                 'harga' => 1320000,
-                'jumlah' => 24,
             ],
             [
                 'kode' => '612-01-104-0021',
@@ -62,7 +57,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 1,
                 'satuan' => 2,
                 'harga' => 594000,
-                'jumlah' => 6,
             ],
             [
                 'kode' => '612-01-110-0011',
@@ -70,7 +64,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 1,
                 'satuan' => 5,
                 'harga' => 102300,
-                'jumlah' => 10,
             ],
             [
                 'kode' => '612-01-113-0079',
@@ -78,7 +71,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 1,
                 'satuan' => 6,
                 'harga' => 1991000,
-                'jumlah' => 110,
             ],
             [
                 'kode' => '612-01-113-0150',
@@ -86,7 +78,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 1,
                 'satuan' => 6,
                 'harga' => 792000,
-                'jumlah' => 20,
             ],
             [
                 'kode' => '612-01-116-0211',
@@ -94,7 +85,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 1,
                 'satuan' => 2,
                 'harga' => 462000,
-                'jumlah' => 30,
             ],
             [
                 'kode' => '612-01-116-0212',
@@ -102,7 +92,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 1,
                 'satuan' => 2,
                 'harga' => 862400,
-                'jumlah' => 56,
             ],
             [
                 'kode' => '612-01-117-0008',
@@ -110,7 +99,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 1,
                 'satuan' => 2,
                 'harga' => 445500,
-                'jumlah' => 5,
             ],
             [
                 'kode' => '612-01-300-0340',
@@ -118,7 +106,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 1,
                 'satuan' => 2,
                 'harga' => 403194,
-                'jumlah' => 123,
             ],
             [
                 'kode' => '612-01-300-0362',
@@ -126,7 +113,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 1,
                 'satuan' => 2,
                 'harga' => 616000,
-                'jumlah' => 3,
             ],
             [
                 'kode' => '612-01-300-0371',
@@ -134,13 +120,11 @@ class ItemSeeder extends Seeder
                 'kategori' => 1,
                 'satuan' => 2,
                 'harga' => 84150,
-                'jumlah' => 9,
             ],
             [
                 'kode' => '612-04-101-0035',
                 'nama' => 'CF 14 7/8 X 11 2 PLY',
                 'satuan' => 4,
-                'jumlah' => 3,
                 'harga' => 577500,
                 'kategori' => 2,
             ],
@@ -148,7 +132,6 @@ class ItemSeeder extends Seeder
                 'kode' => '612-04-101-0291',
                 'nama' => 'CF 9 1/2 x 11" 3 PLY (NCR)',
                 'satuan' => 3,
-                'jumlah' => 23,
                 'harga' => 526600,
                 'kategori' => 2,
             ],
@@ -156,7 +139,6 @@ class ItemSeeder extends Seeder
                 'kode' => '612-04-104-0475',
                 'nama' => 'Toner HP Laserjet 204 Cyan',
                 'satuan' => 6,
-                'jumlah' => 4,
                 'harga' => 387200,
                 'kategori' => 2,
             ],
@@ -164,7 +146,6 @@ class ItemSeeder extends Seeder
                 'kode' => '612-04-104-0476',
                 'nama' => 'Toner HP Laserjet 204 Magenta',
                 'satuan' => 6,
-                'jumlah' => 4,
                 'harga' => 387200,
                 'kategori' => 2,
             ],
@@ -172,7 +153,6 @@ class ItemSeeder extends Seeder
                 'kode' => '612-04-104-0477',
                 'nama' => 'Toner HP Laserjet 204 Yellow',
                 'satuan' => 6,
-                'jumlah' => 4,
                 'harga' => 387200,
                 'kategori' => 2,
             ],
@@ -180,7 +160,6 @@ class ItemSeeder extends Seeder
                 'kode' => '612-04-104-0478',
                 'nama' => 'Toner HP Laserjet 204 Black',
                 'satuan' => 6,
-                'jumlah' => 5,
                 'harga' => 387200,
                 'kategori' => 2,
             ],
@@ -188,7 +167,6 @@ class ItemSeeder extends Seeder
                 'kode' => '612-04-112-0005',
                 'nama' => 'TONER XEROX DOCUPRINT CP315 DW CYAN',
                 'satuan' => 6,
-                'jumlah' => 1,
                 'harga' => 67700,
                 'kategori' => 2,
             ],
@@ -196,7 +174,6 @@ class ItemSeeder extends Seeder
                 'kode' => '612-04-112-0006',
                 'nama' => 'TONER XEROX DOCUPRINT CP315 DW MAGENTA',
                 'satuan' => 6,
-                'jumlah' => 1,
                 'harga' => 67700,
                 'kategori' => 2,
             ],
@@ -204,7 +181,6 @@ class ItemSeeder extends Seeder
                 'kode' => '612-04-112-0007',
                 'nama' => 'TONER XEROX DOCUPRINT CP315 DW YELLOW',
                 'satuan' => 6,
-                'jumlah' => 1,
                 'harga' => 67700,
                 'kategori' => 2,
             ],
@@ -212,7 +188,6 @@ class ItemSeeder extends Seeder
                 'kode' => '612-04-112-0008',
                 'nama' => 'TONER XEROX DOCUPRINT CP315 DW BLACK',
                 'satuan' => 6,
-                'jumlah' => 3,
                 'harga' => 1249600,
                 'kategori' => 2,
             ],
@@ -222,7 +197,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 2,
                 'satuan' => 6,
                 'harga' => 350900,
-                'jumlah' => 3,
             ],
             [
                 'kode' => '612-04-300-0131',
@@ -230,7 +204,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 2,
                 'satuan' => 6,
                 'harga' => 141800,
-                'jumlah' => 1,
             ],
             [
                 'kode' => '612-04-300-0136',
@@ -238,7 +211,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 2,
                 'satuan' => 6,
                 'harga' => 141800,
-                'jumlah' => 1,
             ],
             [
                 'kode' => '612-04-300-0137',
@@ -246,7 +218,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 2,
                 'satuan' => 6,
                 'harga' => 141800,
-                'jumlah' => 1,
             ],
             [
                 'kode' => '612-04-300-0138',
@@ -254,7 +225,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 2,
                 'satuan' => 6,
                 'harga' => 141800,
-                'jumlah' => 1,
             ],
             [
                 'kode' => '612-04-300-0139',
@@ -262,7 +232,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 2,
                 'satuan' => 6,
                 'harga' => 110500,
-                'jumlah' => 1,
             ],
             [
                 'kode' => '612-04-300-0140',
@@ -270,7 +239,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 2,
                 'satuan' => 6,
                 'harga' => 338800,
-                'jumlah' => 2,
             ],
             [
                 'kode' => '612-04-300-0141',
@@ -278,7 +246,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 2,
                 'satuan' => 6,
                 'harga' => 338800,
-                'jumlah' => 2,
             ],
             [
                 'kode' => '612-04-300-0142',
@@ -286,7 +253,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 2,
                 'satuan' => 6,
                 'harga' => 338800,
-                'jumlah' => 2,
             ],
             [
                 'kode' => '612-04-300-0143',
@@ -294,7 +260,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 2,
                 'satuan' => 6,
                 'harga' => 338800,
-                'jumlah' => 2,
             ],
             [
                 'kode' => '612-04-300-0146',
@@ -302,7 +267,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 2,
                 'satuan' => 6,
                 'harga' => 1123500,
-                'jumlah' => 7,
             ],
             [
                 'kode' => '612-04-300-0147',
@@ -310,7 +274,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 2,
                 'satuan' => 6,
                 'harga' => 332750,
-                'jumlah' => 8,
             ],
             [
                 'kode' => '612-04-300-0150',
@@ -318,7 +281,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 2,
                 'satuan' => 6,
                 'harga' => 805475,
-                'jumlah' => 2,
             ],
             [
                 'kode' => '612-04-300-0151',
@@ -326,7 +288,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 2,
                 'satuan' => 6,
                 'harga' => 238975,
-                'jumlah' => 1,
             ],
             [
                 'kode' => '612-04-300-0152',
@@ -334,7 +295,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 2,
                 'satuan' => 6,
                 'harga' => 477950,
-                'jumlah' => 1,
             ],
             [
                 'kode' => '612-04-300-0153',
@@ -342,7 +302,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 2,
                 'satuan' => 6,
                 'harga' => 2732950,
-                'jumlah' => 3,
             ],
             [
                 'kode' => '612-04-300-8032',
@@ -350,7 +309,6 @@ class ItemSeeder extends Seeder
                 'kategori' => 2,
                 'satuan' => 6,
                 'harga' => 407000,
-                'jumlah' => 2,
             ],
             [
                 'kode' => '612-04-900-0135',
@@ -358,98 +316,84 @@ class ItemSeeder extends Seeder
                 'kategori' => 2,
                 'satuan' => 1,
                 'harga' => 2117500,
-                'jumlah' => 11,
             ],
             [
                 'nama' => 'Amplop Coklat Logo Taspen',
                 'kategori' => 3,
                 'satuan' => 7,
                 'harga' => 0,
-                'jumlah' => 10,
             ],
             [
                 'nama' => 'Blanko FPP',
                 'kategori' => 3,
                 'satuan' => 7,
                 'harga' => 0,
-                'jumlah' => 10,
             ],
             [
                 'nama' => 'SPTB',
                 'kategori' => 3,
                 'satuan' => 7,
                 'harga' => 0,
-                'jumlah' => 10,
             ],
             [
                 'nama' => 'Formulir Persyaratan',
                 'kategori' => 3,
                 'satuan' => 7,
                 'harga' => 0,
-                'jumlah' => 10,
             ],
             [
                 'nama' => 'Blanko KPPG',
                 'kategori' => 3,
                 'satuan' => 7,
                 'harga' => 0,
-                'jumlah' => 3,
             ],
             [
                 'nama' => 'Formulir AKT 2',
                 'kategori' => 3,
                 'satuan' => 7,
                 'harga' => 0,
-                'jumlah' => 3,
             ],
             [
                 'nama' => 'Map Dosir Pensiun',
                 'kategori' => 3,
                 'satuan' => 8,
                 'harga' => 0,
-                'jumlah' => 250,
             ],
             [
                 'nama' => 'Formulir Wawancara Beasiswa',
                 'kategori' => 3,
                 'satuan' => 7,
                 'harga' => 0,
-                'jumlah' => 3,
             ],
             [
                 'nama' => 'Formulir Surat Kuasa Ahli Waris',
                 'kategori' => 3,
                 'satuan' => 7,
                 'harga' => 0,
-                'jumlah' => 3,
             ],
             [
                 'nama' => 'Formulir Keterangan Ahli Waris',
                 'kategori' => 3,
                 'satuan' => 7,
                 'harga' => 0,
-                'jumlah' => 5,
             ],
             [
                 'nama' => 'Formulir Mutasi',
                 'kategori' => 3,
                 'satuan' => 7,
                 'harga' => 0,
-                'jumlah' => 4,
             ],
             [
                 'nama' => 'Formulir Keterangan Janda/Duda',
                 'kategori' => 3,
                 'satuan' => 7,
                 'harga' => 0,
-                'jumlah' => 3,
             ],
             [
                 'nama' => 'Blanko Wawancara',
                 'kategori' => 3,
                 'satuan' => 7,
                 'harga' => 0,
-                'jumlah' => 3,
             ],
         ];
 

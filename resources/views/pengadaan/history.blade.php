@@ -20,6 +20,7 @@
                                                 <th scope="col">Tanggal</th>
                                                 @if (!request()->routeIs('pengadaan.history'))
                                                     <th scope="col">Pemohon</th>
+                                                    <th scope="col">Bidang</th>
                                                 @endif
                                                 <th scope="col">Status</th>
                                                 <th scope="col">Aksi</th>
@@ -35,15 +36,61 @@
                                                     </td>
                                                     @if (!request()->routeIs('pengadaan.history'))
                                                         <td>{{ $p->Pemohon->nama }}</td>
+                                                        <td>{{ $p->Bidang->nama }}</td>
                                                     @endif
-                                                    @if (!$p->status_manager_bidang)
-                                                        <td>Diproses Manager Bidang</td>
-                                                    @elseif (!$p->status_manager_umum)
-                                                        <td>Diproses Manager Umum</td>
+                                                    @if ($p->status_manager_umum === 0)
+                                                        <td>
+                                                            <span class="badge badge-sm bg-danger">
+                                                                Ditolak Manager Umum
+                                                            </span>
+                                                        </td>
+                                                    @elseif ($p->status_manager_bidang === 0)
+                                                        <td>
+                                                            <span class="badge badge-sm bg-danger">
+                                                                Ditolak Manager Bidang
+                                                            </span>
+                                                        </td>
+                                                    @elseif ($p->status_manager_bidang === null)
+                                                        <td>
+                                                            <span class="badge badge-sm bg-primary">
+                                                                Diproses Manager Bidang
+                                                            </span>
+                                                        </td>
+                                                    @elseif ($p->status_manager_umum === null)
+                                                        <td>
+                                                            <span class="badge badge-sm bg-primary">
+                                                                Diproses Manager Umum
+                                                            </span>
+                                                        </td>
                                                     @else
-                                                        <td>Selesai</td>
+                                                        <td>
+                                                            <span class="badge badge-sm bg-success">
+                                                                Selesai
+                                                            </span>
+                                                        </td>
                                                     @endif
                                                     <td>
+                                                        @if ($p->status_manager_bidang === 0 && $p->pemohon === auth()->user()->id)
+                                                            <a href="/pengadaan/revisi/{{ $p->id }}"
+                                                                class="btn btn-outline-warning">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                    viewBox="0 0 24 24" stroke-width="1.5"
+                                                                    stroke="currentColor" style="height: 20px">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                                                                </svg>
+                                                            </a>
+                                                        @elseif ($p->status_manager_umum === 0 && $p->manager_bidang === auth()->user()->id)
+                                                            <a href="/bidang/pengadaan/revisi/{{ $p->id }}"
+                                                                class="btn btn-outline-warning">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                    viewBox="0 0 24 24" stroke-width="1.5"
+                                                                    stroke="currentColor" style="height: 20px">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                                                                </svg>
+                                                            </a>
+                                                        @endif
                                                         <a href="/pengadaan/detail/{{ $p->id }}"
                                                             class="btn btn-outline-primary">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"

@@ -21,11 +21,11 @@ return new class extends Migration
 
             $table->boolean('status_manager_bidang')->nullable();
             $table->timestamp('waktu_manager_bidang')->nullable();
-            $table->text('komentar_manager_bidang')->nullable();
+            $table->text('alasan_manager_bidang')->nullable();
 
             $table->boolean('status_manager_umum')->nullable();
             $table->timestamp('waktu_manager_umum')->nullable();
-            $table->text('komentar_manager_umum')->nullable();
+            $table->text('alasan_manager_umum')->nullable();
 
             $table->boolean('selesai')->default(false);
             $table->timestamp('selesai_waktu')->nullable();

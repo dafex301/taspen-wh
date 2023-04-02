@@ -18,8 +18,10 @@ return new class extends Migration
             $table->timestamps();
             $table->string('kode')->unique()->nullable();
             $table->string('nama');
-            $table->integer('jumlah');
-            $table->integer('harga');
+            $table->integer('stok_bidang_layanan')->default(0);
+            $table->integer('stok_bidang_keuangan')->default(0);
+            $table->integer('stok_bidang_umum')->default(0);
+            $table->integer('harga')->default(0);
             $table->foreignId('kategori');
             $table->foreignId('satuan');
         });

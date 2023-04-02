@@ -48,8 +48,7 @@
                                                                 @foreach ($items as $i)
                                                                     @if ($i->kategori == $k->id)
                                                             <option value="{{ $i->id }}">
-                                                                {{ $i->nama }} ({{ $i->Satuan->nama }}) (Stok:
-                                                                {{ $i->jumlah }})</option>
+                                                                {{ $i->nama }} ({{ $i->Satuan->nama }})</option>
                                                         @endif
                                                         @endforeach
                                                         </option>
@@ -60,7 +59,20 @@
                                                     <input type="number" class="form-control" placeholder="Jumlah"
                                                         id="jumlah1" name="jumlah[]" required>
                                                 </div>
+                                                <div class="col">
+                                                    <button type="button" class="btn btn-danger delete-btn"
+                                                        style="display:none">
+                                                        <svg class="delete-icon" xmlns="http://www.w3.org/2000/svg"
+                                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                                            stroke="currentColor" style="width: 20px;">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M19.5 12h-15" />
+                                                        </svg>
+                                                        Hapus
+                                                    </button>
+                                                </div>
                                             </div>
+
                                         </div>
                                         <div class="text-center mb-3">
                                             <button class="btn btn-success" id="tambah-btn">
@@ -69,12 +81,13 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         d="M12 4.5v15m7.5-7.5h-15" />
                                                 </svg>
-
-                                                <span>Tambah Barang
-                                                </span> </button>
+                                                <span>
+                                                    Tambah Barang
+                                                </span>
+                                            </button>
                                         </div>
                                         <div class="mb-3 mt-4">
-                                            <button class="btn btn-primary" type="submit">Submit Laporan</button>
+                                            <button class="btn btn-primary" type="submit">Submit Pengadaan</button>
                                         </div>
                                     </div>
                                 </div>
@@ -95,7 +108,21 @@
             let clone = addBarang.cloneNode(true);
             clone.querySelector('select').value = '';
             clone.querySelector('input').value = '';
+            clone.querySelector('.delete-btn').style.display = 'block';
+            let id = addContainer.childElementCount + 1;
             addContainer.appendChild(clone);
+        });
+
+        // When element with delete-btn class clicked, remove parent element
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('delete-btn')) {
+                e.preventDefault();
+                e.target.parentElement.parentElement.remove();
+            }
+            if (e.target && e.target.classList.contains('delete-icon')) {
+                e.preventDefault();
+                e.target.parentElement.parentElement.parentElement.remove();
+            }
         });
     </script>
 @endsection

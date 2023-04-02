@@ -34,6 +34,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         // Pengadaan Routes
         Route::get('/pengadaan/create', 'PengadaanController@create')->name('pengadaan.create');
         Route::get('/pengadaan/detail/{id}', 'PengadaanController@show')->name('pengadaan.detail');
+        Route::get('/pengadaan/revisi/{id}', 'PengadaanController@revisi')->name('pengadaan.revisi');
+        Route::post('/pengadaan/revisi', 'PengadaanController@update')->name('pengadaan.update');
         Route::get('/pengadaan/history', 'PengadaanController@history')->name('pengadaan.history');
         Route::post('/pengadaan', 'PengadaanController@store')->name('pengadaan.store');
 
@@ -52,7 +54,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/bidang/pengadaan/verifikasi', 'PengadaanController@verifikasi')->name('pengadaan.bidang.verifikasi');
         Route::get('/bidang/pengadaan/verifikasi/{id}', 'PengadaanController@show')->name('pengadaan.bidang.verifikasi.detail');
         Route::post('/bidang/pengadaan/verifikasi/{id}', 'PengadaanController@accept')->name('pengadaan.bidang.verifikasi.accept');
+        Route::post('/bidang/pengadaan/reject/{id}', 'PengadaanController@reject')->name('pengadaan.bidang.verifikasi.reject');
         Route::get('/bidang/pengadaan/history', 'PengadaanController@history')->name('pengadaan.bidang.history');
+        Route::get('/bidang/pengadaan/revisi/{id}', 'PengadaanController@revisi')->name('pengadaan.bidang.revisi');
+        Route::post('/bidang/pengadaan/revisi', 'PengadaanController@update')->name('pengadaan.bidang.update');
 
         // Permintaan Routes
         Route::get('/bidang/permintaan/verifikasi', 'PermintaanController@verifikasi')->name('permintaan.bidang.verifikasi');
@@ -64,6 +69,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/umum/pengadaan/verifikasi', 'PengadaanController@verifikasi')->name('pengadaan.umum.verifikasi');
         Route::get('/umum/pengadaan/verifikasi/{id}', 'PengadaanController@show')->name('pengadaan.umum.verifikasi.detail');
         Route::post('/umum/pengadaan/verifikasi/{id}', 'PengadaanController@accept')->name('pengadaan.umum.verifikasi.accept');
+        Route::post('/umum/pengadaan/reject/{id}', 'PengadaanController@reject')->name('pengadaan.umum.verifikasi.reject');
+        Route::get('/umum/pengadaan/history', 'PengadaanController@history')->name('pengadaan.umum.history');
+        Route::get('/umum/pengadaan/approval', 'PengadaanController@approval')->name('pengadaan.umum.approval');
     });
 
     // Admin Routes
