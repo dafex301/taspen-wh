@@ -16,6 +16,9 @@ class ManajerUmum
      */
     public function handle(Request $request, Closure $next)
     {
+        if (!auth()->check()) {
+            return redirect()->route('login.show');
+        }
         if (auth()->user()->Role->nama != 'Manajer Umum') {
             return redirect()->route('dashboard.index');
         }

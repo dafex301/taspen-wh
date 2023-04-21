@@ -16,6 +16,9 @@ class ManajerBidang
      */
     public function handle(Request $request, Closure $next)
     {
+        if (!auth()->check()) {
+            return redirect()->route('login.show');
+        }
         if (auth()->user()->Role->nama != 'Manajer Bidang') {
             return redirect()->route('dashboard.index');
         }

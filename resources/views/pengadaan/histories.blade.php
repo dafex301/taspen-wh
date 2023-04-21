@@ -6,11 +6,15 @@
             <div class="col-lg-12">
                 <div class="card text-center" style="">
                     <div class="card-body">
-                        <h5 class="card-title">Buat Pengadaan</h5>
+                        <h5 class="card-title">History Pengadaan</h5>
                         <p class="card-text">
-                            {{ $pengadaanTotal }} Usulan
+                            {{ $realisasiPengadaan }} Riwayat
                         </p>
-                        <a class="btn btn-success" href="/umum/pengadaan/approval/create">Buat</a>
+                        <a class="btn btn-success" href="/umum/pengadaan/history/approved">Lihat Pengadaan</a>
+                        <div class="mt-2">
+                            <a class="btn btn-light" href="/umum/pengadaan/history">Lihat Semua Pengadaan</a>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -23,9 +27,9 @@
                     <div class="card-body">
                         <h5 class="card-title">Bidang Layanan dan Kepesertaan</h5>
                         <p class="card-text">
-                            {{ $pengadaanLayanan }} Usulan
+                            {{ $pengadaanCount[0] }} Riwayat
                         </p>
-                        <a class="btn btn-primary" href="/umum/pengadaan/approval/layanan">Lihat</a>
+                        <a class="btn btn-primary" href="/umum/pengadaan/history/layanan">Lihat</a>
                     </div>
                 </div>
             </div>
@@ -36,9 +40,9 @@
                     <div class="card-body">
                         <h5 class="card-title">Bidang Keuangan</h5>
                         <p class="card-text">
-                            {{ $pengadaanKeuangan }} Usulan
+                            {{ $pengadaanCount[1] }} Riwayat
                         </p>
-                        <a class="btn btn-primary" href="/umum/pengadaan/approval/keuangan">Lihat</a>
+                        <a class="btn btn-primary" href="/umum/pengadaan/history/keuangan">Lihat</a>
                     </div>
                 </div>
             </div>
@@ -49,9 +53,9 @@
                     <div class="card-body">
                         <h5 class="card-title">Bidang Umum dan SDM</h5>
                         <p class="card-text">
-                            {{ $pengadaanSDM }} Usulan
+                            {{ $pengadaanCount[2] }} Riwayat
                         </p>
-                        <a class="btn btn-primary" href="/umum/pengadaan/approval/sdm">Lihat</a>
+                        <a class="btn btn-primary" href="/umum/pengadaan/history/sdm">Lihat</a>
                     </div>
                 </div>
             </div>

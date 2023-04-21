@@ -70,8 +70,21 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/umum/pengadaan/verifikasi/{id}', 'PengadaanController@show')->name('pengadaan.umum.verifikasi.detail');
         Route::post('/umum/pengadaan/verifikasi/{id}', 'PengadaanController@accept')->name('pengadaan.umum.verifikasi.accept');
         Route::post('/umum/pengadaan/reject/{id}', 'PengadaanController@reject')->name('pengadaan.umum.verifikasi.reject');
+
+        Route::get('/umum/pengadaan/histories', 'PengadaanController@histories')->name('pengadaan.umum.histories');
         Route::get('/umum/pengadaan/history', 'PengadaanController@history')->name('pengadaan.umum.history');
+        Route::get('/umum/pengadaan/history/approved', 'PengadaanController@approvedHistory')->name('pengadaan.umum.approvedHistory');
+        Route::get('/umum/pengadaan/history/approved/{id}', 'PengadaanController@approvedHistoryDetail')->name('pengadaan.umum.history');
+        Route::get('/umum/pengadaan/history/layanan', 'PengadaanController@history')->name('pengadaan.umum.history.layanan');
+        Route::get('/umum/pengadaan/history/keuangan', 'PengadaanController@history')->name('pengadaan.umum.history.keuangan');
+        Route::get('/umum/pengadaan/history/sdm', 'PengadaanController@history')->name('pengadaan.umum.history.sdm');
+
         Route::get('/umum/pengadaan/approval', 'PengadaanController@approval')->name('pengadaan.umum.approval');
+        Route::get('/umum/pengadaan/approval/layanan', 'PengadaanController@verifikasi')->name('pengadaan.umum.approval.layanan');
+        Route::get('/umum/pengadaan/approval/keuangan', 'PengadaanController@verifikasi')->name('pengadaan.umum.approval.keuangan');
+        Route::get('/umum/pengadaan/approval/sdm', 'PengadaanController@verifikasi')->name('pengadaan.umum.approval.sdm');
+        Route::get('/umum/pengadaan/approval/create', 'PengadaanController@buatPengadaan')->name('pengadaan.umum.approval.buatPengadaan');
+        Route::post('/umum/pengadaan/approval/create', 'PengadaanController@realisasiPengadaan')->name('pengadaan.umum.approval.realisasiPengadaan');
     });
 
     // Admin Routes

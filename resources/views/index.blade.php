@@ -104,9 +104,9 @@
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <th>{{ $item->nama }}</th>
                                         <td>{{ $item->Kategori->nama }}</td>
-                                        @if (auth()->user()->Bidang === 'Bidang Keuangan')
+                                        @if (auth()->user()->Bidang->nama === 'Bidang Keuangan')
                                             <td>{{ $item->stok_bidang_keuangan }}</td>
-                                        @elseif(auth()->user()->Bidang === 'Bidang Layanan dan Kepesertaan')
+                                        @elseif(auth()->user()->Bidang->nama === 'Bidang Layanan dan Kepesertaan')
                                             <td>{{ $item->stok_bidang_layanan }}</td>
                                         @else
                                             <td>{{ $item->stok_bidang_umum }}</td>

@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
-                        <div class="card-header"><strong>History Permintaan Bidang</strong></div>
+                        <div class="card-header"><strong>Approval Pengadaan Bidang</strong></div>
 
                         <div class="card-body">
 
