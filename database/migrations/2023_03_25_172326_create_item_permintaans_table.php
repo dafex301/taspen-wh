@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('item_permintaans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_permintaan')->constrained('pengadaans')->onDelete('cascade');
+            $table->foreignId('id_permintaan')->constrained('permintaans')->onDelete('cascade');
             $table->foreignId('id_item')->constrained('items')->onDelete('cascade');
             $table->integer('jumlah');
             $table->timestamps();

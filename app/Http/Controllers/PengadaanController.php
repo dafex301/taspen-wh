@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\RealisasiPengadaanList;
 use App\Http\Requests\StorePengadaanRequest;
 use App\Http\Requests\UpdatePengadaanRequest;
+use Illuminate\Http\Request;
 
 class PengadaanController extends Controller
 {
@@ -554,5 +555,37 @@ class PengadaanController extends Controller
     public function destroy(Pengadaan $pengadaan)
     {
         //
+    }
+
+    public function stok()
+    {
+        $items = Item::all();
+
+        return view('pengadaan.stok', compact('items'));
+    }
+
+    public function inputStok(Request $request)
+    {
+        $layanan = $request->layanan;
+        $keuangan = $request->keuangan;
+        $umum = $request->umum;
+        try {
+            // Start transaction
+            DB::beginTransaction();
+            // for each item, add stok
+            for ($i = 0; $i < count($layanan); $i++) {
+                $item = Item::find($i + 1);
+                $item->stok_bidang_layanan = $layanan[$i];
+                $item->stok_bidang_keuangan = $keuangan[$i];
+                $item->stok_bidang_umum = $umum[$i];
+                $item->save();
+            }
+            // Commit transaction
+            DB::commit();
+            return redirect()->route('dashboard.index')->with('success', 'Berhasil mengubah stok');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->route('pengadaan.umum.stok')->with('error', 'Terjadi kesalahan saat mengubah stok: ' . $e->getMessage());
+        }
     }
 }

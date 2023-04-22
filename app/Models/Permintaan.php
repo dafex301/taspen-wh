@@ -14,6 +14,14 @@ class Permintaan extends Model
         'kegiatan',
         'pemohon',
         'bidang',
+        'manager_umum',
+        'manager_bidang',
+        'status_manager_umum',
+        'status_manager_bidang',
+        'alasan_manager_umum',
+        'alasan_manager_bidang',
+        'waktu_manager_umum',
+        'waktu_manager_bidang',
     ];
 
     // Relation with user

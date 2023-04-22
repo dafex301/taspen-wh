@@ -7,6 +7,7 @@
             <div class="card-body">
                 <div class="mb-3 d-flex justify-content-between">
                     <div>
+                        <h5>Detail Pengadaan</h5>
                         <h3>{{ $pengadaan->kegiatan }}</h3>
                         <div>{{ $pengadaan->created_at->format('d M Y') }}</div>
                         <div>{{ $pengadaan->Bidang->nama }}</div>

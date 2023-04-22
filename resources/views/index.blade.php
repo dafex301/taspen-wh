@@ -92,7 +92,9 @@
                                     <th scope="col">No</th>
                                     <th scope="col">Nama</th>
                                     <th scope="col">Kategori</th>
-                                    <th scope="col">Jumlah Yang Dimiliki</th>
+                                    @auth
+                                        <th scope="col">Jumlah Yang Dimiliki</th>
+                                    @endauth
                                     <th scope="col">Jumlah Keseluruhan</th>
                                     <th scope="col">Satuan</th>
                                     <th scope="col">Harga</th>
@@ -104,13 +106,17 @@
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <th>{{ $item->nama }}</th>
                                         <td>{{ $item->Kategori->nama }}</td>
-                                        @if (auth()->user()->Bidang->nama === 'Bidang Keuangan')
-                                            <td>{{ $item->stok_bidang_keuangan }}</td>
-                                        @elseif(auth()->user()->Bidang->nama === 'Bidang Layanan dan Kepesertaan')
-                                            <td>{{ $item->stok_bidang_layanan }}</td>
-                                        @else
-                                            <td>{{ $item->stok_bidang_umum }}</td>
-                                        @endif
+                                        @auth
+
+                                            @if (auth()->user()->Bidang->nama === 'Bidang Keuangan')
+                                                <td>{{ $item->stok_bidang_keuangan }}</td>
+                                            @elseif(auth()->user()->Bidang->nama === 'Bidang Layanan dan Kepesertaan')
+                                                <td>{{ $item->stok_bidang_layanan }}</td>
+                                            @else
+                                                <td>{{ $item->stok_bidang_umum }}</td>
+                                            @endif
+                                        @endauth
+
                                         <td>{{ $item->stok_bidang_keuangan + $item->stok_bidang_layanan + $item->stok_bidang_umum }}
                                         </td>
                                         <td>{{ $item->Satuan->nama }}</td>

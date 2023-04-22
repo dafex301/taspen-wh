@@ -55,11 +55,11 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-2">
                                                     <input type="number" class="form-control" placeholder="Jumlah"
                                                         id="jumlah1" name="jumlah[]" required>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-2">
                                                     <button type="button" class="btn btn-danger delete-btn"
                                                         style="display:none">
                                                         <svg class="delete-icon" xmlns="http://www.w3.org/2000/svg"

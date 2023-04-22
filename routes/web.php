@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\PengadaanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +43,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         // Permintaan Routes
         Route::get('/permintaan/create', 'PermintaanController@create')->name('permintaan.create');
         Route::get('/permintaan/detail/{id}', 'PermintaanController@show')->name('permintaan.detail');
+        Route::get('/permintaan/revisi/{id}', 'PermintaanController@revisi')->name('permintaan.revisi');
+        Route::post('/permintaan/revisi', 'PermintaanController@update')->name('permintaan.update');
         Route::get('/permintaan/history', 'PermintaanController@history')->name('permintaan.history');
         Route::post('/permintaan', 'PermintaanController@store')->name('permintaan.store');
 
@@ -61,7 +64,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         // Permintaan Routes
         Route::get('/bidang/permintaan/verifikasi', 'PermintaanController@verifikasi')->name('permintaan.bidang.verifikasi');
+        Route::get('/bidang/permintaan/verifikasi/{id}', 'PermintaanController@show')->name('permintaan.bidang.verifikasi.detail');
+        Route::post('/bidang/permintaan/verifikasi/{id}', 'PermintaanController@accept')->name('permintaan.umum.verifikasi.accept');
+        Route::post('/bidang/permintaan/verifikasi/{id}', 'PermintaanController@accept')->name('permintaan.bidang.verifikasi.accept');
+        Route::post('/bidang/permintaan/reject/{id}', 'PermintaanController@reject')->name('permintaan.bidang.verifikasi.reject');
         Route::get('/bidang/permintaan/history', 'PermintaanController@history')->name('permintaan.bidang.history');
+        Route::get('/bidang/permintaan/revisi/{id}', 'PermintaanController@revisi')->name('permintaan.bidang.revisi');
+        Route::post('/bidang/permintaan/revisi', 'PermintaanController@update')->name('permintaan.bidang.update');
     });
 
     Route::group(['middleware' => ['manajer.umum']], function () {
@@ -85,6 +94,22 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/umum/pengadaan/approval/sdm', 'PengadaanController@verifikasi')->name('pengadaan.umum.approval.sdm');
         Route::get('/umum/pengadaan/approval/create', 'PengadaanController@buatPengadaan')->name('pengadaan.umum.approval.buatPengadaan');
         Route::post('/umum/pengadaan/approval/create', 'PengadaanController@realisasiPengadaan')->name('pengadaan.umum.approval.realisasiPengadaan');
+
+        // Permintaan Routes
+        Route::get('/umum/permintaan/approval', 'PermintaanController@approval')->name('permintaan.umum.approval');
+        Route::get('/umum/permintaan/verifikasi', 'PermintaanController@verifikasi')->name('permintaan.umum.verifikasi');
+        Route::get('/umum/permintaan/approval/layanan', 'PermintaanController@verifikasi')->name('permintaan.umum.approval.layanan');
+        Route::get('/umum/permintaan/approval/keuangan', 'PermintaanController@verifikasi')->name('permintaan.umum.approval.keuangan');
+        Route::get('/umum/permintaan/approval/sdm', 'PermintaanController@verifikasi')->name('permintaan.umum.approval.sdm');
+
+        Route::get('/umum/permintaan/verifikasi/{id}', 'PermintaanController@show')->name('permintaan.umum.verifikasi.detail');
+        Route::post('/umum/permintaan/verifikasi/{id}', 'PermintaanController@accept')->name('permintaan.umum.verifikasi.accept');
+        Route::post('/umum/permintaan/reject/{id}', 'PermintaanController@reject')->name('permintaan.umum.verifikasi.reject');
+        Route::get('/umum/permintaan/history', 'PermintaanController@history')->name('permintaan.umum.history');
+
+        // Stok Routes
+        Route::get('/umum/stok', 'PengadaanController@stok')->name('pengadaan.umum.stok');
+        Route::post('/umum/stok', 'PengadaanController@inputStok')->name('pengadaan.umum.inputStok');
     });
 
     // Admin Routes
