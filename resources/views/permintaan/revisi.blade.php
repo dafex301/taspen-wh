@@ -65,10 +65,30 @@
                                                                         @if ($i->id == $selectedItem->id_item)
                                                             <option value="{{ $i->id }}" selected>
                                                                 {{ $i->nama }} ({{ $i->Satuan->nama }})
+                                                                | Stok Bidang:
+                                                                @if (auth()->user()->bidang === 1)
+                                                                    {{ $i->stok_bidang_layanan }}
+                                                                @elseif (auth()->user()->bidang === 2)
+                                                                    {{ $i->stok_bidang_keuangan }}
+                                                                @else
+                                                                    {{ $i->stok_bidang_umum }}
+                                                                @endif
+                                                                | Stok Keseluruhan:
+                                                                {{ $i->stok_bidang_layanan + $i->stok_bidang_keuangan + $i->stok_bidang_umum }}
                                                             </option>
                                                         @else
                                                             <option value="{{ $i->id }}">
                                                                 {{ $i->nama }} ({{ $i->Satuan->nama }})
+                                                                | Stok Bidang:
+                                                                @if (auth()->user()->bidang === 1)
+                                                                    {{ $i->stok_bidang_layanan }}
+                                                                @elseif (auth()->user()->bidang === 2)
+                                                                    {{ $i->stok_bidang_keuangan }}
+                                                                @else
+                                                                    {{ $i->stok_bidang_umum }}
+                                                                @endif
+                                                                | Stok Keseluruhan:
+                                                                {{ $i->stok_bidang_layanan + $i->stok_bidang_keuangan + $i->stok_bidang_umum }}
                                                             </option>
                                                         @endif
                                         @endif
@@ -77,11 +97,11 @@
                                         @endforeach
                                         </select>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-2">
                                         <input type="number" class="form-control" placeholder="Jumlah" id="jumlah1"
                                             name="jumlah[]" required value="{{ $selectedItem->jumlah }}">
                                     </div>
-                                    <div class="col">
+                                    <div class="col-2">
                                         <button type="button" class="btn btn-danger delete-btn"
                                             @if ($loop->first) hidden @endif>
                                             <svg class="delete-icon" xmlns="http://www.w3.org/2000/svg" fill="none"

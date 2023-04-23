@@ -152,7 +152,7 @@
                                 Verifikasi Permintaan
                             </a>
                         </li>
-                        <li class="nav-item w-100"><a class="nav-link" href="/umum/permintaan/history">
+                        <li class="nav-item w-100"><a class="nav-link" href="/umum/permintaan/histories">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                     style="width: 20px; margin: 0 5px 0 5px">
                                     <path

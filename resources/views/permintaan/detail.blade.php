@@ -1,7 +1,83 @@
 @extends('layouts.main')
 
 @section('container')
-    <div class="container">
+    <style type="text/css">
+        @media print {
+            .noprint {
+                display: none;
+            }
+
+            .print {
+                display: block !important;
+            }
+        }
+
+        .print {
+            display: none;
+        }
+    </style>
+
+    {{-- Printing Style --}}
+    <style type="text/css">
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+        }
+
+        .tg td {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-baqh {
+            text-align: center;
+            vertical-align: top
+        }
+
+        .tg .tg-0lax {
+            text-align: left;
+            vertical-align: top
+        }
+    </style>
+
+
+    <div class="container noprint">
+
+        {{-- notification about lastPermintaan if route is /bidang/permintaan/verifikasi/{id} or /umum/permintaan/verifikasi/{id} --}}
+        @if (Str::startsWith(request()->path(), 'bidang/permintaan/verifikasi') ||
+                Str::startsWith(request()->path(), 'umum/permintaan/verifikasi'))
+            @if ($lastPermintaan)
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Permintaan terakhir <strong>{{ $lastPermintaan->kegiatan }}</strong>
+                    pada tanggal <strong>{{ $lastPermintaan->created_at->format('d M Y') }}</strong>
+                    <ul>
+                        @foreach ($lastItems as $i)
+                            <li>{{ $i->nama }} ({{ $i->jumlah }} {{ $i->satuan }})</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+        @endif
 
         <div class="card">
             <div class="card-body">
@@ -13,6 +89,9 @@
                         <div>{{ $permintaan->Bidang->nama }}</div>
                         <div>{{ $permintaan->Pemohon->nama }}</div>
                     </div>
+                    <button onclick="window.print()" class="btn btn-success noprint" style="height: 40px;">
+                        Cetak
+                    </button>
                 </div>
 
                 @foreach ($kategori as $k)
@@ -69,13 +148,115 @@
                         <div>
                             <button class="btn btn-danger" id="tolak" data-bs-toggle="modal"
                                 data-bs-target="#tolakModal">Tolak Permintaan</button>
-                            <button class="btn btn-success" id="setuju" data-bs-toggle="modal"
-                                data-bs-target="#approveModal">Setujui Permintaan</button>
+                            @if ($permintaan->status_manager_umum === 0 && Str::startsWith(request()->path(), 'bidang/permintaan/verifikasi'))
+                                <a class="btn btn-warning" id="setuju"
+                                    href="/bidang/permintaan/revisi/{{ $permintaan->id }}">Revisi Permintaan</a>
+                            @else
+                                <button class="btn btn-success" id="setuju" data-bs-toggle="modal"
+                                    data-bs-target="#approveModal">Setujui Permintaan</button>
+                            @endif
                         </div>
                     </div>
                 @endif
             </div>
         </div>
+    </div>
+
+
+    <div class="print">
+        <header>
+            <table>
+                <tr>
+                    <td>
+                        <img src="{{ url('assets/img/taspen.png') }}" alt="" width="100" />
+                    </td>
+                    <td>
+                        <span style="font-weight: bold; font-size: large">PT. TASPEN (PERSERO)</span><br />
+                        <span>Jl. Letjend Soeprapto No. 45 Cempaka Putih, Jakarta Pusat
+                            10520</span>
+                    </td>
+                </tr>
+            </table>
+        </header>
+        <center>
+            <h3 style="margin-top:10px;">RESUME PERMINTAAN</h3>
+            {{-- No: RSM-id with 3 digits such as 002 --}}
+            {{-- Date monthyear such as 042023 --}}
+            <p>No: RSM-{{ str_pad($permintaan->id, 3, '0', STR_PAD_LEFT) }}/CU.04/{{ date('mY') }}</p>
+        </center>
+        <table>
+
+            <tr>
+                <td>Nama Kegiatan</td>
+                <td>:</td>
+                <td>{{ $permintaan->kegiatan }}</td>
+            </tr>
+            <tr>
+                <td>Nama</td>
+                <td>:</td>
+                <td>{{ $permintaan->Pemohon->nama }}</td>
+            </tr>
+            <tr>
+                <td>NIK</td>
+                <td>:</td>
+                <td>NIK</td>
+            </tr>
+            <tr>
+                <td>Bidang</td>
+                <td>:</td>
+                <td>{{ $permintaan->Bidang->nama }}</td>
+            </tr>
+            <tr>
+                <td>Tanggal</td>
+                <td>:</td>
+                <td>{{ $permintaan->created_at->format('d M Y') }}</td>
+            </tr>
+            {{-- Spacing --}}
+            <tr style="opacity: 0%">
+                <td>Nama Kegiatann</td>
+                <td>:::</td>
+                <td>{{ $permintaan->kegiatan }}</td>
+            </tr>
+            {{-- End of Spacing --}}
+        </table>
+
+        @foreach ($kategori as $k)
+            <table class="tg">
+                <thead>
+                    <tr>
+                        <th class="tg-baqh" colspan="4">{{ $k }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tg-baqh">No</td>
+                        <td class="tg-baqh">Barang</td>
+                        <td class="tg-baqh">Jumlah</td>
+                        <td class="tg-baqh">Satuan</td>
+                    </tr>
+                    <?php $idx = 1; ?>
+                    @foreach ($items as $i)
+                        @if ($i->kategori === $k)
+                            <tr>
+                                <td class="tg-baqh">{{ $idx++ }}</td>
+                                <td class="tg-0lax">{{ $i->nama }}</td>
+                                <td class="tg-baqh">{{ $i->jumlah }}</td>
+                                <td class="tg-baqh">{{ $i->satuan }}</td>
+                            </tr>
+                        @endif
+                    @endforeach
+                </tbody>
+            </table>
+        @endforeach
+
+        <div style="text-align: right; margin-top: 10px;">
+            <p>Semarang, {{ date('d M Y', strtotime($permintaan->waktu_manager_umum)) }}</p>
+
+            <div style="height: 70px;"></div>
+            <p>{{ $permintaan->Manager_Umum->nama }}</p>
+            <p>{{ $permintaan->Manager_Umum->nik }}</p>
+        </div>
+        <p>Dicetak pada: {{ now() }}</p>
     </div>
 
     <!-- Approve Modal -->

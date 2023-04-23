@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\Bidang;
 use App\Models\Kategori;
 use App\Models\Permintaan;
 use App\Models\ItemPermintaan;
@@ -33,10 +34,16 @@ class PermintaanController extends Controller
         $role = $user->Role->nama;
         $path = request()->path();
 
-        if ($path === 'bidang/permintaan/history' && $role === 'Manajer Bidang') {
+        if ($path === 'bidang/pengadaan/history' && $role === 'Manajer Bidang') {
             $permintaan = Permintaan::where('bidang', $user->bidang)->orderBy('updated_at', 'desc')->get();
         } elseif ($path === 'umum/permintaan/history' && $role === 'Manajer Umum') {
-            $permintaan = Permintaan::all();
+            $permintaan = Permintaan::orderBy('updated_at', 'desc')->get();
+        } elseif ($path === 'umum/permintaan/history/layanan' && $role === 'Manajer Umum') {
+            $permintaan = Permintaan::where('bidang', 1)->orderBy('updated_at', 'desc')->get();
+        } elseif ($path === 'umum/permintaan/history/keuangan' && $role === 'Manajer Umum') {
+            $permintaan = Permintaan::where('bidang', 2)->orderBy('updated_at', 'desc')->get();
+        } elseif ($path === 'umum/permintaan/history/sdm' && $role === 'Manajer Umum') {
+            $permintaan = Permintaan::where('bidang', 3)->orderBy('updated_at', 'desc')->get();
         } else {
             $permintaan = Permintaan::where('pemohon', $user->id)->orderBy('updated_at', 'desc')->get();
         }
@@ -123,25 +130,87 @@ class PermintaanController extends Controller
 
         //   Get unique kategori from $items and only get the 'nama' column
         $kategori = $items->unique('kategori')->pluck('kategori');
+
+        // if path is /bidang/permintaan/verifikasi/{id}
+        // or /umum/verifikasi/{id}
+        // show one permintaan before by the user that status_manager_umum is true
+        if (request()->path() === 'bidang/permintaan/verifikasi/' . $id || request()->path() === 'umum/permintaan/verifikasi/' . $id) {
+            $lastPermintaan = Permintaan::where('pemohon', $permintaan->pemohon)
+                ->where('status_manager_umum', true)
+                ->orderBy('updated_at', 'desc')
+                ->first();
+
+            if ($lastPermintaan) {
+                $lastItems = DB::table('item_permintaans')
+                    ->select('item_permintaans.id', 'item_permintaans.jumlah', 'items.nama', 'permintaans.bidang as bidang', 'kategoris.nama as kategori', 'satuans.nama as satuan', 'stok_bidang_layanan', 'stok_bidang_keuangan', 'stok_bidang_umum')
+                    ->join('items', 'item_permintaans.id_item', '=', 'items.id')
+                    ->join('kategoris', 'items.kategori', '=', 'kategoris.id')
+                    ->join('satuans', 'items.satuan', '=', 'satuans.id')
+                    ->join('permintaans', 'item_permintaans.id_permintaan', '=', 'permintaans.id')
+                    ->where('item_permintaans.id_permintaan', $lastPermintaan->id)
+                    ->orderBy('items.kategori')
+                    ->get();
+
+                $lastKategori = $lastItems->unique('kategori')->pluck('kategori');
+
+                return view('permintaan.detail', compact('permintaan', 'items', 'kategori', 'lastPermintaan', 'lastItems', 'lastKategori'));
+            }
+        }
         return view('permintaan.detail', compact('permintaan', 'items', 'kategori'));
     }
 
     public function accept(String $id)
     {
-        $permintaan = Permintaan::find($id);
+        try {
+            DB::beginTransaction();
 
-        if (auth()->user()->Role->nama === 'Manajer Bidang') {
-            $permintaan->status_manager_bidang = true;
-            $permintaan->manager_bidang = auth()->user()->id;
-            $permintaan->waktu_manager_bidang = now();
-            $permintaan->save();
-            return redirect()->route('permintaan.bidang.verifikasi')->with('success', 'Berhasil menerima permintaan');
-        } elseif (auth()->user()->Role->nama === 'Manajer Umum') {
-            $permintaan->status_manager_umum = true;
-            $permintaan->manager_umum = auth()->user()->id;
-            $permintaan->waktu_manager_umum = now();
-            $permintaan->save();
-            return redirect()->route('permintaan.umum.verifikasi')->with('success', 'Berhasil menerima permintaan');
+            $permintaan = Permintaan::find($id);
+
+            if (auth()->user()->Role->nama === 'Manajer Bidang') {
+                $permintaan->status_manager_bidang = true;
+                $permintaan->manager_bidang = auth()->user()->id;
+                $permintaan->waktu_manager_bidang = now();
+                $permintaan->save();
+
+                DB::commit();
+
+                return redirect()->route('permintaan.bidang.verifikasi')->with('success', 'Berhasil menerima permintaan');
+            } elseif (auth()->user()->Role->nama === 'Manajer Umum') {
+                $permintaan->status_manager_umum = true;
+                $permintaan->manager_umum = auth()->user()->id;
+                $permintaan->waktu_manager_umum = now();
+                $permintaan->save();
+
+                // Change stock in item table
+                $items = ItemPermintaan::where('id_permintaan', $id)->get();
+                $bidang = $permintaan->bidang;
+
+                if ($bidang === 1) {
+                    foreach ($items as $item) {
+                        $itemStok = Item::find($item->id_item);
+                        $itemStok->stok_bidang_layanan -= $item->jumlah;
+                        $itemStok->save();
+                    }
+                } elseif ($bidang === 2) {
+                    foreach ($items as $item) {
+                        $itemStok = Item::find($item->id_item);
+                        $itemStok->stok_bidang_keuangan -= $item->jumlah;
+                        $itemStok->save();
+                    }
+                } elseif ($bidang === 3) {
+                    foreach ($items as $item) {
+                        $itemStok = Item::find($item->id_item);
+                        $itemStok->stok_bidang_umum -= $item->jumlah;
+                        $itemStok->save();
+                    }
+                }
+
+                DB::commit();
+
+                return redirect()->route('permintaan.umum.verifikasi')->with('success', 'Berhasil menerima permintaan');
+            }
+        } catch (\Exception $e) {
+            dd($e);
         }
     }
 
@@ -162,8 +231,6 @@ class PermintaanController extends Controller
         } elseif ($role === 'Manajer Umum') {
             if (request()->tujuan == 'manajer-bidang') {
                 $permintaan->status_manager_bidang = null;
-                $permintaan->manager_bidang = null;
-                $permintaan->waktu_manager_bidang = null;
 
                 $permintaan->status_manager_umum = false;
                 $permintaan->manager_umum = $user->id;
@@ -249,6 +316,9 @@ class PermintaanController extends Controller
                     'manager_umum' => null,
                     'waktu_manager_umum' => null,
                     'alasan_manager_umum' => null,
+                    'status_manager_bidang' => true,
+                    'manager_bidang' => auth()->user()->id,
+                    'waktu_manager_bidang' => now(),
                 ]);
             }
             ItemPermintaan::where('id_permintaan', $request->id)->delete();
@@ -316,6 +386,11 @@ class PermintaanController extends Controller
                 ->where('bidang', 3)
                 ->orderBy('updated_at', 'desc')
                 ->get();
+        } elseif ($path === 'umum/permintaan/verifikasi' && $role === 'Manajer Umum') {
+            $permintaan = Permintaan::where('status_manager_bidang', true)
+                ->where('status_manager_umum', null)
+                ->orderBy('updated_at', 'desc')
+                ->get();
         } else {
             $permintaan = Permintaan::where('pemohon', $user->id)->orderBy('updated_at', 'desc')->get();
         }
@@ -342,5 +417,25 @@ class PermintaanController extends Controller
             ->where('selesai', false)->count();
 
         return view('permintaan.approval', compact('permintaanLayanan', 'permintaanKeuangan', 'permintaanSDM', 'permintaanTotal'));
+    }
+
+    public function histories()
+    {
+        // Get permintaan that status_manager_umum is true, groupby bidang and count
+        $permintaanCount = Permintaan::groupBy('bidang')
+            ->selectRaw('bidang, count(*) as total')
+            ->get();
+
+
+        // flatten only get the bidang => total, total there is 3 bidang
+        $permintaanCount = $permintaanCount->flatten()->toArray();
+
+        // convert to bidang => total
+        $permintaanCount = array_combine(array_column($permintaanCount, 'bidang'), array_column($permintaanCount, 'total'));
+
+        // total permintaan
+        $permintaanCount['total'] = array_sum($permintaanCount);
+
+        return view('permintaan.histories', compact('permintaanCount'));
     }
 }
