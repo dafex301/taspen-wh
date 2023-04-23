@@ -319,8 +319,8 @@
 
         {{-- Footer --}}
         <footer class="footer noprint">
-            <div>Footer</div>
-            <div class="ms-auto">Footer Kanan</div>
+            <div>Taspen Warehouse System</div>
+            <div class="ms-auto">PT. Taspen</div>
         </footer>
         {{-- End of Footer --}}
 
