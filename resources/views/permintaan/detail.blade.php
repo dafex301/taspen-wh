@@ -65,7 +65,7 @@
         {{-- notification about lastPermintaan if route is /bidang/permintaan/verifikasi/{id} or /umum/permintaan/verifikasi/{id} --}}
         @if (Str::startsWith(request()->path(), 'bidang/permintaan/verifikasi') ||
                 Str::startsWith(request()->path(), 'umum/permintaan/verifikasi'))
-            @if ($lastPermintaan)
+            @if (isset($lastPermintaan))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     Permintaan terakhir <strong>{{ $lastPermintaan->kegiatan }}</strong>
                     pada tanggal <strong>{{ $lastPermintaan->created_at->format('d M Y') }}</strong>
