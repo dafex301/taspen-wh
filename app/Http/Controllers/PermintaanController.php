@@ -188,19 +188,55 @@ class PermintaanController extends Controller
                 if ($bidang === 1) {
                     foreach ($items as $item) {
                         $itemStok = Item::find($item->id_item);
-                        $itemStok->stok_bidang_layanan -= $item->jumlah;
+                        if ($itemStok->stok_bidang_layanan - $item->jumlah < 0) {
+                            $item->jumlah -= $itemStok->stok_bidang_layanan;
+                            $itemStok->stok_bidang_layanan = 0;
+                            if ($itemStok->stok_bidang_umum - $item->jumlah < 0) {
+                                $item->jumlah -= $itemStok->stok_bidang_umum;
+                                $itemStok->stok_bidang_umum = 0;
+                                $itemStok->stok_bidang_keuangan -= $item->jumlah;
+                            } else {
+                                $itemStok->stok_bidang_umum -= $item->jumlah;
+                            }
+                        } else {
+                            $itemStok->stok_bidang_layanan -= $item->jumlah;
+                        }
                         $itemStok->save();
                     }
                 } elseif ($bidang === 2) {
                     foreach ($items as $item) {
                         $itemStok = Item::find($item->id_item);
-                        $itemStok->stok_bidang_keuangan -= $item->jumlah;
+                        if ($itemStok->stok_bidang_keuangan - $item->jumlah < 0) {
+                            $item->jumlah -= $itemStok->stok_bidang_keuangan;
+                            $itemStok->stok_bidang_keuangan = 0;
+                            if ($itemStok->stok_bidang_umum - $item->jumlah < 0) {
+                                $item->jumlah -= $itemStok->stok_bidang_umum;
+                                $itemStok->stok_bidang_umum = 0;
+                                $itemStok->stok_bidang_layanan -= $item->jumlah;
+                            } else {
+                                $itemStok->stok_bidang_umum -= $item->jumlah;
+                            }
+                        } else {
+                            $itemStok->stok_bidang_keuangan -= $item->jumlah;
+                        }
                         $itemStok->save();
                     }
                 } elseif ($bidang === 3) {
                     foreach ($items as $item) {
                         $itemStok = Item::find($item->id_item);
-                        $itemStok->stok_bidang_umum -= $item->jumlah;
+                        if ($itemStok->stok_bidang_umum - $item->jumlah < 0) {
+                            $item->jumlah -= $itemStok->stok_bidang_umum;
+                            $itemStok->stok_bidang_umum = 0;
+                            if ($itemStok->stok_bidang_layanan - $item->jumlah < 0) {
+                                $item->jumlah -= $itemStok->stok_bidang_layanan;
+                                $itemStok->stok_bidang_layanan = 0;
+                                $itemStok->stok_bidang_keuangan -= $item->jumlah;
+                            } else {
+                                $itemStok->stok_bidang_layanan -= $item->jumlah;
+                            }
+                        } else {
+                            $itemStok->stok_bidang_umum -= $item->jumlah;
+                        }
                         $itemStok->save();
                     }
                 }

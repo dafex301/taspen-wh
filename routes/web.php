@@ -16,8 +16,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
-    // Dashboard Routes
-    Route::get('/', 'DashboardController@index')->name('dashboard.index');
 
     // Guest Routes
     Route::group(['middleware' => ['guest']], function () {
@@ -32,6 +30,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     // Auth Routes
     Route::group(['middleware' => ['auth']], function () {
+        // Dashboard Routes
+
+        Route::get('/', 'DashboardController@index')->name('dashboard.index');
         // Pengadaan Routes
         Route::get('/pengadaan/create', 'PengadaanController@create')->name('pengadaan.create');
         Route::get('/pengadaan/detail/{id}', 'PengadaanController@show')->name('pengadaan.detail');

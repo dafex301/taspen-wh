@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
 
         User::factory()->create([
             'role' => 1,
+            'nama' => 'Test',
             'nik' => 'staff-layanan',
             'bidang' => 1
         ]);

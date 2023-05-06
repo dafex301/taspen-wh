@@ -274,10 +274,18 @@
                 </a>
                 @auth
                     <ul class="header-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="#">
-                                Welcome, {{ Auth::user()->nama }} - {{ Auth::user()->Role->nama }} -
-                                {{ Auth::user()->Bidang->nama }}</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Welcome, {{ Auth::user()->nama }} -
+                                @if (Auth::user()->role !== 3)
+                                    {{ Auth::user()->bidang === 1 ? 'Service' : (Auth::user()->bidang === 2 ? 'Finance' : 'Hc&ga') }}
+                                    {{ Auth::user()->Role->nama == 'Manajer Bidang' ? 'Sector Head' : Auth::user()->Role->nama }}
+                                @else
+                                    Branch Manager
+                                @endif
 
+                            </a>
+                        </li>
                         <li class="nav-item"><a class="nav-link" href="#">
                                 <svg class="icon icon-lg">
                                     <use xlink:href="{{ url('vendors/@coreui/icons/svg/free.svg#cil-bell') }}"></use>
