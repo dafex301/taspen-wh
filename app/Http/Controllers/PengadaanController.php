@@ -98,7 +98,11 @@ class PengadaanController extends Controller
         // Group by kategori
         $itemPengadaan = $itemPengadaan->groupBy('kategori');
 
-        return view('pengadaan.buat', compact('itemPengadaan'));
+        // Get the latest id on realisas_pengadaans table
+        $realisasiPengadaan = RealisasiPengadaan::latest()->first();
+        $realisasiPengadaanNewId = $realisasiPengadaan->id + 1;
+
+        return view('pengadaan.buat', compact('itemPengadaan', 'realisasiPengadaanNewId'));
     }
 
     public function realisasiPengadaan()

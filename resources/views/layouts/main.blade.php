@@ -91,6 +91,59 @@
                             Manajemen Kategori</a></li>
                 @else
                     @if (auth()->user()->Role->nama === 'Manajer Bidang')
+                        {{-- @if (auth()->user()->Bidang->nama === 'Bidang Umum dan SDM')
+                            <li class="nav-title">Menu Manajer Bidang Umum</li>
+                            <li class="nav-item w-100">
+                                <a class="nav-link" href="/umum/stok">
+                                    <svg style="width: 20px; margin: 0 5px 0 5px" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                        class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0l-3-3m3 3l3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                                    </svg>
+                                    Input Stok
+                                </a>
+                            </li>
+                            <li class="nav-item w-100">
+                                <a class="nav-link" href="/umum/permintaan/approval">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        style="width: 20px; margin: 0 5px 0 5px">
+                                        <path fill-rule="evenodd"
+                                            d="M12.516 2.17a.75.75 0 00-1.032 0 11.209 11.209 0 01-7.877 3.08.75.75 0 00-.722.515A12.74 12.74 0 002.25 9.75c0 5.942 4.064 10.933 9.563 12.348a.749.749 0 00.374 0c5.499-1.415 9.563-6.406 9.563-12.348 0-1.39-.223-2.73-.635-3.985a.75.75 0 00-.722-.516l-.143.001c-2.996 0-5.717-1.17-7.734-3.08zm3.094 8.016a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                                            clip-rule="evenodd" />
+
+                                    </svg>
+                                    Verifikasi Permintaan
+                                </a>
+                            </li>
+                            <li class="nav-item w-100"><a class="nav-link" href="/umum/permintaan/histories">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        style="width: 20px; margin: 0 5px 0 5px">
+                                        <path
+                                            d="M5.625 3.75a2.625 2.625 0 100 5.25h12.75a2.625 2.625 0 000-5.25H5.625zM3.75 11.25a.75.75 0 000 1.5h16.5a.75.75 0 000-1.5H3.75zM3 15.75a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75zM3.75 18.75a.75.75 0 000 1.5h16.5a.75.75 0 000-1.5H3.75z" />
+
+                                    </svg>
+                                    History Permintaan</a></li>
+
+                            <li class="nav-item w-100"><a class="nav-link" href="/umum/pengadaan/approval">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        style="width: 20px; margin: 0 5px 0 5px">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M12 10.5v6m3-3H9m4.06-7.19l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
+
+                                    </svg>
+                                    Approval Pengadaan</a>
+                            </li>
+                            <li class="nav-item w-100"><a class="nav-link" href="/umum/pengadaan/histories">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        style="width: 20px; margin: 0 5px 0 5px">
+                                        <path
+                                            d="M5.625 3.75a2.625 2.625 0 100 5.25h12.75a2.625 2.625 0 000-5.25H5.625zM3.75 11.25a.75.75 0 000 1.5h16.5a.75.75 0 000-1.5H3.75zM3 15.75a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75zM3.75 18.75a.75.75 0 000 1.5h16.5a.75.75 0 000-1.5H3.75z" />
+
+                                    </svg>
+                                    History Pengadaan</a>
+                            </li>
+                        @else --}}
                         <li class="nav-title">Menu Manajer Bidang</li>
                         <li class="nav-item w-100"><a class="nav-link" href="/bidang/permintaan/verifikasi">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -127,6 +180,7 @@
                                 </svg>
                                 History Pengadaan</a>
                         </li>
+                        {{-- @endif --}}
                     @elseif (auth()->user()->Role->nama == 'Manajer Umum')
                         <li class="nav-title">Menu Manajer Umum</li>
                         <li class="nav-item w-100">

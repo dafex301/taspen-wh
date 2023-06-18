@@ -187,7 +187,8 @@
                             <td></td>
                             <td>No Reservation</td>
                             <td>:</td>
-                            <td>0040005001</td>
+                            <td>{{ $permintaan->created_at->format('Ymd') . str_pad($permintaan->id, 4, '0', STR_PAD_LEFT) }}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -214,10 +215,10 @@
                                 {{-- Get the loop iterations+1 --}}
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $i->nama }}</td>
-                                <td>{{ $i->jumlah }}</td>
-                                <td>{{ $i->satuan }}</td>
-                                <td>{{ $i->jumlah }}</td>
-                                <td>{{ $i->satuan }}</td>
+                                <td style="text-align: center;">{{ $i->jumlah }}</td>
+                                <td style="text-align: center;">{{ $i->satuan }}</td>
+                                <td style="text-align: center;">{{ $i->jumlah }}</td>
+                                <td style="text-align: center;">{{ $i->satuan }}</td>
                                 <td></td>
                             </tr>
                         @endforeach
