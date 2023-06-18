@@ -348,7 +348,8 @@
                                     {{ Auth::user()->bidang === 1 ? 'Service' : (Auth::user()->bidang === 2 ? 'Finance' : 'Hc&ga') }}
                                     {{ Auth::user()->Role->nama == 'Manajer Bidang' ? 'Sector Head' : Auth::user()->Role->nama }}
                                 @else
-                                    Branch Manager
+                                    {{-- TODO --}}
+                                    Hc&ga Sector Head
                                 @endif
 
                             </a>

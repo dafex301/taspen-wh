@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::factory()->create([
-            'role' => 2,
+            'role' => 3,
             'nama' => 'RR Ratri Feminingrum',
             'nik' => 'Ratri3533',
             'password' => bcrypt('Taspen1234'),
