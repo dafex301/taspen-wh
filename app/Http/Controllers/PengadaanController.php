@@ -420,7 +420,7 @@ class PengadaanController extends Controller
             $pengadaan->manager_umum = auth()->user()->id;
             $pengadaan->waktu_manager_umum = now();
             $pengadaan->save();
-            return redirect()->route('pengadaan.umum.verifikasi')->with('success', 'Berhasil menerima pengadaan');
+            return redirect()->route('pengadaan.umum.approval')->with('success', 'Berhasil menerima pengadaan');
         }
     }
 
