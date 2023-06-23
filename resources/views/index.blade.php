@@ -252,7 +252,6 @@
                                     @endauth
                                     <th scope="col">Jumlah Keseluruhan</th>
                                     <th scope="col">Satuan</th>
-                                    <th scope="col">Harga</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -275,8 +274,6 @@
                                         <td>{{ $item->stok_bidang_keuangan + $item->stok_bidang_layanan + $item->stok_bidang_umum }}
                                         </td>
                                         <td>{{ $item->Satuan->nama }}</td>
-                                        <td>Rp. {{ number_format($item->harga, 0, ',', '.') }}</td>
-
                                     </tr>
                                 @endforeach
                             </tbody>
