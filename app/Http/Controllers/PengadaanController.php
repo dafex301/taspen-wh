@@ -100,7 +100,7 @@ class PengadaanController extends Controller
 
         // Get the latest id on realisas_pengadaans table
         $realisasiPengadaan = RealisasiPengadaan::latest()->first();
-        $realisasiPengadaanNewId = $realisasiPengadaan ? $realisasiPengadaan + 1 : 1;
+        $realisasiPengadaanNewId = $realisasiPengadaan ? $realisasiPengadaan->id + 1 : 1;
 
         return view('pengadaan.buat', compact('itemPengadaan', 'realisasiPengadaanNewId'));
     }
