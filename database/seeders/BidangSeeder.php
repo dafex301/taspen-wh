@@ -17,13 +17,19 @@ class BidangSeeder extends Seeder
     {
         $bidang = [
             [
-                'nama' => 'Bidang Layanan dan Kepesertaan',
+                'nama' => 'Services and Membership',
             ],
             [
-                'nama' => 'Bidang Keuangan',
+                'nama' => 'Finance Administration',
             ],
             [
-                'nama' => 'Bidang Umum dan SDM',
+                'nama' => 'HC & GA',
+            ],
+            [
+                'nama' => 'Cash & Pension Verif',
+            ],
+            [
+                'nama' => 'Branch Manager',
             ],
         ];
 

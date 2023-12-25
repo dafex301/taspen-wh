@@ -1,0 +1,308 @@
+[
+    {
+        "NIK": 1585,
+        "NAMA": "MUHAMMAD ABDUL GOFUR",
+        "JABATAN": "BRANCH MANAGER",
+        "USER": "Muhammad1585",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 3,
+        "BIDANG": 5
+    },
+    {
+        "NIK": 3505,
+        "NAMA": "ANISA NURIKA AMALIA",
+        "JABATAN": "CASH&PENSION VERIF STAFF",
+        "USER": "Anisa3505",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 4
+    },
+    {
+        "NIK": 3158,
+        "NAMA": "KHAIRURRIZKA MUAMAL",
+        "JABATAN": "CASH&PENSION VERIF STAFF",
+        "USER": "Khairurrizka3158",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 4
+    },
+    {
+        "NIK": 3578,
+        "NAMA": "OLZA GHEA SAVIRA",
+        "JABATAN": "CASH&PENSION VERIF STAFF",
+        "USER": "Olza3578",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 4
+    },
+    {
+        "NIK": 1630,
+        "NAMA": "ACHMAD MUNADI",
+        "JABATAN": "CASH&PENSION VERIF SECTOR HEAD",
+        "USER": "Achmad1630",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 2,
+        "BIDANG": 4
+    },
+    {
+        "NIK": 4068,
+        "NAMA": "DIAH PUTPITASARI",
+        "JABATAN": "FINANCE ADMINISTRATION STAFF",
+        "USER": "Diah4068",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 2
+    },
+    {
+        "NIK": 4063,
+        "NAMA": "GILANG TELAGA ATMAJA",
+        "JABATAN": "FINANCE ADMINISTRATION STAFF",
+        "USER": "Gilang4063",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 2
+    },
+    {
+        "NIK": 3573,
+        "NAMA": "DIMAS ALDI SAIFUDDIN",
+        "JABATAN": "FINANCE ADMINISTRATION SECTOR HEAD",
+        "USER": "Dimas3573",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 2,
+        "BIDANG": 2
+    },
+    {
+        "NIK": 4064,
+        "NAMA": "BAYU PUTRA PAMUNGKAS",
+        "JABATAN": "HC & GA STAFF",
+        "USER": "Bayu4064",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 3
+    },
+    {
+        "NIK": 4070,
+        "NAMA": "CAHYA MAHARDIKA",
+        "JABATAN": "HC & GA STAFF",
+        "USER": "Cahya4070",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 3
+    },
+    {
+        "NIK": 4172,
+        "NAMA": "GHEANOFANY RAMADAYANTI",
+        "JABATAN": "HC & GA STAFF",
+        "USER": "Gheanofany4172",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 3
+    },
+    {
+        "NIK": 3533,
+        "NAMA": "RADEN RARA RATRI FEMININGRUM",
+        "JABATAN": "HC & GA SECTOR HEAD",
+        "USER": "Raden3533",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 3,
+        "BIDANG": 3
+    },
+    {
+        "NIK": 2257,
+        "NAMA": "MAIZIRWAN",
+        "JABATAN": "SERVICES&MEMBERSHIP SECTOR HEAD",
+        "USER": "Maizirwan2257",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 2,
+        "BIDANG": 1
+    },
+    {
+        "NIK": 4067,
+        "NAMA": "ADE KURNIASARI",
+        "JABATAN": "SERVICES STAFF",
+        "USER": "Ade4067",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 1
+    },
+    {
+        "NIK": 2375,
+        "NAMA": "AGUS ALIM",
+        "JABATAN": "SERVICES STAFF",
+        "USER": "Agus2375",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 1
+    },
+    {
+        "NIK": 3399,
+        "NAMA": "AJENG PUSPITA NINGRUM",
+        "JABATAN": "MEMBERSHIP STAFF",
+        "USER": "Ajeng3399",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 1
+    },
+    {
+        "NIK": 4083,
+        "NAMA": "ALLGA MANORA HAYUNDANISWARA",
+        "JABATAN": "SERVICES STAFF",
+        "USER": "Allga4083",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 1
+    },
+    {
+        "NIK": 4179,
+        "NAMA": "ANANTIAN SURYO UTOMO",
+        "JABATAN": "SERVICES STAFF",
+        "USER": "Anantian4179",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 1
+    },
+    {
+        "NIK": 4062,
+        "NAMA": "ANINDITYA SALSABILA AZAHRA",
+        "JABATAN": "MEMBERSHIP STAFF",
+        "USER": "Aninditya4062",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 1
+    },
+    {
+        "NIK": 1508,
+        "NAMA": "BHINATORO TUNGGUL BAWON",
+        "JABATAN": "MEMBERSHIP STAFF",
+        "USER": "Bhinatoro1508",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 1
+    },
+    {
+        "NIK": 4069,
+        "NAMA": "DWIKY AULIA BRAMANTO",
+        "JABATAN": "SERVICES STAFF",
+        "USER": "Dwiky4069",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 1
+    },
+    {
+        "NIK": 3495,
+        "NAMA": "ERVINA ARI SAFITRI",
+        "JABATAN": "SERVICES STAFF",
+        "USER": "Ervina3495",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 1
+    },
+    {
+        "NIK": 4065,
+        "NAMA": "FAHMA FITROTUL MUNA",
+        "JABATAN": "SERVICES STAFF",
+        "USER": "Fahma4065",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 1
+    },
+    {
+        "NIK": 3493,
+        "NAMA": "FITRIA RATNA FATMAWATI",
+        "JABATAN": "SERVICES STAFF",
+        "USER": "Fitria3493",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 1
+    },
+    {
+        "NIK": 4203,
+        "NAMA": "GABRIELLA UNDAP",
+        "JABATAN": "SERVICES STAFF",
+        "USER": "Gabriella4203",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 1
+    },
+    {
+        "NIK": 4059,
+        "NAMA": "MOHAMMAD MAFTUH BASTUL BISRI",
+        "JABATAN": "SERVICES STAFF",
+        "USER": "Mohammad4059",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 1
+    },
+    {
+        "NIK": 4066,
+        "NAMA": "PASHA HAKIM PRAPTAMA",
+        "JABATAN": "SERVICES STAFF",
+        "USER": "Pasha4066",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 1
+    },
+    {
+        "NIK": 4060,
+        "NAMA": "RAMA FIKY ADITAMA",
+        "JABATAN": "SERVICES STAFF",
+        "USER": "Rama4060",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 1
+    },
+    {
+        "NIK": 1328,
+        "NAMA": "RUSDIYATI",
+        "JABATAN": "SERVICES STAFF",
+        "USER": "Rusdiyati1328",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 1
+    },
+    {
+        "NIK": 3784,
+        "NAMA": "SEPTIAYU KUSUMA MURDIONO",
+        "JABATAN": "MEMBERSHIP STAFF",
+        "USER": "Septiayu3784",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 1
+    },
+    {
+        "NIK": 4061,
+        "NAMA": "STELLA NADINE ALVARITA",
+        "JABATAN": "SERVICES STAFF",
+        "USER": "Stella4061",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 1
+    },
+    {
+        "NIK": 1152,
+        "NAMA": "SUGIHARTI MADYO",
+        "JABATAN": "KARYAWAN STAFF PADA KCU SEMARANG",
+        "USER": "Sugiharti1152",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 1
+    },
+    {
+        "NIK": 3181,
+        "NAMA": "SUMARWANTO",
+        "JABATAN": "SERVICES STAFF",
+        "USER": "Sumarwanto3181",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 1
+    },
+    {
+        "NIK": 3611,
+        "NAMA": "USWATUN KHASANAH",
+        "JABATAN": "SERVICES STAFF",
+        "USER": "Uswatun3611",
+        "PASSWORD": "Taspen1234",
+        "ROLE": 1,
+        "BIDANG": 1
+    }
+]

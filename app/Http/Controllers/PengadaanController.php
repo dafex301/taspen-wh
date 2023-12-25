@@ -181,15 +181,15 @@ class PengadaanController extends Controller
         $role = $user->Role->nama;
         $path = request()->path();
 
-        if ($path === 'bidang/pengadaan/history' && $role === 'Manajer Bidang') {
+        if ($path === 'bidang/pengadaan/history' && $role === 'Sector Head') {
             $pengadaan = Pengadaan::where('bidang', $user->bidang)->orderBy('updated_at', 'desc')->get();
-        } elseif ($path === 'umum/pengadaan/history' && $role === 'Manajer Umum') {
+        } elseif ($path === 'umum/pengadaan/history' && $role === 'Manager') {
             $pengadaan = Pengadaan::orderBy('updated_at', 'desc')->get();
-        } elseif ($path === 'umum/pengadaan/history/layanan' && $role === 'Manajer Umum') {
+        } elseif ($path === 'umum/pengadaan/history/layanan' && $role === 'Manager') {
             $pengadaan = Pengadaan::where('bidang', 1)->orderBy('updated_at', 'desc')->get();
-        } elseif ($path === 'umum/pengadaan/history/keuangan' && $role === 'Manajer Umum') {
+        } elseif ($path === 'umum/pengadaan/history/keuangan' && $role === 'Manager') {
             $pengadaan = Pengadaan::where('bidang', 2)->orderBy('updated_at', 'desc')->get();
-        } elseif ($path === 'umum/pengadaan/history/sdm' && $role === 'Manajer Umum') {
+        } elseif ($path === 'umum/pengadaan/history/sdm' && $role === 'Manager') {
             $pengadaan = Pengadaan::where('bidang', 3)->orderBy('updated_at', 'desc')->get();
         } else {
             $pengadaan = Pengadaan::where('pemohon', $user->id)->orderBy('updated_at', 'desc')->get();
@@ -295,24 +295,24 @@ class PengadaanController extends Controller
         $path = request()->path();
 
 
-        if ($path === 'bidang/pengadaan/verifikasi' && $role === 'Manajer Bidang') {
+        if ($path === 'bidang/pengadaan/verifikasi' && $role === 'Sector Head') {
             $pengadaan = Pengadaan::where('bidang', $user->bidang)
                 ->where('status_manager_bidang', null)
                 ->orderBy('updated_at', 'desc')
                 ->get();
-        } elseif ($path === 'umum/pengadaan/approval/layanan' && $role === 'Manajer Umum') {
+        } elseif ($path === 'umum/pengadaan/approval/layanan' && $role === 'Manager') {
             $pengadaan = Pengadaan::where('status_manager_bidang', true)
                 ->where('status_manager_umum', null)
                 ->where('bidang', 1)
                 ->orderBy('updated_at', 'desc')
                 ->get();
-        } elseif ($path === 'umum/pengadaan/approval/keuangan' && $role === 'Manajer Umum') {
+        } elseif ($path === 'umum/pengadaan/approval/keuangan' && $role === 'Manager') {
             $pengadaan = Pengadaan::where('status_manager_bidang', true)
                 ->where('status_manager_umum', null)
                 ->where('bidang', 2)
                 ->orderBy('updated_at', 'desc')
                 ->get();
-        } elseif ($path === 'umum/pengadaan/approval/sdm' && $role === 'Manajer Umum') {
+        } elseif ($path === 'umum/pengadaan/approval/sdm' && $role === 'Manager') {
             $pengadaan = Pengadaan::where('status_manager_bidang', true)
                 ->where('status_manager_umum', null)
                 ->where('bidang', 3)
@@ -409,13 +409,13 @@ class PengadaanController extends Controller
     {
         $pengadaan = Pengadaan::find($id);
 
-        if (auth()->user()->Role->nama === 'Manajer Bidang') {
+        if (auth()->user()->Role->nama === 'Sector Head') {
             $pengadaan->status_manager_bidang = true;
             $pengadaan->manager_bidang = auth()->user()->id;
             $pengadaan->waktu_manager_bidang = now();
             $pengadaan->save();
             return redirect()->route('pengadaan.bidang.verifikasi')->with('success', 'Berhasil menerima pengadaan');
-        } elseif (auth()->user()->Role->nama === 'Manajer Umum') {
+        } elseif (auth()->user()->Role->nama === 'Manager') {
             $pengadaan->status_manager_umum = true;
             $pengadaan->manager_umum = auth()->user()->id;
             $pengadaan->waktu_manager_umum = now();
@@ -431,14 +431,14 @@ class PengadaanController extends Controller
         $user = auth()->user();
         $role = $user->Role->nama;
 
-        if ($role === 'Manajer Bidang') {
+        if ($role === 'Sector Head') {
             $pengadaan->status_manager_bidang = false;
             $pengadaan->manager_bidang = $user->id;
             $pengadaan->waktu_manager_bidang = now();
             $pengadaan->alasan_manager_bidang = $alasan;
             $pengadaan->save();
             return redirect()->route('pengadaan.bidang.verifikasi')->with('success', 'Berhasil menolak pengadaan');
-        } elseif ($role === 'Manajer Umum') {
+        } elseif ($role === 'Manager') {
             if (request()->tujuan == 'manajer-bidang') {
                 $pengadaan->status_manager_umum = false;
                 $pengadaan->manager_umum = $user->id;

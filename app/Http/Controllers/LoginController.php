@@ -28,15 +28,17 @@ class LoginController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        $credentials = $request->getCredentials();
-        try {
-            $user = Auth::getProvider()->retrieveByCredentials($credentials);
-            Auth::login($user);
-            return $this->authenticated($request, $user);
-        } catch (Throwable $e) {
-            return redirect()->to('login')
-                ->withErrors(trans('auth.failed'));
+        $credentials = $request->only('username', 'password');
+
+        if (Auth::attempt($credentials)) {
+            // Authentication passed...
+            return $this->authenticated($request, Auth::user());
         }
+
+        // Authentication failed...
+        return redirect()->back()->withErrors([
+            'username' => 'The provided credentials do not match our records.',
+        ]);
     }
 
     /**

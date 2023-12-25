@@ -19,7 +19,7 @@ class ManajerBidang
         if (!auth()->check()) {
             return redirect()->route('login.show');
         }
-        if (auth()->user()->Role->nama != 'Manajer Bidang') {
+        if (auth()->user()->Role->nama != 'Sector Head') {
             return redirect()->route('dashboard.index');
         }
         return $next($request);

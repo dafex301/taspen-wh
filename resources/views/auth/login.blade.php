@@ -48,12 +48,14 @@
 
                                         <div class="mb-4">
                                             <div class="form-outline">
-                                                <input type="text" id="nik" name="nik" autofocus
-                                                    value="{{ old('nik') }}" class="form-control form-control-lg" />
-                                                <label class="form-label" for="nik">NIK</label>
+                                                <input type="text" id="username" name="username" autofocus
+                                                    value="{{ old('username') }}"
+                                                    class="form-control form-control-lg" />
+                                                <label class="form-label" for="username">Username</label>
                                             </div>
-                                            @if ($errors->has('nik'))
-                                                <span class="text-danger text-left">{{ $errors->first('nik') }}</span>
+                                            @if ($errors->has('username'))
+                                                <span
+                                                    class="text-danger text-left">{{ $errors->first('username') }}</span>
                                             @endif
                                         </div>
 

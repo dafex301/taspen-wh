@@ -33,6 +33,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         // Dashboard Routes
 
         Route::get('/', 'DashboardController@index')->name('dashboard.index');
+
+        // User routes
+        Route::get('/profile', 'UserController@show')->name('user.profile');
+        Route::post('/update-password', 'UserController@updatePassword')->name('password.update');
+
         // Pengadaan Routes
         Route::get('/pengadaan/create', 'PengadaanController@create')->name('pengadaan.create');
         Route::get('/pengadaan/detail/{id}', 'PengadaanController@show')->name('pengadaan.detail');
@@ -116,6 +121,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         // Stok Routes
         Route::get('/umum/stok', 'PengadaanController@stok')->name('pengadaan.umum.stok');
         Route::post('/umum/stok', 'PengadaanController@inputStok')->name('pengadaan.umum.inputStok');
+
+        Route::get('/umum/users', 'UserController@index')->name('user.index');
+        Route::post('/umum/users', 'UserController@store')->name('user.store');
+        Route::put('/umum/users/{id}', 'UserController@update')->name('user.update');
+        Route::delete('/umum/users/{id}', 'UserController@destroy')->name('user.destroy');
     });
 
     // Admin Routes

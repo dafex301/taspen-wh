@@ -9,7 +9,7 @@
                         <div class="alert alert-danger" role="alert">Alasan Penolakan oleh Manajer
                             Bidang:<br>{{ $pengadaan->alasan_manager_bidang }}</div>
                     @elseif ($pengadaan->alasan_manager_umum)
-                        <div class="alert alert-danger" role="alert">Alasan Penolakan oleh Manajer Umum:
+                        <div class="alert alert-danger" role="alert">Alasan Penolakan oleh Manager:
                             <br>{{ $pengadaan->alasan_manager_umum }}
                         </div>
                     @endif

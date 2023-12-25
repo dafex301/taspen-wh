@@ -20,8 +20,8 @@ class ManajerUmum
             return redirect()->route('login.show');
         }
         if (
-            auth()->user()->Role->nama != 'Manajer Umum'
-            && (auth()->user()->Role->nama != 'Manajer Bidang' && auth()->user()->Bidang->nama != 'Bidang Umum dan SDM')
+            auth()->user()->Role->nama != 'Manager'
+            && (auth()->user()->Role->nama != 'Sector Head' && auth()->user()->Bidang->nama != 'Bidang Umum dan SDM')
         ) {
             return redirect()->route('dashboard.index');
         }

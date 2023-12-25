@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="{{ url('css/datatables/font-awesome.min.css') }}">
     <!-- Bootstrap CDN -->
     <link rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -90,9 +91,9 @@
                             </svg>
                             Manajemen Kategori</a></li>
                 @else
-                    @if (auth()->user()->Role->nama === 'Manajer Bidang')
+                    @if (auth()->user()->Role->nama === 'Sector Head')
                         {{-- @if (auth()->user()->Bidang->nama === 'Bidang Umum dan SDM')
-                            <li class="nav-title">Menu Manajer Bidang Umum</li>
+                            <li class="nav-title">Menu Sector Head Umum</li>
                             <li class="nav-item w-100">
                                 <a class="nav-link" href="/umum/stok">
                                     <svg style="width: 20px; margin: 0 5px 0 5px" xmlns="http://www.w3.org/2000/svg"
@@ -144,7 +145,7 @@
                                     History Pengadaan</a>
                             </li>
                         @else --}}
-                        <li class="nav-title">Menu Manajer Bidang</li>
+                        <li class="nav-title">Menu Sector Head</li>
                         @if (auth()->user()->Bidang->nama === 'Bidang Umum dan SDM')
                             <li class="nav-item w-100">
                                 <a class="nav-link" href="/umum/stok">
@@ -194,8 +195,8 @@
                                 History Pengadaan</a>
                         </li>
                         {{-- @endif --}}
-                    @elseif (auth()->user()->Role->nama == 'Manajer Umum')
-                        <li class="nav-title">Menu Manajer Umum</li>
+                    @elseif (auth()->user()->Role->nama == 'Manager')
+                        <li class="nav-title">Menu Manager</li>
                         <li class="nav-item w-100">
                             <a class="nav-link" href="/umum/stok">
                                 <svg style="width: 20px; margin: 0 5px 0 5px" xmlns="http://www.w3.org/2000/svg"
@@ -237,16 +238,34 @@
                                 Approval Pengadaan</a>
                         </li>
                         <li class="nav-item w-100"><a class="nav-link" href="/umum/pengadaan/histories">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    style="width: 20px; margin: 0 5px 0 5px">
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14"
+                                    style="width: 13px; margin: 0 10px 0 8px">
                                     <path
-                                        d="M5.625 3.75a2.625 2.625 0 100 5.25h12.75a2.625 2.625 0 000-5.25H5.625zM3.75 11.25a.75.75 0 000 1.5h16.5a.75.75 0 000-1.5H3.75zM3 15.75a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75zM3.75 18.75a.75.75 0 000 1.5h16.5a.75.75 0 000-1.5H3.75z" />
-
+                                        d="M18 0H2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM9 6v2H2V6h7Zm2 0h7v2h-7V6Zm-9 4h7v2H2v-2Zm9 2v-2h7v2h-7Z" />
                                 </svg>
                                 History Pengadaan</a>
                         </li>
+                        <li class="nav-title">Menu Manajemen Data</li>
+                        <li class="nav-item w-100"><a class="nav-link" href="/umum/items">
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 10"
+                                    style="width: 13px; margin: 0 10px 0 8px">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                        d="M6 1h10M6 5h10M6 9h10M1.49 1h.01m-.01 4h.01m-.01 4h.01" />
+                                </svg>
+                                Manajemen Item</a>
+                        </li>
+                        <li class="nav-item w-100"><a class="nav-link" href="/umum/users">
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 18"
+                                    style="width: 13px; margin: 0 10px 0 8px">
+                                    <path
+                                        d="M7 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm2 1H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
+                                </svg>
+                                Manajemen User</a>
+                        </li>
                     @endif
-
 
                     <li class="nav-title">Menu Permintaan</li>
                     <li class="nav-item w-100"><a class="nav-link" href="/permintaan/create">
@@ -335,20 +354,19 @@
                 </button>
                 <a class="header-brand d-md-none" href="#">
                     <svg width="118" height="46" alt="CoreUI Logo">
-                        <use xlink:href="assets/brand/coreui.svg#full"></use>
                     </svg>
                 </a>
                 @auth
                     <ul class="header-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                Welcome, {{ Auth::user()->nama }} -
-                                @if (Auth::user()->role !== 3)
-                                    {{ Auth::user()->bidang === 1 ? 'Service' : (Auth::user()->bidang === 2 ? 'Finance' : 'Hc&ga') }}
-                                    {{ Auth::user()->Role->nama == 'Manajer Bidang' ? 'Sector Head' : Auth::user()->Role->nama }}
+                            <a class="nav-link" href="/profile">
+
+                                @if (Auth::user()->Bidang->nama === 'Branch Manager')
+                                    Welcome, {{ Auth::user()->nama }} -
+                                    {{ Auth::user()->Bidang->nama }}
                                 @else
-                                    {{-- TODO --}}
-                                    Hc&ga Sector Head
+                                    Welcome, {{ Auth::user()->nama }} -
+                                    {{ Auth::user()->Bidang->nama }} - {{ Auth::user()->Role->nama }}
                                 @endif
 
                             </a>
@@ -393,9 +411,11 @@
         {{-- End of Body --}}
 
         {{-- Footer --}}
-        <footer class="footer noprint">
-            <div>Taspen Warehouse System</div>
-            <div class="ms-auto">PT. Taspen</div>
+        <footer class="footer noprint" style="padding: 10px 32px">
+            {{-- <img src={{ url('assets/img/logo.png') }} alt="T-SAFE" width="70"> --}}
+            <div><b>Warehouse System - PT. Taspen (Persero)</b></div>
+            <div></div>
+            <img src={{ url('assets/img/taspen.png') }} alt="PT. Taspen" width="80">
         </footer>
         {{-- End of Footer --}}
 
@@ -456,117 +476,59 @@
         });
     </script>
 
-    <!-- Input Form -->
     <script>
-        // Jenis Lain Input
-        if ($('#jenis').val() == 0) {
-            $('#jenis-lain-container').show();
-        } else {
-            $('#jenis-lain-container').hide();
-        }
+        $('#updateModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
 
-        $('#jenis').change(function() {
-            console.log(($(this).val()));
-            if ($(this).val() == 0) {
-                $('#jenis-lain-container').show();
-            } else {
-                $('#jenis-lain-container').hide();
-            }
-        });
-    </script>
+            // Extract info from data-* attributes
+            var id = button.data('id')
+            var nama = button.data('nama')
+            var nik = button.data('nik')
+            var username = button.data('username')
+            var role = button.data('role')
+            var bidang = button.data('bidang')
 
-    <!-- Modal Data -->
-    <script>
-        const imageModal = document.getElementById('imageModal')
-        imageModal.addEventListener('show.bs.modal', event => {
-            // Button that triggered the modal
-            const button = event.relatedTarget
-            // Extract info from data-bs-* attributes
-            const image = button.getAttribute('data-bs-whatever')
-            // If necessary, you could initiate an AJAX request here
-            // and then do the updating in a callback.
-            //
-            // Update the modal's content.
-            const modalBody = imageModal.querySelector('.modal-body')
-            modalBody.innerHTML = `<img src="/storage/${image}" class="img-fluid" alt="Responsive image">`
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+
+            $('#update-nama').val(nama)
+            $('#update-username').val(username)
+            $('#update-role').val(role)
+            $('#update-nik').val(nik)
+            $('#update-bidang').val(bidang)
+
+            // Set the action of the form to /admin/akun/{id}
+            $('#updateForm').attr('action', '/umum/users/' + id)
         })
     </script>
 
-    <!-- Upload Preview -->
-    <script>
-        // When upload image, show preview, keep the ratio to original
-        $('#dokumentasi').change(function() {
-            console.log('test2');
-            var file = this.files[0];
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                var img = new Image();
-                img.src = e.target.result;
-                img.onload = function() {
-                    var canvas = document.createElement('canvas');
-                    var ctx = canvas.getContext('2d');
-                    var MAX_WIDTH = 300;
-                    var MAX_HEIGHT = 300;
-                    var width = img.width;
-                    var height = img.height;
-                    if (width > height) {
-                        if (width > MAX_WIDTH) {
-                            height *= MAX_WIDTH / width;
-                            width = MAX_WIDTH;
-                        }
-                    } else {
-                        if (height > MAX_HEIGHT) {
-                            width *= MAX_HEIGHT / height;
-                            height = MAX_HEIGHT;
-                        }
-                    }
-                    canvas.width = width;
-                    canvas.height = height;
-                    ctx.drawImage(img, 0, 0, width, height);
-                    var dataurl = canvas.toDataURL('image/png');
-                    $('.img-container').html('<img src="' + dataurl +
-                        '" class="img-fluid" alt="Responsive image">');
-                }
-            }
-            reader.readAsDataURL(file);
-        });
 
-        $('#completed-image').change(function() {
-            console.log('test');
-            var file = this.files[0];
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                var img = new Image();
-                img.src = e.target.result;
-                img.onload = function() {
-                    var canvas = document.createElement('canvas');
-                    var ctx = canvas.getContext('2d');
-                    var MAX_WIDTH = 300;
-                    var MAX_HEIGHT = 300;
-                    var width = img.width;
-                    var height = img.height;
-                    if (width > height) {
-                        if (width > MAX_WIDTH) {
-                            height *= MAX_WIDTH / width;
-                            width = MAX_WIDTH;
-                        }
-                    } else {
-                        if (height > MAX_HEIGHT) {
-                            width *= MAX_HEIGHT / height;
-                            height = MAX_HEIGHT;
-                        }
-                    }
-                    canvas.width = width;
-                    canvas.height = height;
-                    ctx.drawImage(img, 0, 0, width, height);
-                    var dataurl = canvas.toDataURL('image/png');
-                    $('.img-container-2').html('<img src="' + dataurl +
-                        '" class="img-fluid" alt="Responsive image">');
-                }
-            }
-            reader.readAsDataURL(file);
-        });
+    {{-- Delete Script --}}
+    <script>
+        $('#deleteModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+
+            // Extract info from data-* attributes
+            var id = button.data('id')
+            var nama = button.data('nama')
+            var nik = button.data('nik')
+            var username = button.data('username')
+            var role = button.data('role')
+            var bidang = button.data('bidang')
+
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+
+            // Set the identity of the account to be deleted
+            $('#deleteIdentity').text(nik + ' - ' + nama)
+
+            // Set the action of the form to /admin/akun/{id}
+            $('#deleteForm').attr('action', '/umum/users/' + id)
+        })
     </script>
+    {{-- End of Delete Script --}}
 
 </body>
 

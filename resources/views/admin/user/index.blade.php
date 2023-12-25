@@ -21,10 +21,11 @@
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th scope="col">No</th>
+                                                <th scope="col">NIK</th>
                                                 <th scope="col">Nama</th>
-                                                <th scope="col">Email</th>
                                                 <th scope="col">Username</th>
-                                                <th scope="col">Role</th>
+                                                <th scope="col">Bidang</th>
+                                                <th scope="col">Level</th>
                                                 <th scope="col">Aksi</th>
                                             </tr>
                                         </thead>
@@ -33,17 +34,33 @@
                                             @foreach ($users as $u)
                                                 <tr>
                                                     <th scope="row">{{ $loop->iteration }}</th>
-                                                    <th scope="row">{{ $u->name }}</th>
-                                                    <td scope="">{{ $u->email }}</td>
+                                                    <th scope="row">{{ $u->nik }}</th>
+                                                    <th scope="row">{{ $u->nama }}</th>
                                                     <td scope="">{{ $u->username }}</td>
-                                                    <td scope="">{{ $u->Role->name }}</td>
+                                                    <td scope="">{{ $u->Bidang->nama }}</td>
+                                                    <td scope="">{{ $u->role }}</td>
                                                     <td>
+                                                        {{-- <button type="button" class="btn btn-outline-primary"
+                                                            data-bs-toggle="modal" data-bs-target="#updateModal"
+                                                            data-id="{{ $u->id }}" data-nama="{{ $u->nama }}"
+                                                            data-nik="{{ $u->nik }}"
+                                                            data-username="{{ $u->username }}"
+                                                            data-bidang="{{ $u->bidang }}"
+                                                            data-role="{{ $u->role }}">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                                style="height: 20px">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                                                            </svg>
+                                                        </button> --}}
                                                         <button type="button" class="btn btn-outline-primary"
                                                             data-bs-toggle="modal" data-bs-target="#updateModal"
-                                                            data-id="{{ $u->id }}" data-name="{{ $u->name }}"
-                                                            data-email="{{ $u->email }}"
+                                                            data-id="{{ $u->id }}" data-nama="{{ $u->nama }}"
                                                             data-username="{{ $u->username }}"
-                                                            data-role="{{ $u->role }}">
+                                                            data-bidang="{{ $u->bidang }}"
+                                                            data-role="{{ $u->role }}"
+                                                            data-nik="{{ $u->nik }}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                                 style="height: 20px">
@@ -55,10 +72,11 @@
                                                             <button type="button" class="btn btn-outline-danger"
                                                                 data-bs-toggle="modal" data-bs-target="#deleteModal"
                                                                 data-id="{{ $u->id }}"
-                                                                data-name="{{ $u->name }}"
-                                                                data-email="{{ $u->email }}"
+                                                                data-nama="{{ $u->nama }}"
+                                                                data-nik="{{ $u->nik }}"
                                                                 data-username="{{ $u->username }}"
-                                                                data-role="{{ $u->Role->name }}">
+                                                                data-bidang="{{ $u->bidang }}"
+                                                                data-role="{{ $u->role }}">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                     viewBox="0 0 24 24" stroke-width="1.5"
                                                                     stroke="currentColor" style="height: 20px">
@@ -82,7 +100,7 @@
     </div>
 
     {{-- Create Modal --}}
-    <form method="POST" action="/admin/akun" id="createForm">
+    <form method="POST" action="/umum/users" id="createForm">
         @csrf
         <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel"
             aria-hidden="true">
@@ -100,18 +118,26 @@
                             <input type="text" class="form-control" id="create-name" name="name" required>
                         </div>
                         <div class="form-group">
-                            <label for="create-email" class="col-form-label">Email</label>
-                            <input type="email" class="form-control" id="create-email" name="email" required>
+                            <label for="create-nik" class="col-form-label">NIK</label>
+                            <input type="nik" class="form-control" id="create-nik" name="nik" required>
                         </div>
                         <div class="form-group">
                             <label for="create-username" class="col-form-label">Username</label>
                             <input type="text" class="form-control" id="create-username" name="username" required>
                         </div>
                         <div class="form-group">
-                            <label for="create-role" class="col-form-label">Role</label>
+                            <label for="create-bidang" class="col-form-label">Bidang</label>
+                            <select name="bidang" id="create-bidang" class="form-control" required>
+                                @foreach ($bidang as $b)
+                                    <option value="{{ $b->id }}">{{ $b->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="create-role" class="col-form-label">Level</label>
                             <select name="role" id="create-role" class="form-control" required>
                                 @foreach ($role as $r)
-                                    <option value="{{ $r->id }}">{{ $r->name }}</option>
+                                    <option value="{{ $r->id }}">{{ $r->id }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -131,7 +157,7 @@
     {{-- End of Create Modal --}}
 
     {{-- Update Modal --}}
-    <form method="POST" action="/admin/akun" id="updateForm">
+    <form method="POST" action="/umum/users" id="updateForm">
         @method('PUT')
         @csrf
         <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
@@ -147,29 +173,37 @@
                     <div class="modal-body">
 
                         <div class="form-group">
-                            <label for="update-name" class="col-form-label">Nama</label>
-                            <input type="text" class="form-control" id="update-name" name="name">
+                            <label for="update-nama" class="col-form-label">Nama</label>
+                            <input type="text" class="form-control" id="update-nama" name="nama">
                         </div>
                         <div class="form-group">
-                            <label for="update-email" class="col-form-label">Email</label>
-                            <input type="email" class="form-control" id="update-email" name="email">
+                            <label for="update-nik" class="col-form-label">NIK</label>
+                            <input type="nik" class="form-control" id="update-nik" name="nik">
                         </div>
                         <div class="form-group">
                             <label for="update-username" class="col-form-label">Username</label>
                             <input type="text" class="form-control" id="update-username" name="username">
                         </div>
                         <div class="form-group">
-                            <label for="update-role" class="col-form-label">Role</label>
+                            <label for="update-role" class="col-form-label">Level</label>
                             <select name="role" id="update-role" class="form-control">
                                 @foreach ($role as $r)
-                                    <option value="{{ $r->id }}">{{ $r->name }}</option>
+                                    <option value="{{ $r->id }}">{{ $r->id }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="update-bidang" class="col-form-label">Bidang</label>
+                            <select name="bidang" id="update-bidang" class="form-control">
+                                @foreach ($bidang as $r)
+                                    <option value="{{ $r->id }}">{{ $r->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Buat Akun</button>
+                        <button type="submit" class="btn btn-primary">Update Akun</button>
                     </div>
                 </div>
             </div>
@@ -193,11 +227,10 @@
                         class="img-fluid w-25">
                     <p class="text-center mt-3">Apakah anda yakin ingin menghapus akun ini?</p>
                     <h4 class="text-center" id="deleteIdentity">Nama - Email</h4>
-                    <h5 id="deleteEmail">email@email.com</h5>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <form action="" method="post" id="deleteForm">
+                    <form action="/umum/users" method="post" id="deleteForm">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Delete Akun</button>
@@ -207,57 +240,4 @@
         </div>
     </div>
     {{-- End of Delete Modal --}}
-
-    {{-- Update Script --}}
-    <script>
-        $('#updateModal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-
-            // Extract info from data-* attributes
-            var id = button.data('id')
-            var name = button.data('name')
-            var username = button.data('username')
-            var email = button.data('email')
-            var role = button.data('role')
-
-            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-            var modal = $(this)
-
-            $('#update-name').val(name)
-            $('#update-username').val(username)
-            $('#update-email').val(email)
-            $('#update-role').val(role)
-
-            // Set the action of the form to /admin/akun/{id}
-            $('#updateForm').attr('action', '/admin/akun/' + id)
-        })
-    </script>
-    {{-- End of Update Script --}}
-
-    {{-- Delete Script --}}
-    <script>
-        $('#deleteModal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-
-            // Extract info from data-* attributes
-            var id = button.data('id')
-            var name = button.data('name')
-            var username = button.data('username')
-            var email = button.data('email')
-            var role = button.data('role')
-
-            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-            var modal = $(this)
-
-            // Set the identity of the account to be deleted
-            $('#deleteIdentity').text(name + ' - ' + role)
-            $('#deleteEmail').text(email)
-
-            // Set the action of the form to /admin/akun/{id}
-            $('#deleteForm').attr('action', '/admin/akun/' + id)
-        })
-    </script>
-    {{-- End of Delete Script --}}
 @endsection

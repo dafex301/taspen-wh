@@ -36,7 +36,7 @@
                                                         <th scope="col">{{ $p->Bidang->nama }}</th>
                                                     @endif
                                                     <td>
-                                                        @if (auth()->user()->Role->nama === 'Manajer Bidang')
+                                                        @if (auth()->user()->Role->nama === 'Sector Head')
                                                             <a href="/bidang/permintaan/verifikasi/{{ $p->id }}"
                                                                 class="btn btn-outline-success">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"

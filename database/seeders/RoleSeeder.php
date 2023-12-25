@@ -21,10 +21,10 @@ class RoleSeeder extends Seeder
                 'nama' => 'Staff',
             ],
             [
-                'nama' => 'Manajer Bidang',
+                'nama' => 'Sector Head',
             ],
             [
-                'nama' => 'Manajer Umum',
+                'nama' => 'Manager',
             ],
         ];
 

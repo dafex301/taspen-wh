@@ -34,15 +34,15 @@ class PermintaanController extends Controller
         $role = $user->Role->nama;
         $path = request()->path();
 
-        if ($path === 'bidang/pengadaan/history' && $role === 'Manajer Bidang') {
+        if ($path === 'bidang/pengadaan/history' && $role === 'Sector Head') {
             $permintaan = Permintaan::where('bidang', $user->bidang)->orderBy('updated_at', 'desc')->get();
-        } elseif ($path === 'umum/permintaan/history' && $role === 'Manajer Umum') {
+        } elseif ($path === 'umum/permintaan/history' && $role === 'Manager') {
             $permintaan = Permintaan::orderBy('updated_at', 'desc')->get();
-        } elseif ($path === 'umum/permintaan/history/layanan' && $role === 'Manajer Umum') {
+        } elseif ($path === 'umum/permintaan/history/layanan' && $role === 'Manager') {
             $permintaan = Permintaan::where('bidang', 1)->orderBy('updated_at', 'desc')->get();
-        } elseif ($path === 'umum/permintaan/history/keuangan' && $role === 'Manajer Umum') {
+        } elseif ($path === 'umum/permintaan/history/keuangan' && $role === 'Manager') {
             $permintaan = Permintaan::where('bidang', 2)->orderBy('updated_at', 'desc')->get();
-        } elseif ($path === 'umum/permintaan/history/sdm' && $role === 'Manajer Umum') {
+        } elseif ($path === 'umum/permintaan/history/sdm' && $role === 'Manager') {
             $permintaan = Permintaan::where('bidang', 3)->orderBy('updated_at', 'desc')->get();
         } else {
             $permintaan = Permintaan::where('pemohon', $user->id)->orderBy('updated_at', 'desc')->get();
@@ -166,7 +166,7 @@ class PermintaanController extends Controller
 
             $permintaan = Permintaan::find($id);
 
-            if (auth()->user()->Role->nama === 'Manajer Bidang') {
+            if (auth()->user()->Role->nama === 'Sector Head') {
                 $permintaan->status_manager_bidang = true;
                 $permintaan->manager_bidang = auth()->user()->id;
                 $permintaan->waktu_manager_bidang = now();
@@ -175,7 +175,7 @@ class PermintaanController extends Controller
                 DB::commit();
 
                 return redirect()->route('permintaan.bidang.verifikasi')->with('success', 'Berhasil menerima permintaan');
-            } elseif (auth()->user()->Role->nama === 'Manajer Umum') {
+            } elseif (auth()->user()->Role->nama === 'Manager') {
                 $permintaan->status_manager_umum = true;
                 $permintaan->manager_umum = auth()->user()->id;
                 $permintaan->waktu_manager_umum = now();
@@ -257,14 +257,14 @@ class PermintaanController extends Controller
         $user = auth()->user();
         $role = $user->Role->nama;
 
-        if ($role === 'Manajer Bidang') {
+        if ($role === 'Sector Head') {
             $permintaan->status_manager_bidang = false;
             $permintaan->manager_bidang = $user->id;
             $permintaan->waktu_manager_bidang = now();
             $permintaan->alasan_manager_bidang = $alasan;
             $permintaan->save();
             return redirect()->route('permintaan.bidang.verifikasi')->with('success', 'Berhasil menolak permintaan');
-        } elseif ($role === 'Manajer Umum') {
+        } elseif ($role === 'Manager') {
             if (request()->tujuan == 'manajer-bidang') {
                 $permintaan->status_manager_bidang = null;
 
@@ -399,30 +399,30 @@ class PermintaanController extends Controller
         $path = request()->path();
 
 
-        if ($path === 'bidang/permintaan/verifikasi' && $role === 'Manajer Bidang') {
+        if ($path === 'bidang/permintaan/verifikasi' && $role === 'Sector Head') {
             $permintaan = Permintaan::where('bidang', $user->bidang)
                 ->where('status_manager_bidang', null)
                 ->orderBy('updated_at', 'desc')
                 ->get();
-        } elseif ($path === 'umum/permintaan/approval/layanan' && $role === 'Manajer Umum') {
+        } elseif ($path === 'umum/permintaan/approval/layanan' && $role === 'Manager') {
             $permintaan = Permintaan::where('status_manager_bidang', true)
                 ->where('status_manager_umum', null)
                 ->where('bidang', 1)
                 ->orderBy('updated_at', 'desc')
                 ->get();
-        } elseif ($path === 'umum/permintaan/approval/keuangan' && $role === 'Manajer Umum') {
+        } elseif ($path === 'umum/permintaan/approval/keuangan' && $role === 'Manager') {
             $permintaan = Permintaan::where('status_manager_bidang', true)
                 ->where('status_manager_umum', null)
                 ->where('bidang', 2)
                 ->orderBy('updated_at', 'desc')
                 ->get();
-        } elseif ($path === 'umum/permintaan/approval/sdm' && $role === 'Manajer Umum') {
+        } elseif ($path === 'umum/permintaan/approval/sdm' && $role === 'Manager') {
             $permintaan = Permintaan::where('status_manager_bidang', true)
                 ->where('status_manager_umum', null)
                 ->where('bidang', 3)
                 ->orderBy('updated_at', 'desc')
                 ->get();
-        } elseif ($path === 'umum/permintaan/verifikasi' && $role === 'Manajer Umum') {
+        } elseif ($path === 'umum/permintaan/verifikasi' && $role === 'Manager') {
             $permintaan = Permintaan::where('status_manager_bidang', true)
                 ->where('status_manager_umum', null)
                 ->orderBy('updated_at', 'desc')

@@ -37,7 +37,7 @@ class DashboardController extends Controller
                     ->count();
 
                 return view('index', compact('items', 'totalPermintaan', 'totalPengadaan', 'revisiPermintaan', 'revisiPengadaan'));
-            } elseif (auth()->user()->Role->nama == 'Manajer Bidang') {
+            } elseif (auth()->user()->Role->nama == 'Sector Head') {
                 $permintaanMasuk = Permintaan::where('bidang', auth()->user()->bidang)
                     ->where('status_manager_bidang', null)
                     ->count();
@@ -55,7 +55,7 @@ class DashboardController extends Controller
                     ->count();
 
                 return view('index', compact('items', 'permintaanMasuk', 'pengadaanMasuk', 'revisiPermintaan', 'revisiPengadaan'));
-            } elseif (auth()->user()->Role->nama == 'Manajer Umum') {
+            } elseif (auth()->user()->Role->nama == 'Manager') {
                 $totalPermintaan = Permintaan::all()->count();
 
                 $totalPengadaan = Pengadaan::all()->count();

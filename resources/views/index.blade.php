@@ -11,7 +11,7 @@
                             <div class="card mb-4 text-white bg-primary">
                                 <div class="card-body pb-0 d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h1 class="">{{ $totalPermintaan }}</h1>
+                                        <h1 class="">{{ $totalPermintaan ?? 0 }}</h1>
                                         <div>Total Permintaan</div>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -28,7 +28,7 @@
                             <div class="card mb-4 text-white bg-warning">
                                 <div class="card-body pb-0 d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h1 class="">{{ $revisiPermintaan }}</h1>
+                                        <h1 class="">{{ $revisiPermintaan ?? 0 }}</h1>
                                         <div>Revisi Permintaan</div>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -45,7 +45,7 @@
                             <div class="card mb-4 text-white bg-success">
                                 <div class="card-body pb-0 d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h1 class="">{{ $totalPengadaan }}</h1>
+                                        <h1 class="">{{ $totalPengadaan ?? 0 }}</h1>
                                         <div>Total Pengadaan</div>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -65,7 +65,7 @@
                             <div class="card mb-4 text-white bg-warning">
                                 <div class="card-body pb-0 d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h1 class="">{{ $revisiPengadaan }}</h1>
+                                        <h1 class="">{{ $revisiPengadaan ?? 0 }}</h1>
                                         <div>Revisi Pengadaan</div>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -79,14 +79,14 @@
                         </div>
                         <!-- /.col-->
                     </div>
-                @elseif (auth()->user()->Role->nama === 'Manajer Bidang')
+                @elseif (auth()->user()->Role->nama === 'Sector Head')
                     <div class="row">
                         <!-- /.col-->
                         <div class="col-sm-6 col-lg-3">
                             <div class="card mb-4 text-white bg-primary">
                                 <div class="card-body pb-0 d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h1 class="">{{ $permintaanMasuk }}</h1>
+                                        <h1 class="">{{ $permintaanMasuk ?? 0 }}</h1>
                                         <div>Permintaan Masuk</div>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -103,7 +103,7 @@
                             <div class="card mb-4 text-white bg-warning">
                                 <div class="card-body pb-0 d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h1 class="">{{ $revisiPermintaan }}</h1>
+                                        <h1 class="">{{ $revisiPermintaan ?? 0 }}</h1>
                                         <div>Permintaan Revisi</div>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -120,7 +120,7 @@
                             <div class="card mb-4 text-white bg-info">
                                 <div class="card-body pb-0 d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h1 class="">{{ $pengadaanMasuk }}</h1>
+                                        <h1 class="">{{ $pengadaanMasuk ?? 0 }}</h1>
                                         <div>Pengadaan Masuk</div>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -140,7 +140,7 @@
                             <div class="card mb-4 text-white bg-warning">
                                 <div class="card-body pb-0 d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h1 class="">{{ $revisiPengadaan }}</h1>
+                                        <h1 class="">{{ $revisiPengadaan ?? 0 }}</h1>
                                         <div>Pengadaan Revisi</div>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -161,7 +161,7 @@
                             <div class="card mb-4 text-white bg-primary">
                                 <div class="card-body pb-0 d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h1 class="">{{ $permintaanMasuk }}</h1>
+                                        <h1 class="">{{ $permintaanMasuk ?? 0 }}</h1>
                                         <div>Permintaan Masuk</div>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -178,7 +178,7 @@
                             <div class="card mb-4 text-white bg-info">
                                 <div class="card-body pb-0 d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h1 class="">{{ $totalPermintaan }}</h1>
+                                        <h1 class="">{{ $totalPermintaan ?? 0 }}</h1>
                                         <div>Total Permintaan</div>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -198,7 +198,7 @@
                             <div class="card mb-4 text-white bg-warning">
                                 <div class="card-body pb-0 d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h1 class="">{{ $pengadaanMasuk }}</h1>
+                                        <h1 class="">{{ $pengadaanMasuk ?? 0 }}</h1>
                                         <div>Pengadaan Masuk</div>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -215,7 +215,7 @@
                             <div class="card mb-4 text-white bg-success">
                                 <div class="card-body pb-0 d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h1 class="">{{ $totalPengadaan }}</h1>
+                                        <h1 class="">{{ $totalPengadaan ?? 0 }}</h1>
                                         <div>Total Pengadaan</div>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
