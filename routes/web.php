@@ -94,6 +94,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/umum/pengadaan/history/layanan', 'PengadaanController@history')->name('pengadaan.umum.history.layanan');
         Route::get('/umum/pengadaan/history/keuangan', 'PengadaanController@history')->name('pengadaan.umum.history.keuangan');
         Route::get('/umum/pengadaan/history/sdm', 'PengadaanController@history')->name('pengadaan.umum.history.sdm');
+        Route::get('/umum/pengadaan/history/pensiun', 'PengadaanController@history')->name('pengadaan.umum.history.pensiun');
 
         Route::get('/umum/pengadaan/approval', 'PengadaanController@approval')->name('pengadaan.umum.approval');
         Route::get('/umum/pengadaan/approval/layanan', 'PengadaanController@verifikasi')->name('pengadaan.umum.approval.layanan');
@@ -103,11 +104,15 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/umum/pengadaan/approval/create', 'PengadaanController@realisasiPengadaan')->name('pengadaan.umum.approval.realisasiPengadaan');
 
         // Permintaan Routes
+        Route::get('/umum/permintaan', 'PermintaanController@manage')->name('permintaan.umum.approval');
+        Route::post('/umum/permintaan/import', 'PermintaanController@import')->name('permintaan.umum.approval');
+
         Route::get('/umum/permintaan/approval', 'PermintaanController@approval')->name('permintaan.umum.approval');
         Route::get('/umum/permintaan/verifikasi', 'PermintaanController@verifikasi')->name('permintaan.umum.verifikasi');
         Route::get('/umum/permintaan/approval/layanan', 'PermintaanController@verifikasi')->name('permintaan.umum.approval.layanan');
         Route::get('/umum/permintaan/approval/keuangan', 'PermintaanController@verifikasi')->name('permintaan.umum.approval.keuangan');
         Route::get('/umum/permintaan/approval/sdm', 'PermintaanController@verifikasi')->name('permintaan.umum.approval.sdm');
+        Route::get('/umum/permintaan/approval/pensiun', 'PermintaanController@verifikasi')->name('permintaan.umum.approval.pensiun');
 
         Route::get('/umum/permintaan/verifikasi/{id}', 'PermintaanController@show')->name('permintaan.umum.verifikasi.detail');
         Route::post('/umum/permintaan/verifikasi/{id}', 'PermintaanController@accept')->name('permintaan.umum.verifikasi.accept');
@@ -118,10 +123,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/umum/permintaan/history/layanan', 'PermintaanController@history')->name('permintaan.umum.history.layanan');
         Route::get('/umum/permintaan/history/keuangan', 'PermintaanController@history')->name('permintaan.umum.history.keuangan');
         Route::get('/umum/permintaan/history/sdm', 'PermintaanController@history')->name('permintaan.umum.history.sdm');
+        Route::get('/umum/permintaan/history/pensiun', 'PermintaanController@history')->name('permintaan.umum.history.pensiun');
 
         // Stok Routes
         Route::get('/umum/stok', 'PengadaanController@stok')->name('pengadaan.umum.stok');
         Route::post('/umum/stok', 'PengadaanController@inputStok')->name('pengadaan.umum.inputStok');
+        Route::post('/umum/stok/import', 'ItemController@importStok')->name('pengadaan.umum.import');
 
         Route::resource('/umum/items', ItemController::class);
         Route::post('/umum/items/import', 'ItemController@import')->name('item.import');

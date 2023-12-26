@@ -47,4 +47,9 @@ class Permintaan extends Model
     {
         return $this->belongsTo(User::class, 'manager_umum');
     }
+
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'item_permintaans', 'id_permintaan', 'id_item')->withPivot('jumlah');
+    }
 }

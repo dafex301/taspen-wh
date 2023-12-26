@@ -17,11 +17,11 @@
         </div>
 
         <div class="row mt-4">
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <div class="card" style=""><img class="card-img-top" src="{{ url('assets/img/pelayanan.png') }}"
                         style="" alt="">
                     <div class="card-body">
-                        <h5 class="card-title">Bidang Layanan dan Kepesertaan</h5>
+                        <h5 class="card-title">Services & Membership</h5>
                         <p class="card-text">
                             {{ $permintaanCount[1] ?? 0 }} Riwayat
                         </p>
@@ -30,11 +30,11 @@
                 </div>
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <div class="card" style=""><img class="card-img-top" src="{{ url('assets/img/keuangan.png') }}"
                         alt="">
                     <div class="card-body">
-                        <h5 class="card-title">Bidang Keuangan</h5>
+                        <h5 class="card-title">Finance Administration</h5>
                         <p class="card-text">
                             {{ $permintaanCount[2] ?? 0 }} Riwayat
                         </p>
@@ -43,15 +43,28 @@
                 </div>
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <div class="card" style=""><img class="card-img-top" src="{{ url('assets/img/sdm.jpg') }}"
                         alt="">
                     <div class="card-body">
-                        <h5 class="card-title">Bidang Umum dan SDM</h5>
+                        <h5 class="card-title">HC & GA</h5>
                         <p class="card-text">
                             {{ $permintaanCount[3] ?? 0 }} Riwayat
                         </p>
                         <a class="btn btn-primary" href="/umum/permintaan/history/sdm">Lihat</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="card" style=""><img class="card-img-top" src="{{ url('assets/img/pensiun.jpg') }}"
+                        alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">Cash & Pension Verif</h5>
+                        <p class="card-text">
+                            {{ $permintaanCount[4] ?? 0 }} Riwayat
+                        </p>
+                        <a class="btn btn-primary" href="/umum/permintaan/history/pensiun">Lihat</a>
                     </div>
                 </div>
             </div>

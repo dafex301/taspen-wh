@@ -6,7 +6,14 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
-                        <div class="card-header"><strong>History Permintaan Bidang</strong></div>
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-center w-100">
+                                <strong>Manajemen Permintaan</strong>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importModal">
+                                    Import Data
+                                </button>
+                            </div>
+                        </div>
 
                         <div class="card-body">
 
@@ -17,11 +24,10 @@
                                             <tr>
                                                 <th scope="col">No</th>
                                                 <th scope="col">Kegiatan</th>
+                                                <th scope="col">Item</th>
                                                 <th scope="col">Tanggal</th>
-                                                @if (!request()->routeIs('permintaan.history'))
-                                                    <th scope="col">Pemohon</th>
-                                                    <th scope="col">Bidang</th>
-                                                @endif
+                                                <th scope="col">Pemohon</th>
+                                                <th scope="col">Bidang</th>
                                                 <th scope="col">Status</th>
                                                 <th scope="col">Aksi</th>
                                             </tr>
@@ -33,6 +39,16 @@
                                                     <th scope="row">
                                                         <div>{{ $p->kegiatan }}</div>
                                                     </th>
+                                                    <td>
+                                                        <ul>
+                                                            @foreach ($p->items as $item)
+                                                                <li>
+                                                                    {{ $item->nama }}
+                                                                    {{ $item->pivot->jumlah }}
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </td>
                                                     <td>
                                                         {{ $p->created_at->format('d M Y') }}
                                                     </td>
@@ -116,4 +132,34 @@
             </div>
         </div>
     </div>
+
+    {{-- Import Modal --}}
+    <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel"
+        aria-hidden="true">
+        <form method="POST" action="/umum/permintaan/import" id="importForm" enctype="multipart/form-data">
+            @csrf
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createModalLabel">Import Permintaan</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="file" class="col-form-label">File CSV</label>
+                            <input type="file" accept=".csv" class="form-control" id="file" name="file"
+                                required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Buat Permintaan</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    {{-- End of Import Modal --}}
 @endsection

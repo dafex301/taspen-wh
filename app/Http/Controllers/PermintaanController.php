@@ -6,6 +6,7 @@ use App\Models\Item;
 use App\Models\Bidang;
 use App\Models\Kategori;
 use App\Models\Permintaan;
+use Illuminate\Http\Request;
 use App\Models\ItemPermintaan;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StorePermintaanRequest;
@@ -422,6 +423,12 @@ class PermintaanController extends Controller
                 ->where('bidang', 3)
                 ->orderBy('updated_at', 'desc')
                 ->get();
+        } elseif ($path === 'umum/permintaan/approval/pensiun' && $role === 'Manager') {
+            $permintaan = Permintaan::where('status_manager_bidang', true)
+                ->where('status_manager_umum', null)
+                ->where('bidang', 4)
+                ->orderBy('updated_at', 'desc')
+                ->get();
         } elseif ($path === 'umum/permintaan/verifikasi' && $role === 'Manager') {
             $permintaan = Permintaan::where('status_manager_bidang', true)
                 ->where('status_manager_umum', null)
@@ -448,11 +455,15 @@ class PermintaanController extends Controller
             ->where('status_manager_bidang', true)
             ->where('status_manager_umum', null)
             ->count();
+        $permintaanPensiun = Permintaan::where('bidang', '4')
+            ->where('status_manager_bidang', true)
+            ->where('status_manager_umum', null)
+            ->count();
         $permintaanTotal = Permintaan::where('status_manager_bidang', true)
             ->where('status_manager_umum', null)
             ->where('selesai', false)->count();
 
-        return view('permintaan.approval', compact('permintaanLayanan', 'permintaanKeuangan', 'permintaanSDM', 'permintaanTotal'));
+        return view('permintaan.approval', compact('permintaanLayanan', 'permintaanKeuangan', 'permintaanSDM', 'permintaanTotal', 'permintaanPensiun'));
     }
 
     public function histories()
@@ -473,5 +484,46 @@ class PermintaanController extends Controller
         $permintaanCount['total'] = array_sum($permintaanCount);
 
         return view('permintaan.histories', compact('permintaanCount'));
+    }
+
+    public function manage()
+    {
+        $permintaan = Permintaan::all();
+
+        return view('admin.permintaan.index', compact('permintaan'));
+    }
+
+    public function import(Request $request)
+    {
+        $file = $request->file('file');
+        $fileContents = file($file->getPathname());
+
+        $bidangMap = Bidang::pluck('id', 'nama');
+
+        foreach ($fileContents as $line) {
+            // skip first line
+            if ($line == $fileContents[0]) {
+                continue;
+            }
+            $data = str_getcsv($line);
+
+            $bidangId = $bidangMap[$data[6]] ?? null;
+
+            if ($bidangId !== null) {
+                $user = Item::firstOrNew(['username' => $data[3], 'nik' => $data[0]]);
+
+                if (!$user->exists) {
+                    $user->nik = $data[0];
+                    $user->nama = $data[1];
+                    $user->username = $data[3];
+                    $user->bidang = $bidangId;
+                    $user->role = $data[5];
+                    $user->password = $data[4];
+                    $user->save();
+                }
+            }
+        }
+
+        return redirect()->back()->with('success', 'CSV file imported successfully.');
     }
 }

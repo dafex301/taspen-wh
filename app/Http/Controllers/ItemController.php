@@ -150,15 +150,43 @@ class ItemController extends Controller
             if ($kategoriId !== null && $satuanId !== null) {
                 $item = Item::firstOrNew(['kode' => $data[1]]);
 
-                if (!$item->exists) {
-                    $item->kode = $data[1];
-                    $item->nama = $data[2];
-                    $item->satuan = $satuanId;
-                    $item->kategori = $kategoriId;
-                    $item->harga = $data[5];
-                    $item->save();
-                }
+                $item->kode = $data[1];
+                $item->nama = $data[2];
+                $item->satuan = $satuanId;
+                $item->kategori = $kategoriId;
+                $item->harga = $data[5];
+                $item->save();
             }
+        }
+
+        return redirect()->back()->with('success', 'CSV file imported successfully.');
+    }
+
+    public function importStok(Request $request)
+    {
+        $file = $request->file('file');
+        $fileContents = file($file->getPathname());
+
+        $itemsMap = Item::pluck('id', 'nama');
+
+        foreach ($fileContents as $line) {
+            if ($line == $fileContents[0]) {
+                continue;
+            }
+            $data = str_getcsv($line);
+
+            // get the item id from the map or skip if it doesnt exist
+            if (!isset($itemsMap[$data[0]])) {
+                continue;
+            }
+
+            $item = Item::find($itemsMap[$data[0]]);
+            $item->stok_bidang_layanan = $data[1];
+            $item->stok_bidang_keuangan = $data[2];
+            $item->stok_bidang_umum = $data[3];
+            $item->stok_bidang_pensiun = $data[4];
+
+            $item->save();
         }
 
         return redirect()->back()->with('success', 'CSV file imported successfully.');

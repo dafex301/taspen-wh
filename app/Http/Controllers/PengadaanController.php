@@ -40,10 +40,14 @@ class PengadaanController extends Controller
             ->where('status_manager_bidang', true)
             ->where('status_manager_umum', null)
             ->count();
+        $pengadaanPensiun = Pengadaan::where('bidang', '4')
+            ->where('status_manager_bidang', true)
+            ->where('status_manager_umum', null)
+            ->count();
         $pengadaanTotal = Pengadaan::where('status_manager_umum', true)
             ->where('selesai', false)->count();
 
-        return view('pengadaan.approval', compact('pengadaanLayanan', 'pengadaanKeuangan', 'pengadaanSDM', 'pengadaanTotal'));
+        return view('pengadaan.approval', compact('pengadaanLayanan', 'pengadaanKeuangan', 'pengadaanSDM', 'pengadaanPensiun', 'pengadaanTotal'));
     }
 
     public function buatPengadaan()
@@ -191,6 +195,8 @@ class PengadaanController extends Controller
             $pengadaan = Pengadaan::where('bidang', 2)->orderBy('updated_at', 'desc')->get();
         } elseif ($path === 'umum/pengadaan/history/sdm' && $role === 'Manager') {
             $pengadaan = Pengadaan::where('bidang', 3)->orderBy('updated_at', 'desc')->get();
+        } elseif ($path === 'umum/pengadaan/history/pensiun' && $role === 'Manager') {
+            $pengadaan = Pengadaan::where('bidang', 4)->orderBy('updated_at', 'desc')->get();
         } else {
             $pengadaan = Pengadaan::where('pemohon', $user->id)->orderBy('updated_at', 'desc')->get();
         }
@@ -211,7 +217,7 @@ class PengadaanController extends Controller
             ->groupBy('bidang');
 
 
-        $pengadaanCount = [0, 0, 0];
+        $pengadaanCount = [0, 0, 0, 0];
         // foreach pengadaan, count the pengadaan
         foreach ($pengadaan as $key => $value) {
             $pengadaanCount[$key - 1] = $value->count();
@@ -573,6 +579,7 @@ class PengadaanController extends Controller
         $layanan = $request->layanan;
         $keuangan = $request->keuangan;
         $umum = $request->umum;
+        $pensiun = $request->pensiun;
         try {
             // Start transaction
             DB::beginTransaction();
@@ -582,6 +589,7 @@ class PengadaanController extends Controller
                 $item->stok_bidang_layanan = $layanan[$i];
                 $item->stok_bidang_keuangan = $keuangan[$i];
                 $item->stok_bidang_umum = $umum[$i];
+                $item->stok_bidang_pensiun = $pensiun[$i];
                 $item->save();
             }
             // Commit transaction

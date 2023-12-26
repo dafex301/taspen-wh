@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('stok_bidang_layanan')->default(0);
             $table->integer('stok_bidang_keuangan')->default(0);
             $table->integer('stok_bidang_umum')->default(0);
+            $table->integer('stok_bidang_pensiun')->default(0);
             $table->integer('harga')->default(0);
             $table->foreignId('kategori');
             $table->foreignId('satuan');
