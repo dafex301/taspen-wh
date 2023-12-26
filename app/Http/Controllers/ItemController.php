@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\Satuan;
+use App\Models\Kategori;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreItemRequest;
 use App\Http\Requests\UpdateItemRequest;
 
@@ -15,7 +18,11 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.items.index', [
+            'item' => Item::orderBy('updated_at', 'desc')->get(),
+            'kategori' => Kategori::all(),
+            'satuan' => Satuan::all()
+        ]);
     }
 
     /**
@@ -35,8 +42,26 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreItemRequest $request)
-    {
-        //
+    { {
+            $data = request()->validate([
+                'nama' => 'required',
+                'kode' => 'required',
+                'harga' => 'required',
+                'kategori' => 'required',
+                'satuan' => 'required',
+            ]);
+
+            // Create user
+            Item::create([
+                'nama' => $data['nama'],
+                'kode' => $data['kode'],
+                'harga' => $data['harga'],
+                'kategori' => $data['kategori'],
+                'satuan' => $data['satuan'],
+            ]);
+
+            return redirect('/umum/items')->with('success', "Item successfully created.");
+        }
     }
 
     /**
@@ -70,7 +95,24 @@ class ItemController extends Controller
      */
     public function update(UpdateItemRequest $request, Item $item)
     {
-        //
+        $data = request()->validate([
+            'nama' => 'required',
+            'kode' => 'required',
+            'harga' => 'required',
+            'kategori' => 'required',
+            'satuan' => 'required',
+        ]);
+
+        // Update item
+        $item->update([
+            'nama' => $data['nama'],
+            'kode' => $data['kode'],
+            'harga' => $data['harga'],
+            'kategori' => $data['kategori'],
+            'satuan' => $data['satuan'],
+        ]);
+
+        return redirect('/umum/items')->with('success', "User successfully updated.");
     }
 
     /**
@@ -81,6 +123,44 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        //
+
+        $item->delete();
+
+        return redirect('/umum/items')->with('success', "Item successfully deleted.");
+    }
+
+    public function import(Request $request)
+    {
+        $file = $request->file('file');
+        $fileContents = file($file->getPathname());
+
+        $kategoriMap = Kategori::pluck('id', 'nama');
+        $satuanMap = Satuan::pluck('id', 'nama');
+
+        foreach ($fileContents as $line) {
+            // skip first line
+            if ($line == $fileContents[0]) {
+                continue;
+            }
+            $data = str_getcsv($line);
+
+            $satuanId = $satuanMap[$data[3]] ?? null;
+            $kategoriId = $kategoriMap[$data[4]] ?? null;
+
+            if ($kategoriId !== null && $satuanId !== null) {
+                $item = Item::firstOrNew(['kode' => $data[1]]);
+
+                if (!$item->exists) {
+                    $item->kode = $data[1];
+                    $item->nama = $data[2];
+                    $item->satuan = $satuanId;
+                    $item->kategori = $kategoriId;
+                    $item->harga = $data[5];
+                    $item->save();
+                }
+            }
+        }
+
+        return redirect()->back()->with('success', 'CSV file imported successfully.');
     }
 }

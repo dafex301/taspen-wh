@@ -33,7 +33,7 @@
                                                     <th scope="row">{{ $k->name }}</th>
                                                     <td>
                                                         <button type="button" class="btn btn-outline-primary"
-                                                            data-bs-toggle="modal" data-bs-target="#updateModal"
+                                                            data-bs-toggle="modal" data-bs-target="#updateKategoriModal"
                                                             data-id="{{ $k->id }}" data-name="{{ $k->name }}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -43,7 +43,7 @@
                                                             </svg>
                                                         </button>
                                                         <button type="button" class="btn btn-outline-danger"
-                                                            data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                                            data-bs-toggle="modal" data-bs-target="#deleteItemModal"
                                                             data-id="{{ $k->id }}" data-name="{{ $k->name }}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -99,12 +99,12 @@
     <form method="POST" action="/admin/kategori" id="updateForm">
         @method('PUT')
         @csrf
-        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="updateKategoriModal" tabindex="-1" role="dialog"
+            aria-labelledby="updateKategoriModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="updateModalLabel">Update Kategori</h5>
+                        <h5 class="modal-title" id="updateKategoriModalLabel">Update Kategori</h5>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -126,12 +126,12 @@
     {{-- End of Update Modal --}}
 
     {{-- Delete Modal --}}
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+    <div class="modal fade" id="deleteItemModal" tabindex="-1" role="dialog" aria-labelledby="deleteItemModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Delete Kategori</h5>
+                    <h5 class="modal-title" id="deleteItemModalLabel">Delete Kategori</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -157,7 +157,7 @@
 
     {{-- Update Script --}}
     <script>
-        $('#updateModal').on('show.bs.modal', function(event) {
+        $('#updateKategoriModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
 
             // Extract info from data-* attributes
@@ -178,7 +178,7 @@
 
     {{-- Delete Script --}}
     <script>
-        $('#deleteModal').on('show.bs.modal', function(event) {
+        $('#deleteItemModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
 
             // Extract info from data-* attributes

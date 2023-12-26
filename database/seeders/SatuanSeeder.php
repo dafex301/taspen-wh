@@ -40,6 +40,21 @@ class SatuanSeeder extends Seeder
             [
                 'nama' => 'BH'
             ],
+            [
+                'nama' => 'SET'
+            ],
+            [
+                'nama' => 'Buah'
+            ],
+            [
+                'nama' => 'Pasang'
+            ],
+            [
+                'nama' => 'PAK'
+            ],
+            [
+                'nama' => 'PCS'
+            ],
 
         ];
 

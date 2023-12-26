@@ -123,7 +123,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/umum/stok', 'PengadaanController@stok')->name('pengadaan.umum.stok');
         Route::post('/umum/stok', 'PengadaanController@inputStok')->name('pengadaan.umum.inputStok');
 
-        Route::resource('/umum/item', ItemController::class);
+        Route::resource('/umum/items', ItemController::class);
+        Route::post('/umum/items/import', 'ItemController@import')->name('item.import');
 
         Route::get('/umum/users', 'UserController@index')->name('user.index');
         Route::post('/umum/users', 'UserController@store')->name('user.store');

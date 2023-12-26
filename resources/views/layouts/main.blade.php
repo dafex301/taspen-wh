@@ -477,7 +477,7 @@
     </script>
 
     <script>
-        $('#updateModal').on('show.bs.modal', function(event) {
+        $('#updateUserModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
 
             // Extract info from data-* attributes
@@ -501,12 +501,8 @@
             // Set the action of the form to /admin/akun/{id}
             $('#updateForm').attr('action', '/umum/users/' + id)
         })
-    </script>
 
-
-    {{-- Delete Script --}}
-    <script>
-        $('#deleteModal').on('show.bs.modal', function(event) {
+        $('#deleteUserModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
 
             // Extract info from data-* attributes
@@ -528,7 +524,56 @@
             $('#deleteForm').attr('action', '/umum/users/' + id)
         })
     </script>
-    {{-- End of Delete Script --}}
+
+
+    <script>
+        $('#updateItemModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+
+            // Extract info from data-* attributes
+            var id = button.data('id')
+            var nama = button.data('nama')
+            var kode = button.data('kode')
+            var harga = button.data('harga')
+            var kategori = button.data('kategori')
+            var satuan = button.data('satuan')
+
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+
+            $('#update-nama').val(nama)
+            $('#update-harga').val(harga)
+            $('#update-kategori').val(kategori)
+            $('#update-kode').val(kode)
+            $('#update-satuan').val(satuan)
+
+            // Set the action of the form to /admin/akun/{id}
+            $('#updateForm').attr('action', '/umum/items/' + id)
+        })
+
+        $('#deleteItemModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+
+            // Extract info from data-* attributes
+            var id = button.data('id')
+            var nama = button.data('nama')
+            var kode = button.data('kode')
+            var harga = button.data('harga')
+            var kategori = button.data('kategori')
+            var satuan = button.data('satuan')
+
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+
+            // Set the identity of the account to be deleted
+            $('#deleteIdentity').text(kode + ' - ' + nama)
+
+            // Set the action of the form to /admin/akun/{id}
+            $('#deleteForm').attr('action', '/umum/items/' + id)
+        })
+    </script>
 
 </body>
 

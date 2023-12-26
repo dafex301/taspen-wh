@@ -9,6 +9,14 @@ class Item extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nama',
+        'kode',
+        'harga',
+        'kategori',
+        'satuan',
+    ];
+
     // Relation with Kategori
     public function kategori()
     {
