@@ -24,6 +24,10 @@ class Permintaan extends Model
         'waktu_manager_bidang',
     ];
 
+    protected $casts = [
+        'waktu_manager_umum' => 'datetime',
+    ];
+
     // Relation with user
     public function pemohon()
     {

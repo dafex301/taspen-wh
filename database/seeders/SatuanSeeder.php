@@ -50,6 +50,9 @@ class SatuanSeeder extends Seeder
                 'nama' => 'Pasang'
             ],
             [
+                'nama' => 'Bungkus'
+            ],
+            [
                 'nama' => 'PAK'
             ],
             [

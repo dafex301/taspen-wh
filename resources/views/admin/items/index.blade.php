@@ -22,6 +22,9 @@
                                 <strong>Manajemen Item</strong>
                                 <div>
 
+                                    <a class="btn btn-warning" href="/umum/stok">
+                                        Lihat Stok
+                                    </a>
                                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#importModal">
                                         Import Item
                                     </button>

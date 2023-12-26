@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Item;
+use App\Models\User;
 use App\Models\Bidang;
 use App\Models\Kategori;
 use App\Models\Permintaan;
@@ -495,10 +497,23 @@ class PermintaanController extends Controller
 
     public function import(Request $request)
     {
+
+        // NO,KEGIATAN,ITEM PERMINTAAN,JUMLAH ITEM,SATUAN,TANGGAL PERMINTAAN,PEMOHON,APPROVAL LV 2,APPROVAL 3,TGL PENGADAA
+        // 1,Kegiatan 1,Ribbon Cart. Epson LQ2180 / LQ2190,2,Buah,5/23/2023,Pasha4066,Maizirwan2257,Raden3533,5/23/2023
+        // 2,Kegiatan 2,Ribbon Cart. Epson LQ2180 / LQ2190,2,Buah,5/24/2023,Pasha4066,Maizirwan2257,Raden3533,5/24/2023
+
         $file = $request->file('file');
         $fileContents = file($file->getPathname());
 
-        $bidangMap = Bidang::pluck('id', 'nama');
+        $usersMap = User::select('id', 'username', 'nama', 'bidang')->get()->mapWithKeys(function ($user) {
+            return [$user->username => [
+                'id' => $user->id,
+                'nama' => $user->nama,
+                'bidang' => $user->bidang,
+            ]];
+        });
+
+        $itemsMap = Item::pluck('id', 'nama');
 
         foreach ($fileContents as $line) {
             // skip first line
@@ -507,21 +522,32 @@ class PermintaanController extends Controller
             }
             $data = str_getcsv($line);
 
-            $bidangId = $bidangMap[$data[6]] ?? null;
+            $pemohon = $usersMap[$data[6]];
+            $manager_bidang = $usersMap[$data[7]];
+            $manager_umum = $usersMap[$data[8]];
 
-            if ($bidangId !== null) {
-                $user = Item::firstOrNew(['username' => $data[3], 'nik' => $data[0]]);
+            $permintaan = new Permintaan();
+            $permintaan->kegiatan = $data[1];
+            $permintaan->pemohon = $pemohon['id'];
+            $permintaan->bidang = $pemohon['bidang'];
+            $permintaan->manager_bidang = $manager_bidang['id'];
+            $permintaan->waktu_manager_bidang = Carbon::parse($data[9])->format('Y-m-d H:i:s');
+            $permintaan->status_manager_bidang = 1;
+            $permintaan->manager_umum = $manager_umum['id'];
+            $permintaan->waktu_manager_umum = Carbon::parse($data[9])->format('Y-m-d H:i:s');
+            $permintaan->status_manager_umum = 1;
+            $permintaan->created_at = Carbon::parse($data[5])->format('Y-m-d H:i:s');
+            $permintaan->updated_at = Carbon::parse($data[5])->format('Y-m-d H:i:s');
+            $permintaan->save();
 
-                if (!$user->exists) {
-                    $user->nik = $data[0];
-                    $user->nama = $data[1];
-                    $user->username = $data[3];
-                    $user->bidang = $bidangId;
-                    $user->role = $data[5];
-                    $user->password = $data[4];
-                    $user->save();
-                }
-            }
+            // get permintaan id
+            $permintaanId = $permintaan->id;
+
+            $itemPermintaan = new ItemPermintaan();
+            $itemPermintaan->id_permintaan = $permintaanId;
+            $itemPermintaan->id_item = $itemsMap[$data[2]];
+            $itemPermintaan->jumlah = $data[3];
+            $itemPermintaan->save();
         }
 
         return redirect()->back()->with('success', 'CSV file imported successfully.');

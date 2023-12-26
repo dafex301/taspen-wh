@@ -148,7 +148,7 @@ class ItemController extends Controller
             $kategoriId = $kategoriMap[$data[4]] ?? null;
 
             if ($kategoriId !== null && $satuanId !== null) {
-                $item = Item::firstOrNew(['kode' => $data[1]]);
+                $item = Item::firstOrNew(['nama' => $data[2]]);
 
                 $item->kode = $data[1];
                 $item->nama = $data[2];

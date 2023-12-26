@@ -18,16 +18,19 @@
                         <div class="card-body">
 
                             <div class="tab-content rounded-bottom">
-                                <div class="tab-pane active preview" role="tabpanel" id="preview-719">
+                                <div class="tab-pane active preview table-responsive" role="tabpanel" id="preview-719">
                                     <table class="table table-hover" id="myTable">
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th scope="col">No</th>
                                                 <th scope="col">Kegiatan</th>
                                                 <th scope="col">Item</th>
-                                                <th scope="col">Tanggal</th>
+                                                <th scope="col">Tanggal Permintaan</th>
                                                 <th scope="col">Pemohon</th>
                                                 <th scope="col">Bidang</th>
+                                                <th scope="col">Approval Lv 2</th>
+                                                <th scope="col">Approval Lv 3</th>
+                                                <th scope="col">Tanggal Pengadaan</th>
                                                 <th scope="col">Status</th>
                                                 <th scope="col">Aksi</th>
                                             </tr>
@@ -40,14 +43,14 @@
                                                         <div>{{ $p->kegiatan }}</div>
                                                     </th>
                                                     <td>
-                                                        <ul>
+                                                        <div>
                                                             @foreach ($p->items as $item)
-                                                                <li>
+                                                                <p>
                                                                     {{ $item->nama }}
                                                                     {{ $item->pivot->jumlah }}
-                                                                </li>
+                                                                </p>
                                                             @endforeach
-                                                        </ul>
+                                                        </div>
                                                     </td>
                                                     <td>
                                                         {{ $p->created_at->format('d M Y') }}
@@ -55,6 +58,10 @@
                                                     @if (!request()->routeIs('permintaan.history'))
                                                         <td>{{ $p->Pemohon->nama }}</td>
                                                         <td>{{ $p->Bidang->nama }}</td>
+                                                        <td>{{ $p->Manager_bidang->nama ?? '-' }}</td>
+                                                        <td>{{ $p->Manager_umum->nama ?? '-' }}</td>
+                                                        <td>{{ $p->waktu_manager_umum ? $p->waktu_manager_umum->format('d M Y') : '-' }}
+                                                        </td>
                                                     @endif
                                                     @if ($p->status_manager_umum === 0)
                                                         <td>
