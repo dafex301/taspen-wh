@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Bidang;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\RegisterRequest;
@@ -94,7 +95,7 @@ class UserController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        return redirect('/umum/akun')->with('success', "User successfully created.");
+        return redirect('/umum/users')->with('success', "User successfully created.");
     }
 
     public function update(User $user, String $id)
@@ -117,6 +118,40 @@ class UserController extends Controller
         ]);
 
         return redirect('/umum/users')->with('success', "User successfully updated.");
+    }
+
+    public function import(Request $request)
+    {
+        $file = $request->file('file');
+        $fileContents = file($file->getPathname());
+
+        $bidangMap = Bidang::pluck('id', 'nama');
+
+        foreach ($fileContents as $line) {
+            // skip first line
+            if ($line == $fileContents[0]) {
+                continue;
+            }
+            $data = str_getcsv($line);
+
+            $bidangId = $bidangMap[$data[6]] ?? null;
+
+            if ($bidangId !== null) {
+                $user = User::firstOrNew(['username' => $data[3], 'nik' => $data[0]]);
+
+                if (!$user->exists) {
+                    $user->nik = $data[0];
+                    $user->nama = $data[1];
+                    $user->username = $data[3];
+                    $user->bidang = $bidangId;
+                    $user->role = $data[5];
+                    $user->password = $data[4];
+                    $user->save();
+                }
+            }
+        }
+
+        return redirect()->back()->with('success', 'CSV file imported successfully.');
     }
 
     public function destroy(User $user, String $id)

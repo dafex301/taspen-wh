@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PengadaanController;
 use Illuminate\Support\Facades\Route;
@@ -122,8 +123,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/umum/stok', 'PengadaanController@stok')->name('pengadaan.umum.stok');
         Route::post('/umum/stok', 'PengadaanController@inputStok')->name('pengadaan.umum.inputStok');
 
+        Route::resource('/umum/item', ItemController::class);
+
         Route::get('/umum/users', 'UserController@index')->name('user.index');
         Route::post('/umum/users', 'UserController@store')->name('user.store');
+        Route::post('/umum/users/import', 'UserController@import')->name('user.import');
         Route::put('/umum/users/{id}', 'UserController@update')->name('user.update');
         Route::delete('/umum/users/{id}', 'UserController@destroy')->name('user.destroy');
     });
