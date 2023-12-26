@@ -420,7 +420,7 @@ class PermintaanController extends Controller
                 ->orderBy('updated_at', 'desc')
                 ->get();
         } elseif ($path === 'umum/permintaan/approval/sdm' && $role === 'Manager') {
-            $permintaan = Permintaan::where('status_manager_bidang', true)
+            $permintaan = Permintaan::where('status_manager_bidang', null)
                 ->where('status_manager_umum', null)
                 ->where('bidang', 3)
                 ->orderBy('updated_at', 'desc')
@@ -498,10 +498,6 @@ class PermintaanController extends Controller
     public function import(Request $request)
     {
 
-        // NO,KEGIATAN,ITEM PERMINTAAN,JUMLAH ITEM,SATUAN,TANGGAL PERMINTAAN,PEMOHON,APPROVAL LV 2,APPROVAL 3,TGL PENGADAA
-        // 1,Kegiatan 1,Ribbon Cart. Epson LQ2180 / LQ2190,2,Buah,5/23/2023,Pasha4066,Maizirwan2257,Raden3533,5/23/2023
-        // 2,Kegiatan 2,Ribbon Cart. Epson LQ2180 / LQ2190,2,Buah,5/24/2023,Pasha4066,Maizirwan2257,Raden3533,5/24/2023
-
         $file = $request->file('file');
         $fileContents = file($file->getPathname());
 
@@ -522,8 +518,8 @@ class PermintaanController extends Controller
             }
             $data = str_getcsv($line);
 
-            $pemohon = $usersMap[$data[6]];
-            $manager_bidang = $usersMap[$data[7]];
+            $pemohon = $usersMap[$data[5]];
+            $manager_bidang = $usersMap[$data[6]];
             $manager_umum = $usersMap[$data[8]];
 
             $permintaan = new Permintaan();
@@ -531,13 +527,13 @@ class PermintaanController extends Controller
             $permintaan->pemohon = $pemohon['id'];
             $permintaan->bidang = $pemohon['bidang'];
             $permintaan->manager_bidang = $manager_bidang['id'];
-            $permintaan->waktu_manager_bidang = Carbon::parse($data[9])->format('Y-m-d H:i:s');
+            $permintaan->waktu_manager_bidang = Carbon::parse($data[7])->format('Y-m-d H:i:s');
             $permintaan->status_manager_bidang = 1;
             $permintaan->manager_umum = $manager_umum['id'];
             $permintaan->waktu_manager_umum = Carbon::parse($data[9])->format('Y-m-d H:i:s');
             $permintaan->status_manager_umum = 1;
-            $permintaan->created_at = Carbon::parse($data[5])->format('Y-m-d H:i:s');
-            $permintaan->updated_at = Carbon::parse($data[5])->format('Y-m-d H:i:s');
+            $permintaan->created_at = Carbon::parse($data[4])->format('Y-m-d H:i:s');
+            $permintaan->updated_at = Carbon::parse($data[4])->format('Y-m-d H:i:s');
             $permintaan->save();
 
             // get permintaan id

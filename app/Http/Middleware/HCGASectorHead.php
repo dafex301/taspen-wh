@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class ManajerUmum
+class HCGASectorHead
 {
     /**
      * Handle an incoming request.
@@ -16,14 +16,6 @@ class ManajerUmum
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!auth()->check()) {
-            return redirect()->route('login.show');
-        }
-        if (
-            auth()->user()->Role->nama != 'Manager'
-        ) {
-            return redirect()->route('dashboard.index');
-        }
         return $next($request);
     }
 }

@@ -203,13 +203,14 @@
                                 <tr>
                                     <th class="tg-9wq8" rowspan="2">No</th>
                                     <th class="tg-9wq8" rowspan="4">Nama Barang</th>
-                                    <th class="tg-c3ow" colspan="4">Jumlah</th>
+                                    <th class="tg-c3ow" colspan="5">Jumlah</th>
                                     <th class="tg-9wq8" rowspan="2">Satuan</th>
                                 </tr>
                                 <tr>
-                                    <th class="tg-yj5y">Layanan</th>
-                                    <th class="tg-yj5y">Keuangan</th>
-                                    <th class="tg-yj5y">Umum</th>
+                                    <th class="tg-yj5y">Services and Membership</th>
+                                    <th class="tg-yj5y">Finance Administration</th>
+                                    <th class="tg-yj5y">HC & GA</th>
+                                    <th class="tg-yj5y">Cash & Pension Verif</th>
                                     <th class="tg-7fle">Total</th>
                                 </tr>
                             </thead>
@@ -218,9 +219,10 @@
                                     <tr>
                                         <td class="tg-baqh">{{ $loop->iteration }}</td>
                                         <td class="tg-0lax">{{ $item['nama_item'] }}</td>
-                                        <td class="tg-baqh">{{ $item['Bidang Layanan dan Kepesertaan'] }}</td>
-                                        <td class="tg-baqh">{{ $item['Bidang Keuangan'] }}</td>
-                                        <td class="tg-baqh">{{ $item['Bidang Umum dan SDM'] }}</td>
+                                        <td class="tg-baqh">{{ $item['Services and Membership'] }}</td>
+                                        <td class="tg-baqh">{{ $item['Finance Administration'] }}</td>
+                                        <td class="tg-baqh">{{ $item['HC & GA'] }}</td>
+                                        <td class="tg-baqh">{{ $item['Cash & Pension Verif'] }}</td>
                                         <td class="tg-amwm">{{ $item['total'] }}</td>
                                         <td class="tg-wp8o">{{ $item['satuan'] }}</td>
                                     </tr>
@@ -358,13 +360,14 @@
                         <tr>
                             <th class="tg-9wq8" rowspan="2">No</th>
                             <th class="tg-9wq8" rowspan="4">Nama Barang</th>
-                            <th class="tg-c3ow" colspan="4">Jumlah</th>
+                            <th class="tg-c3ow" colspan="5">Jumlah</th>
                             <th class="tg-9wq8" rowspan="2">Satuan</th>
                         </tr>
                         <tr>
-                            <th class="tg-yj5y">Layanan</th>
-                            <th class="tg-yj5y">Keuangan</th>
-                            <th class="tg-yj5y">Umum</th>
+                            <th class="tg-yj5y">Services and Membership</th>
+                            <th class="tg-yj5y">Finance Administration</th>
+                            <th class="tg-yj5y">HC & GA</th>
+                            <th class="tg-yj5y">Cash & Pension Verif</th>
                             <th class="tg-7fle">Total</th>
                         </tr>
                     </thead>
@@ -373,9 +376,10 @@
                             <tr>
                                 <td class="tg-baqh">{{ $loop->iteration }}</td>
                                 <td class="tg-0lax">{{ $item['nama_item'] }}</td>
-                                <td class="tg-baqh">{{ $item['Bidang Layanan dan Kepesertaan'] }}</td>
-                                <td class="tg-baqh">{{ $item['Bidang Keuangan'] }}</td>
-                                <td class="tg-baqh">{{ $item['Bidang Umum dan SDM'] }}</td>
+                                <td class="tg-baqh">{{ $item['Services and Membership'] }}</td>
+                                <td class="tg-baqh">{{ $item['Finance Administration'] }}</td>
+                                <td class="tg-baqh">{{ $item['HC & GA'] }}</td>
+                                <td class="tg-baqh">{{ $item['Cash & Pension Verif'] }}</td>
                                 <td class="tg-amwm">{{ $item['total'] }}</td>
                                 <td class="tg-wp8o">{{ $item['satuan'] }}</td>
                             </tr>

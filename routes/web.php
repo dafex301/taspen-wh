@@ -82,6 +82,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::group(['middleware' => ['manajer.umum']], function () {
         // Pengadaan Routes
+        Route::get('/umum/pengadaan', 'PengadaanController@manage')->name('pengadaan.umum.approval');
+        Route::post('/umum/pengadaan/import', 'PengadaanController@import')->name('pengadaan.umum.approval');
+
         Route::get('/umum/pengadaan/verifikasi', 'PengadaanController@verifikasi')->name('pengadaan.umum.verifikasi');
         Route::get('/umum/pengadaan/verifikasi/{id}', 'PengadaanController@show')->name('pengadaan.umum.verifikasi.detail');
         Route::post('/umum/pengadaan/verifikasi/{id}', 'PengadaanController@accept')->name('pengadaan.umum.verifikasi.accept');
@@ -100,12 +103,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/umum/pengadaan/approval/layanan', 'PengadaanController@verifikasi')->name('pengadaan.umum.approval.layanan');
         Route::get('/umum/pengadaan/approval/keuangan', 'PengadaanController@verifikasi')->name('pengadaan.umum.approval.keuangan');
         Route::get('/umum/pengadaan/approval/sdm', 'PengadaanController@verifikasi')->name('pengadaan.umum.approval.sdm');
+        Route::get('/umum/pengadaan/approval/pensiun', 'PengadaanController@verifikasi')->name('pengadaan.umum.approval.pensiun');
         Route::get('/umum/pengadaan/approval/create', 'PengadaanController@buatPengadaan')->name('pengadaan.umum.approval.buatPengadaan');
         Route::post('/umum/pengadaan/approval/create', 'PengadaanController@realisasiPengadaan')->name('pengadaan.umum.approval.realisasiPengadaan');
 
         // Permintaan Routes
-        Route::get('/umum/permintaan', 'PermintaanController@manage')->name('permintaan.umum.approval');
-        Route::post('/umum/permintaan/import', 'PermintaanController@import')->name('permintaan.umum.approval');
+        Route::get('/umum/permintaan', 'PermintaanController@manage')->name('permintaan.umum.manage');
+        Route::post('/umum/permintaan/import', 'PermintaanController@import')->name('permintaan.umum.import');
 
         Route::get('/umum/permintaan/approval', 'PermintaanController@approval')->name('permintaan.umum.approval');
         Route::get('/umum/permintaan/verifikasi', 'PermintaanController@verifikasi')->name('permintaan.umum.verifikasi');

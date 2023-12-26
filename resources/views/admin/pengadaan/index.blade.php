@@ -36,7 +36,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($permintaan as $p)
+                                            @foreach ($pengadaan as $p)
                                                 <tr>
                                                     <th scope="row">{{ $loop->iteration }}</th>
                                                     <th scope="row">
@@ -145,12 +145,12 @@
     {{-- Import Modal --}}
     <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel"
         aria-hidden="true">
-        <form method="POST" action="/umum/permintaan/import" id="importForm" enctype="multipart/form-data">
+        <form method="POST" action="/umum/pengadaan/import" id="importForm" enctype="multipart/form-data">
             @csrf
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="createModalLabel">Import Permintaan</h5>
+                        <h5 class="modal-title" id="createModalLabel">Import Pengadaan</h5>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

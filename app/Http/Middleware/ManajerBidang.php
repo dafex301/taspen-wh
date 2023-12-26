@@ -19,6 +19,9 @@ class ManajerBidang
         if (!auth()->check()) {
             return redirect()->route('login.show');
         }
+        if (auth()->user()->Role->nama == 'Manager') {
+            return $next($request);
+        }
         if (auth()->user()->Role->nama != 'Sector Head') {
             return redirect()->route('dashboard.index');
         }

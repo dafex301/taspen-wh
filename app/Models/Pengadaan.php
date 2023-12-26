@@ -24,6 +24,10 @@ class Pengadaan extends Model
         'waktu_manager_bidang',
     ];
 
+    protected $casts = [
+        'waktu_manager_umum' => 'datetime',
+    ];
+
     // Relation with user
     public function pemohon()
     {
@@ -46,5 +50,10 @@ class Pengadaan extends Model
     public function manager_bidang()
     {
         return $this->belongsTo(User::class, 'manager_bidang');
+    }
+
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'item_permintaans', 'id_permintaan', 'id_item')->withPivot('jumlah');
     }
 }

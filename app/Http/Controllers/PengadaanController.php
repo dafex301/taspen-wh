@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Item;
+use App\Models\User;
 use App\Models\Bidang;
 use App\Models\Kategori;
 use App\Models\Pengadaan;
+use Illuminate\Http\Request;
 use App\Models\ItemPengadaan;
 use App\Models\RealisasiPengadaan;
 use Illuminate\Support\Facades\DB;
 use App\Models\RealisasiPengadaanList;
 use App\Http\Requests\StorePengadaanRequest;
 use App\Http\Requests\UpdatePengadaanRequest;
-use Illuminate\Http\Request;
 
 class PengadaanController extends Controller
 {
@@ -37,7 +39,6 @@ class PengadaanController extends Controller
             ->where('status_manager_umum', null)
             ->count();
         $pengadaanSDM = Pengadaan::where('bidang', '3')
-            ->where('status_manager_bidang', true)
             ->where('status_manager_umum', null)
             ->count();
         $pengadaanPensiun = Pengadaan::where('bidang', '4')
@@ -319,9 +320,15 @@ class PengadaanController extends Controller
                 ->orderBy('updated_at', 'desc')
                 ->get();
         } elseif ($path === 'umum/pengadaan/approval/sdm' && $role === 'Manager') {
-            $pengadaan = Pengadaan::where('status_manager_bidang', true)
+            $pengadaan = Pengadaan::where('status_manager_bidang', null)
                 ->where('status_manager_umum', null)
                 ->where('bidang', 3)
+                ->orderBy('updated_at', 'desc')
+                ->get();
+        } elseif ($path === 'umum/pengadaan/approval/pensiun' && $role === 'Manager') {
+            $pengadaan = Pengadaan::where('status_manager_bidang', true)
+                ->where('status_manager_umum', null)
+                ->where('bidang', 4)
                 ->orderBy('updated_at', 'desc')
                 ->get();
         } else {
@@ -599,5 +606,66 @@ class PengadaanController extends Controller
             DB::rollback();
             return redirect()->route('pengadaan.umum.stok')->with('error', 'Terjadi kesalahan saat mengubah stok: ' . $e->getMessage());
         }
+    }
+
+    public function manage()
+    {
+        $pengadaan = Pengadaan::all();
+
+        return view('admin.pengadaan.index', compact('pengadaan'));
+    }
+
+    public function import(Request $request)
+    {
+
+        $file = $request->file('file');
+        $fileContents = file($file->getPathname());
+
+        $usersMap = User::select('id', 'username', 'nama', 'bidang')->get()->mapWithKeys(function ($user) {
+            return [$user->username => [
+                'id' => $user->id,
+                'nama' => $user->nama,
+                'bidang' => $user->bidang,
+            ]];
+        });
+
+        $itemsMap = Item::pluck('id', 'nama');
+
+        foreach ($fileContents as $line) {
+            // skip first line
+            if ($line == $fileContents[0]) {
+                continue;
+            }
+            $data = str_getcsv($line);
+
+            $pemohon = $usersMap[$data[5]];
+            $manager_bidang = $usersMap[$data[6]];
+            $manager_umum = $usersMap[$data[8]];
+
+            $pengadaan = new Pengadaan();
+            $pengadaan->kegiatan = $data[1];
+            $pengadaan->pemohon = $pemohon['id'];
+            $pengadaan->bidang = $pemohon['bidang'];
+            $pengadaan->manager_bidang = $manager_bidang['id'];
+            $pengadaan->waktu_manager_bidang = Carbon::parse($data[7])->format('Y-m-d H:i:s');
+            $pengadaan->status_manager_bidang = 1;
+            $pengadaan->manager_umum = $manager_umum['id'];
+            $pengadaan->waktu_manager_umum = Carbon::parse($data[9])->format('Y-m-d H:i:s');
+            $pengadaan->status_manager_umum = 1;
+            $pengadaan->created_at = Carbon::parse($data[4])->format('Y-m-d H:i:s');
+            $pengadaan->updated_at = Carbon::parse($data[4])->format('Y-m-d H:i:s');
+            $pengadaan->save();
+
+            // get permintaan id
+            $pengadaanId = $pengadaan->id;
+
+            $itemPengadaan = new ItemPengadaan();
+            $itemPengadaan->id_pengadaan = $pengadaanId;
+            $itemPengadaan->id_item = $itemsMap[$data[2]];
+            $itemPengadaan->jumlah = $data[3];
+            $itemPengadaan->save();
+        }
+
+        return redirect()->back()->with('success', 'CSV file imported successfully.');
     }
 }
