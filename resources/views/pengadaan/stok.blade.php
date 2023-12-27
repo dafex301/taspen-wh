@@ -148,7 +148,8 @@
 
                 // Get Nama (assuming it's the first cell in each row)
                 var nama = row.cells[1].innerText.trim();
-                rowData.push(nama);
+                rowData.push('"' + nama +
+                    '"');
 
                 for (var j = 3; j < row.cells.length; j++) {
                     var inputField = row.cells[j].querySelector('input');
