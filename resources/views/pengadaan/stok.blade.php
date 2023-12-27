@@ -60,7 +60,7 @@
                                                     value="{{ $item->stok_bidang_keuangan }}"></td>
                                             <td><input type="number" name="umum[]" value="{{ $item->stok_bidang_umum }}">
                                             <td><input type="number" name="pensiun[]"
-                                                    value="{{ $item->stok_bidang_umum }}">
+                                                    value="{{ $item->stok_bidang_pensiun }}">
                                             </td>
                                             <td>{{ $item->Satuan->nama }}</td>
                                         </tr>

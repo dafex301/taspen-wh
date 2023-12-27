@@ -177,6 +177,7 @@ class ItemController extends Controller
             $data = str_getcsv($line);
 
             $item = Item::find($data[0]);
+
             $item->stok_bidang_layanan = $data[2];
             $item->stok_bidang_keuangan = $data[3];
             $item->stok_bidang_umum = $data[4];
