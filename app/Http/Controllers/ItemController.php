@@ -150,7 +150,10 @@ class ItemController extends Controller
             if ($kategoriId !== null && $satuanId !== null) {
                 $item = Item::firstOrNew(['nama' => $data[2]]);
 
-                $item->kode = $data[1];
+                // kode could be empty
+                if ($data[1] !== '') {
+                    $item->kode = $data[1];
+                }
                 $item->nama = $data[2];
                 $item->satuan = $satuanId;
                 $item->kategori = $kategoriId;
