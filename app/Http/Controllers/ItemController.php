@@ -176,6 +176,8 @@ class ItemController extends Controller
             }
             $data = str_getcsv($line);
 
+            dd($data);
+
             // if no data, continue
             if ($data[2] == '' && $data[3] == '' && $data[4] == '' && $data[5] == '') {
                 continue;
