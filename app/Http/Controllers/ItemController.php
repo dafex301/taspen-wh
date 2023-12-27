@@ -170,24 +170,17 @@ class ItemController extends Controller
         $file = $request->file('file');
         $fileContents = file($file->getPathname());
 
-        $itemsMap = Item::pluck('id', 'nama');
-
         foreach ($fileContents as $line) {
             if ($line == $fileContents[0]) {
                 continue;
             }
             $data = str_getcsv($line);
 
-            // get the item id from the map or skip if it doesnt exist
-            if (!isset($itemsMap[$data[0]])) {
-                continue;
-            }
-
-            $item = Item::find($itemsMap[$data[0]]);
-            $item->stok_bidang_layanan = $data[1];
-            $item->stok_bidang_keuangan = $data[2];
-            $item->stok_bidang_umum = $data[3];
-            $item->stok_bidang_pensiun = $data[4];
+            $item = Item::find($data[0]);
+            $item->stok_bidang_layanan = $data[2];
+            $item->stok_bidang_keuangan = $data[3];
+            $item->stok_bidang_umum = $data[4];
+            $item->stok_bidang_pensiun = $data[5];
 
             $item->save();
         }

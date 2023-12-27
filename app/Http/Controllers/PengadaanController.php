@@ -601,7 +601,7 @@ class PengadaanController extends Controller
             }
             // Commit transaction
             DB::commit();
-            return redirect()->route('dashboard.index')->with('success', 'Berhasil mengubah stok');
+            return redirect()->route('pengadaan.umum.stok')->with('success', 'Berhasil mengubah stok');
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->route('pengadaan.umum.stok')->with('error', 'Terjadi kesalahan saat mengubah stok: ' . $e->getMessage());
