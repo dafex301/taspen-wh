@@ -248,7 +248,9 @@
                                     <th scope="col">Nama</th>
                                     <th scope="col">Kategori</th>
                                     @auth
-                                        <th scope="col">Jumlah Yang Dimiliki</th>
+                                        @if (auth()->user()->Role->nama !== 'Manager')
+                                            <th scope="col">Jumlah Yang Dimiliki</th>
+                                        @endif
                                     @endauth
                                     <th scope="col">Jumlah Keseluruhan</th>
                                     <th scope="col">Satuan</th>
@@ -262,12 +264,14 @@
                                         <td>{{ $item->Kategori->nama }}</td>
                                         @auth
 
-                                            @if (auth()->user()->Bidang->nama === 'Bidang Keuangan')
+                                            @if (auth()->user()->Bidang->nama === 'Finance Administration')
                                                 <td>{{ $item->stok_bidang_keuangan }}</td>
-                                            @elseif(auth()->user()->Bidang->nama === 'Bidang Layanan dan Kepesertaan')
+                                            @elseif(auth()->user()->Bidang->nama === 'Services and Membership')
                                                 <td>{{ $item->stok_bidang_layanan }}</td>
-                                            @else
+                                            @elseif(auth()->user()->Bidang->nama === 'HC & GA')
                                                 <td>{{ $item->stok_bidang_umum }}</td>
+                                            @elseif(auth()->user()->Bidang->nama === 'Cash & Pension Verif')
+                                                <td>{{ $item->stok_bidang_pensiun }}</td>
                                             @endif
                                         @endauth
 
