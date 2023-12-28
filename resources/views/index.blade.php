@@ -248,7 +248,7 @@
                                     <th scope="col">Nama</th>
                                     <th scope="col">Kategori</th>
                                     @auth
-                                        @if (auth()->user()->Role->nama !== 'Manager')
+                                        @if (auth()->user()->bidang !== 5)
                                             <th scope="col">Jumlah Yang Dimiliki</th>
                                         @endif
                                     @endauth
