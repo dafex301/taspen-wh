@@ -125,13 +125,14 @@
                                     <tr>
                                         <th class="tg-9wq8" rowspan="2">No</th>
                                         <th class="tg-9wq8" rowspan="4">Nama Barang</th>
-                                        <th class="tg-c3ow" colspan="4">Jumlah</th>
+                                        <th class="tg-c3ow" colspan="5">Jumlah</th>
                                         <th class="tg-9wq8" rowspan="2">Satuan</th>
                                     </tr>
                                     <tr>
-                                        <th class="tg-yj5y">Layanan</th>
-                                        <th class="tg-yj5y">Keuangan</th>
-                                        <th class="tg-yj5y">Umum</th>
+                                        <th class="tg-yj5y">Services & Membership</th>
+                                        <th class="tg-yj5y">Finance Administration</th>
+                                        <th class="tg-yj5y">HC & GA</th>
+                                        <th class="tg-yj5y">Cash & Pension Verif</th>
                                         <th class="tg-7fle">Total</th>
                                     </tr>
                                 </thead>
@@ -145,6 +146,7 @@
                                                 <td class="tg-baqh"> {{ $val['bidang'][1] ?? 0 }} </td>
                                                 <td class="tg-baqh"> {{ $val['bidang'][2] ?? 0 }} </td>
                                                 <td class="tg-baqh"> {{ $val['bidang'][3] ?? 0 }} </td>
+                                                <td class="tg-baqh"> {{ $val['bidang'][4] ?? 0 }} </td>
                                                 {{-- total of bidang 1 2 3 --}}
                                                 <td class="tg-amwm">
                                                     {{ ($val['bidang'][1] ?? 0) + ($val['bidang'][2] ?? 0) + ($val['bidang'][3] ?? 0) }}
@@ -203,13 +205,14 @@
                         <tr>
                             <th class="tg-9wq8" rowspan="2">No</th>
                             <th class="tg-9wq8" rowspan="4">Nama Barang</th>
-                            <th class="tg-c3ow" colspan="4">Jumlah</th>
+                            <th class="tg-c3ow" colspan="5">Jumlah</th>
                             <th class="tg-9wq8" rowspan="2">Satuan</th>
                         </tr>
                         <tr>
-                            <th class="tg-yj5y">Layanan</th>
-                            <th class="tg-yj5y">Keuangan</th>
-                            <th class="tg-yj5y">Umum</th>
+                            <th class="tg-yj5y">Services & Membership</th>
+                            <th class="tg-yj5y">Finance Administration</th>
+                            <th class="tg-yj5y">HC & GA</th>
+                            <th class="tg-yj5y">Cash & Pension Verif</th>
                             <th class="tg-7fle">Total</th>
                         </tr>
                     </thead>
@@ -223,6 +226,7 @@
                                     <td class="tg-baqh"> {{ $val['bidang'][1] ?? 0 }} </td>
                                     <td class="tg-baqh"> {{ $val['bidang'][2] ?? 0 }} </td>
                                     <td class="tg-baqh"> {{ $val['bidang'][3] ?? 0 }} </td>
+                                    <td class="tg-baqh"> {{ $val['bidang'][4] ?? 0 }} </td>
                                     {{-- total of bidang 1 2 3 --}}
                                     <td class="tg-amwm">
                                         {{ ($val['bidang'][1] ?? 0) + ($val['bidang'][2] ?? 0) + ($val['bidang'][3] ?? 0) }}
