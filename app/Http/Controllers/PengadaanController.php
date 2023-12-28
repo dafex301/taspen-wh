@@ -631,6 +631,9 @@ class PengadaanController extends Controller
 
         $itemsMap = Item::pluck('id', 'nama');
 
+        $realisasi_pengadaan_id = '';
+        $tanggal_pengadaan = '';
+
         foreach ($fileContents as $line) {
             // skip first line
             if ($line == $fileContents[0]) {
@@ -642,6 +645,22 @@ class PengadaanController extends Controller
             $manager_bidang = $usersMap[$data[6]];
             $manager_umum = $usersMap[$data[8]];
 
+            // initiate tanggal_pengadaan to an empty variable, that will be compared with prev data, if it's different do something
+
+            if ($tanggal_pengadaan !== Carbon::parse($data[9])->format('Y-m-d H:i:s')) {
+                $tanggal_pengadaan = Carbon::parse($data[9])->format('Y-m-d H:i:s');
+
+                // create realisasi_pengadaan
+                $realisasi_pengadaan = new RealisasiPengadaan();
+                $realisasi_pengadaan->penanggung_jawab = $manager_umum['id'];
+                $realisasi_pengadaan->created_at = $tanggal_pengadaan;
+                $realisasi_pengadaan->updated_at = $tanggal_pengadaan;
+                $realisasi_pengadaan->save();
+
+                // get realisasi_pengadaan id
+                $realisasi_pengadaan_id = $realisasi_pengadaan->id;
+            }
+
             $pengadaan = new Pengadaan();
             $pengadaan->kegiatan = $data[1];
             $pengadaan->pemohon = $pemohon['id'];
@@ -652,6 +671,9 @@ class PengadaanController extends Controller
             $pengadaan->manager_umum = $manager_umum['id'];
             $pengadaan->waktu_manager_umum = Carbon::parse($data[9])->format('Y-m-d H:i:s');
             $pengadaan->status_manager_umum = 1;
+            $pengadaan->selesai = 1;
+            $pengadaan->aktor_selesai = $manager_umum['id'];
+            $pengadaan->waktu_selesai = Carbon::parse($data[9])->format('Y-m-d H:i:s');
             $pengadaan->created_at = Carbon::parse($data[4])->format('Y-m-d H:i:s');
             $pengadaan->updated_at = Carbon::parse($data[4])->format('Y-m-d H:i:s');
             $pengadaan->save();
@@ -664,6 +686,14 @@ class PengadaanController extends Controller
             $itemPengadaan->id_item = $itemsMap[$data[2]];
             $itemPengadaan->jumlah = $data[3];
             $itemPengadaan->save();
+
+            // create realisasi_pengadaan_list
+            $realisasi_pengadaan_list = new RealisasiPengadaanList();
+            $realisasi_pengadaan_list->realisasi_pengadaan_id = $realisasi_pengadaan_id;
+            $realisasi_pengadaan_list->pengadaan_id = $pengadaanId;
+            $realisasi_pengadaan_list->created_at = $tanggal_pengadaan;
+            $realisasi_pengadaan_list->updated_at = $tanggal_pengadaan;
+            $realisasi_pengadaan_list->save();
         }
 
         return redirect()->back()->with('success', 'CSV file imported successfully.');

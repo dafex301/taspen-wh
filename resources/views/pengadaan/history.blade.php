@@ -17,11 +17,12 @@
                                             <tr>
                                                 <th scope="col">No</th>
                                                 <th scope="col">Kegiatan</th>
-                                                <th scope="col">Tanggal</th>
+                                                <th scope="col">Tanggal Pengajuan</th>
                                                 @if (!request()->routeIs('pengadaan.history'))
                                                     <th scope="col">Pemohon</th>
                                                     <th scope="col">Bidang</th>
                                                 @endif
+                                                <th scope="col">Tanggal Pengadaan</th>
                                                 <th scope="col">Status</th>
                                                 <th scope="col">Aksi</th>
                                             </tr>
@@ -38,6 +39,9 @@
                                                         <td>{{ $p->Pemohon->nama }}</td>
                                                         <td>{{ $p->Bidang->nama }}</td>
                                                     @endif
+                                                    <td>
+                                                        {{ $p->waktu_selesai->format('d M Y') }}
+                                                    </td>
                                                     @if ($p->status_manager_umum === 0)
                                                         <td>
                                                             <span class="badge badge-sm bg-danger">

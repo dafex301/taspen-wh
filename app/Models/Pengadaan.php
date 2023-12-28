@@ -26,6 +26,7 @@ class Pengadaan extends Model
 
     protected $casts = [
         'waktu_manager_umum' => 'datetime',
+        'waktu_selesai' => 'datetime',
     ];
 
     // Relation with user

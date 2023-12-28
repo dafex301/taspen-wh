@@ -8,7 +8,7 @@
                     <div class="card mb-4">
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center w-100">
-                                <strong>Manajemen Permintaan</strong>
+                                <strong>Manajemen Pengadaan</strong>
                                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importModal">
                                     Import Data
                                 </button>
@@ -25,7 +25,7 @@
                                                 <th scope="col">No</th>
                                                 <th scope="col">Kegiatan</th>
                                                 <th scope="col">Item</th>
-                                                <th scope="col">Tanggal Permintaan</th>
+                                                <th scope="col">Tanggal Pengajuan</th>
                                                 <th scope="col">Pemohon</th>
                                                 <th scope="col">Bidang</th>
                                                 <th scope="col">Approval Lv 2</th>
@@ -57,7 +57,7 @@
                                                     <td>
                                                         {{ $p->created_at->format('d M Y') }}
                                                     </td>
-                                                    @if (!request()->routeIs('permintaan.history'))
+                                                    @if (!request()->routeIs('pengadaan.history'))
                                                         <td>{{ $p->Pemohon->nama }}</td>
                                                         <td>{{ $p->Bidang->nama }}</td>
                                                         <td>{{ $p->Manager_bidang->nama ?? '-' }}</td>
@@ -98,7 +98,7 @@
                                                     @endif
                                                     <td>
                                                         @if ($p->status_manager_bidang === 0 && $p->pemohon === auth()->user()->id)
-                                                            <a href="/permintaan/revisi/{{ $p->id }}"
+                                                            <a href="/pengadaan/revisi/{{ $p->id }}"
                                                                 class="btn btn-outline-warning">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                     viewBox="0 0 24 24" stroke-width="1.5"
@@ -108,7 +108,7 @@
                                                                 </svg>
                                                             </a>
                                                         @elseif ($p->status_manager_umum === 0 && $p->manager_bidang === auth()->user()->id)
-                                                            <a href="/bidang/permintaan/revisi/{{ $p->id }}"
+                                                            <a href="/bidang/pengadaan/revisi/{{ $p->id }}"
                                                                 class="btn btn-outline-warning">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                     viewBox="0 0 24 24" stroke-width="1.5"
@@ -118,7 +118,7 @@
                                                                 </svg>
                                                             </a>
                                                         @endif
-                                                        <a href="/permintaan/detail/{{ $p->id }}"
+                                                        <a href="/pengadaan/detail/{{ $p->id }}"
                                                             class="btn btn-outline-primary">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
